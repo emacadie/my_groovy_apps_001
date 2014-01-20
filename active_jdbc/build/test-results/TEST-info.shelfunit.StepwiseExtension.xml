@@ -1,0 +1,10 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<testsuite name="info.shelfunit.StepwiseExtension" tests="3" failures="0" errors="0" timestamp="2014-01-19T06:02:07" hostname="finance" time="0.022">
+  <properties/>
+  <testcase name="step 1" classname="info.shelfunit.StepwiseExtension" time="0.003"/>
+  <testcase name="step 2" classname="info.shelfunit.StepwiseExtension" time="0.012"/>
+  <testcase name="step 3" classname="info.shelfunit.StepwiseExtension" time="0.002"/>
+  <system-out><![CDATA[In StepwiseExtension
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

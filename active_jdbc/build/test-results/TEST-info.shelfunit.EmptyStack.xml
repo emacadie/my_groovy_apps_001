@@ -1,0 +1,10 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<testsuite name="info.shelfunit.EmptyStack" tests="4" failures="0" errors="0" timestamp="2014-01-19T06:02:06" hostname="finance" time="0.614">
+  <properties/>
+  <testcase name="size" classname="info.shelfunit.EmptyStack" time="0.277"/>
+  <testcase name="pop" classname="info.shelfunit.EmptyStack" time="0.237"/>
+  <testcase name="peek" classname="info.shelfunit.EmptyStack" time="0.002"/>
+  <testcase name="push" classname="info.shelfunit.EmptyStack" time="0.085"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
