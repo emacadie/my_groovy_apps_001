@@ -1,7 +1,7 @@
 <?xml version="1.1" encoding="UTF-8"?>
-<testsuite name="info.shelfunit.OrderedInteractions" tests="1" failures="0" errors="0" timestamp="2014-01-19T06:02:07" hostname="finance" time="0.173">
+<testsuite name="info.shelfunit.OrderedInteractions" tests="1" failures="0" errors="0" timestamp="2014-01-20T06:58:32" hostname="finance" time="0.181">
   <properties/>
-  <testcase name="collaborators must be invoked in order" classname="info.shelfunit.OrderedInteractions" time="0.173"/>
+  <testcase name="collaborators must be invoked in order" classname="info.shelfunit.OrderedInteractions" time="0.181"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

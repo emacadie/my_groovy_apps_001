@@ -1,7 +1,7 @@
 <?xml version="1.1" encoding="UTF-8"?>
-<testsuite name="info.shelfunit.HelloSpock" tests="1" failures="0" errors="0" timestamp="1970-01-01T00:00:00" hostname="finance" time="1.390111327794E9">
+<testsuite name="info.shelfunit.HelloSpock" tests="1" failures="0" errors="0" timestamp="1970-01-01T00:00:00" hostname="finance" time="1.390201113183E9">
   <properties/>
-  <testcase name="length of Spock's and his friends' names" classname="info.shelfunit.HelloSpock" time="0.022"/>
+  <testcase name="length of Spock's and his friends' names" classname="info.shelfunit.HelloSpock" time="0.017"/>
   <system-out><![CDATA[In the HelloSpock test
 In the HelloSpock test
 In the HelloSpock test

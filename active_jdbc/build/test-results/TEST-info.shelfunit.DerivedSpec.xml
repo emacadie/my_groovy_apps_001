@@ -1,8 +1,8 @@
 <?xml version="1.1" encoding="UTF-8"?>
-<testsuite name="info.shelfunit.DerivedSpec" tests="2" failures="0" errors="0" timestamp="1970-01-01T00:00:00" hostname="finance" time="1.390111327728E9">
+<testsuite name="info.shelfunit.DerivedSpec" tests="2" failures="0" errors="0" timestamp="1970-01-01T00:00:00" hostname="finance" time="1.390201112784E9">
   <properties/>
-  <testcase name="baseSpecMethod" classname="info.shelfunit.DerivedSpec" time="0.026"/>
-  <testcase name="derivedSpecMethod" classname="info.shelfunit.DerivedSpec" time="0.001"/>
+  <testcase name="baseSpecMethod" classname="info.shelfunit.DerivedSpec" time="0.023"/>
+  <testcase name="derivedSpecMethod" classname="info.shelfunit.DerivedSpec" time="0.014"/>
   <system-out><![CDATA[base setupSpec()
 derived setupSpec()
 base field initializer

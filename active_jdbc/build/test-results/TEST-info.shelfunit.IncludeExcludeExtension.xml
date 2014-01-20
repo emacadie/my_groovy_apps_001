@@ -1,9 +1,9 @@
 <?xml version="1.1" encoding="UTF-8"?>
-<testsuite name="info.shelfunit.IncludeExcludeExtension" tests="3" failures="0" errors="0" timestamp="2014-01-19T06:02:07" hostname="finance" time="0.009">
+<testsuite name="info.shelfunit.IncludeExcludeExtension" tests="3" failures="0" errors="0" timestamp="2014-01-20T06:58:32" hostname="finance" time="0.005">
   <properties/>
-  <testcase name="a fast method" classname="info.shelfunit.IncludeExcludeExtension" time="0.004"/>
-  <testcase name="a slow method" classname="info.shelfunit.IncludeExcludeExtension" time="0.001"/>
-  <testcase name="a neither fast nor slow method" classname="info.shelfunit.IncludeExcludeExtension" time="0.001"/>
+  <testcase name="a fast method" classname="info.shelfunit.IncludeExcludeExtension" time="0.001"/>
+  <testcase name="a slow method" classname="info.shelfunit.IncludeExcludeExtension" time="0.0"/>
+  <testcase name="a neither fast nor slow method" classname="info.shelfunit.IncludeExcludeExtension" time="0.002"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

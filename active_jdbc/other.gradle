@@ -1,0 +1,132 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'groovy'
+
+import org.apache.commons.codec.binary.Base64
+import org.javalite.instrumentation.Instrumentation
+import org.codehaus.groovy.tools.RootLoader;
+import java.net.URL;
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'org.javalite', name: 'activejdbc', version: '1.4.1'
+        classpath group: 'org.javalite', name: 'activejdbc-instrumentation', version: '1.4.1'	
+        classpath group: 'commons-codec', name: 'commons-codec', version: '1.2'
+	
+    }
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.10'
+    testCompile 'org.mockito:mockito-all:[1.8.5,)'
+    // From Maven, it's GroupId:ArtifactId:Version 
+    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
+
+    compile 'commons-codec:commons-codec:1.6'
+    compile 'io.netty:netty:3.5.7.Final'
+
+    // for shell: 
+    // groovy "org.fusesource.jansi:jansi:1.10"
+
+
+    // math jar
+    compile 'org.apache.commons:commons-math3:3.1.1'
+
+    // logging
+    compile 'org.slf4j:slf4j-api:1.7.+'
+    testRuntime 'org.slf4j:slf4j-ext:1.7.+'
+    testRuntime 'org.slf4j:jcl-over-slf4j:1.7.+'
+    testRuntime 'org.slf4j:jul-to-slf4j:1.7.+'
+    testRuntime 'org.slf4j:log4j-over-slf4j:1.7.+'
+    
+    testRuntime 'ch.qos.logback:logback-core:1.0.+'
+    testRuntime 'ch.qos.logback:logback-classic:1.0.+'
+    // Groovy version 2.1
+    compile 'org.codehaus.groovy:groovy-all:2.1.0'
+     
+    // from Spock
+    testCompile "org.spockframework:spock-core:0.5-groovy-1.7"
+    // active jdbc
+    compile 'org.javalite:activejdbc:1.4.1'
+    compile 'org.javalite:activejdbc-instrumentation:1.4.1'
+
+    // MySQL
+    compile 'mysql:mysql-connector-java:5.0.4'
+
+
+    // optional dependencies for using Spock
+    testCompile "org.hamcrest:hamcrest-core:1.2" // only necessary if Hamcrest matchers are used
+    testRuntime "cglib:cglib-nodep:2.2"     // enables mocking of classes (in addition to interfaces)
+    testRuntime "org.objenesis:objenesis:1.2" // enables mocking of classes without default constructor (together with CGLIB)
+
+    // dependencies used by examples in this project (not required for using Spock)
+    testRuntime "com.h2database:h2:1.2.147"
+    // runShell "org.fusesource.jansi:jansi:1.6"
+
+}
+
+task encode << {
+    def byte[] encodedString = new Base64().encode('hello world\n'.getBytes())
+    println new String(encodedString)
+}
+
+task runJava(type: JavaExec) {
+     println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
+     dependsOn classes
+     description = 'Run gradle.sample.SampleApp'
+     // Java main class to execute.
+     main = 'org.xbill.Lookup'
+     // We need to set the classpath.
+     classpath sourceSets.main.runtimeClasspath
+     // Extra options can be set.
+     systemProperty 'sysProp', 'notUsed'
+     jvmArgs '-client'
+     // We can pass arguments to the main() method of gradle.sample.SampleApp.
+     args 'www.yahoo.com'
+}
+
+task runGroovy(type: JavaExec) {
+     println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
+     dependsOn classes
+     description = 'Run gradle.sample.SampleApp'
+     // to set main class from command line
+     if ( rootProject.hasProperty("mainClass") ) {     
+     	main = mainClass
+     } else {
+       main = 'info.shelfunit.app.math.FirstRunner'
+     }
+
+     classpath sourceSets.main.runtimeClasspath
+     // Extra options can be set.
+     systemProperty 'sysProp', 'notUsed'
+     jvmArgs '-client'
+     // We can pass arguments to the main() method of gradle.sample.SampleApp.
+     args 'www.yahoo.com'
+}
+
+def addUrlIfNotPresent( to, what) { 
+  if(!to || !what) return
+  def urls = to.URLs.toList()
+  switch(what.class) { 
+  case URL: what = new File(what.toURI()); break
+  case String: what = new File(what); break
+  case GString: what = new File(what.toString()); break
+  case File: break; // ok
+  default:
+             println "Don't know how to deal with $what as it is not an URL nor a File"
+             System.exit(1)
+  }
+
+  if(what.directory && !what.exists()) what.mkdirs()
+  def url = what.toURI().toURL()
+  if(!urls.contains(url) && (what.directory || !urls.find{ it.path.endsWith(what.name)})) { 
+    to.addURL(url)
+  }
+}
