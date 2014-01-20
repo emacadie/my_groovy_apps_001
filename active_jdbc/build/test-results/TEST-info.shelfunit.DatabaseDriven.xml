@@ -1,7 +1,0 @@
-<?xml version="1.1" encoding="UTF-8"?>
-<testsuite name="info.shelfunit.DatabaseDriven" tests="1" failures="0" errors="0" timestamp="2014-01-20T06:58:33" hostname="finance" time="0.085">
-  <properties/>
-  <testcase name="maximum of two numbers" classname="info.shelfunit.DatabaseDriven" time="0.085"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

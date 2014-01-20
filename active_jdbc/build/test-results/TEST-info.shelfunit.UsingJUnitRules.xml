@@ -1,9 +1,0 @@
-<?xml version="1.1" encoding="UTF-8"?>
-<testsuite name="info.shelfunit.UsingJUnitRules" tests="1" failures="0" errors="0" timestamp="1970-01-01T00:00:00" hostname="finance" time="1.390201112444E9">
-  <properties/>
-  <testcase name="retrieve test name at runtime" classname="info.shelfunit.UsingJUnitRules" time="0.443"/>
-  <system-out><![CDATA[entering 'retrieve test name at runtime'
-leaving 'retrieve test name at runtime'
-]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
