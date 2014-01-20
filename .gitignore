@@ -24,4 +24,5 @@ tree*txt
 *class
 *jar
 /target/*
+jar_extract_*_tmp
 #- EOF
