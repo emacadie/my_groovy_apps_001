@@ -130,3 +130,16 @@ def addUrlIfNotPresent( to, what) {
     to.addURL(url)
   }
 }
+
+def instrumentThisPal() { 
+  // if (activejdbcInstrumentSpyFile.exists()) return
+  Instrumentation instrumentation = new Instrumentation()
+  projectMainClassesDir = "/home/ericm/github/my_groovy_apps_001/active_jdbc/build/classes/main" // /activejdbc/examples/simple/
+  rootLoader = this.class.classLoader.rootLoader
+    instrumentation.outputDirectory = projectMainClassesDir
+    addUrlIfNotPresent rootLoader, projectMainClassesDir
+    addUrlIfNotPresent Instrumentation.class.classLoader, projectMainClassesDir
+    instrumentation.instrument()
+    activejdbcInstrumentSpyFile = new File(".activejdbc_instrument")
+    activejdbcInstrumentSpyFile.text = new Date().toString()
+}
