@@ -3,6 +3,7 @@ package activejdbc.examples.simple;
 import org.javalite.activejdbc.Base;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import activejdbc.examples.simple.Employee
 
 public class SimpleExample { 
   final static Logger logger = LoggerFactory.getLogger(SimpleExample.class);

@@ -19,11 +19,8 @@ buildscript {
 
 allprojects {
 
-
   dependencies {
-    
-    
-
+ 
     testCompile 'junit:junit:4.10'
     testCompile 'org.mockito:mockito-all:[1.8.5,)'
     // From Maven, it's GroupId:ArtifactId:Version 
@@ -34,7 +31,6 @@ allprojects {
 
     // for shell: 
     // groovy "org.fusesource.jansi:jansi:1.10"
-
 
     // math jar
     compile 'org.apache.commons:commons-math3:3.1.1'
@@ -61,7 +57,6 @@ allprojects {
     // MySQL
     compile 'mysql:mysql-connector-java:5.0.4'
 
-
     // optional dependencies for using Spock
     testCompile "org.hamcrest:hamcrest-core:1.2" // only necessary if Hamcrest matchers are used
     testRuntime "cglib:cglib-nodep:2.2"     // enables mocking of classes (in addition to interfaces)
@@ -69,8 +64,7 @@ allprojects {
 
     // dependencies used by examples in this project (not required for using Spock)
     testRuntime "com.h2database:h2:1.2.147"
-    // runShell "org.fusesource.jansi:jansi:1.6"
-    
+    // runShell "org.fusesource.jansi:jansi:1.6"    
   }
 }
 
@@ -115,18 +109,19 @@ task runGroovy(type: JavaExec) {
      args 'www.yahoo.com'
 }
 
-task printClassPath() {
+task printClassPath(type:JavaExec) {
      println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
      dependsOn classes
-     description = 'Run gradle.sample.SampleApp'
-     
-     // classpath sourceSets.main.runtimeClasspath
+     description = 'this prints out the class path'
      
      println("Printed the path")
      runtimeClasspath.getAsPath().tokenize(":").each { theFile ->
         println theFile    
      }
      println "\n"
+     // println "destinationDir: " + destinationDir.getAbsolutePath
+     println "output.classesDir: " + sourceSets.main.output.classesDir.getPath()
+     println "reportsDirName: ${reportsDirName}"
 }
 
 // task(shell, dependsOn: ':core:compileJava', type: JavaExec) {
