@@ -151,3 +151,8 @@ compileJava.doLast {
     activejdbcInstrumentSpyFile = new File(".activejdbc_instrument")
     activejdbcInstrumentSpyFile.text = new Date().toString()
 }
+
+task(console, dependsOn: 'classes', type: JavaExec) {
+  main = 'groovy.ui.Console'
+  classpath = sourceSets.main.runtimeClasspath
+}
