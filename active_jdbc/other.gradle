@@ -32,13 +32,6 @@ dependencies {
     compile 'commons-codec:commons-codec:1.6'
     compile 'io.netty:netty:3.5.7.Final'
 
-    // for shell: 
-    // groovy "org.fusesource.jansi:jansi:1.10"
-
-
-    // math jar
-    compile 'org.apache.commons:commons-math3:3.1.1'
-
     // logging
     compile 'org.slf4j:slf4j-api:1.7.+'
     testRuntime 'org.slf4j:slf4j-ext:1.7.+'
@@ -60,7 +53,6 @@ dependencies {
     // MySQL
     compile 'mysql:mysql-connector-java:5.0.4'
 
-
     // optional dependencies for using Spock
     testCompile "org.hamcrest:hamcrest-core:1.2" // only necessary if Hamcrest matchers are used
     testRuntime "cglib:cglib-nodep:2.2"     // enables mocking of classes (in addition to interfaces)
@@ -68,8 +60,6 @@ dependencies {
 
     // dependencies used by examples in this project (not required for using Spock)
     testRuntime "com.h2database:h2:1.2.147"
-    // runShell "org.fusesource.jansi:jansi:1.6"
-
 }
 
 task encode << {
@@ -116,6 +106,7 @@ task runGroovy(type: JavaExec) {
      args 'www.yahoo.com'
 }
 
+// from the Griffon ActiveJDBC plugin
 def addUrlIfNotPresent( to, what) { 
   if(!to || !what) return
   def urls = to.URLs.toList()
@@ -136,14 +127,12 @@ def addUrlIfNotPresent( to, what) {
   }
 }
 
-// def instrumentThisPal() { 
+// from the Griffon ActiveJDBC plugin
 compileJava.doLast {
-  println("In compileJava.doLast")
-  // if (activejdbcInstrumentSpyFile.exists()) return
-  Instrumentation instrumentation = new Instrumentation()
-  projectMainClassesDir = sourceSets.main.output.classesDir.getPath()
-  // "/home/ericm/github/my_groovy_apps_001/active_jdbc/build/classes/main" // /activejdbc/examples/simple/
-  rootLoader = this.class.classLoader.rootLoader
+    println("In compileJava.doLast")
+    Instrumentation instrumentation = new Instrumentation()
+    projectMainClassesDir = sourceSets.main.output.classesDir.getPath()
+    rootLoader = this.class.classLoader.rootLoader
     instrumentation.outputDirectory = projectMainClassesDir
     addUrlIfNotPresent rootLoader, projectMainClassesDir
     addUrlIfNotPresent Instrumentation.class.classLoader, projectMainClassesDir

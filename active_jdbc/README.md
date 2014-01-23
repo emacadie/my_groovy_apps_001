@@ -2,15 +2,15 @@ I got ActiveJDBC to work with Groovy.
 
 To get it to work, use other.gradle   
 
+So far it is all Java. Groovy coming up.   
+
 gradle -b other.gradle runJava -PmainClass="activejdbc.examples.simple.SimpleExample"    
 
 
 
-Griffon with activeJDBC at 
-https://github.com/griffon/griffon-activejdbc-plugin/blob/master/scripts/ActivejdbcInstrument.groovy    
+Griffon with activeJDBC at https://github.com/griffon/griffon-activejdbc-plugin/blob/master/scripts/ActivejdbcInstrument.groovy    
 
-addUrlIfNotPresent is at
-https://github.com/codehaus/griffon-git/blob/master/src/main/scripts/_GriffonClasspath.groovy  
+addUrlIfNotPresent is at https://github.com/codehaus/griffon-git/blob/master/src/main/scripts/_GriffonClasspath.groovy  
 
 From a Griffon project at /home/ericm/tmp/groovy/grif001
 -------------------------------------------------------------------
