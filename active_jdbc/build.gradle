@@ -2,7 +2,7 @@
 
 apply plugin: 'java'
 apply plugin: 'maven'
-apply plugin: 'groovy'
+// apply plugin: 'groovy'
 
 repositories {
   mavenCentral()
@@ -153,7 +153,8 @@ task(console, dependsOn: 'classes', type: JavaExec) {
 }
 
 
-task instrumentation(dependsOn: compileGroovy, type: JavaExec) {
+// task instrumentation(dependsOn: compileJava, type: JavaExec) {
+compileJava.dolast { 
      if ( rootProject.hasProperty("mainClass") ) {     
      	main = mainClass
      } else {
@@ -174,5 +175,5 @@ task instrumentation(dependsOn: compileGroovy, type: JavaExec) {
 
 // apply from: file('gradle/activejdbc.gradle')
 
-ant.importBuild 'build.xml'
+// ant.importBuild 'build.xml'
 

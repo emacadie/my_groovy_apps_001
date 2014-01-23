@@ -23,4 +23,5 @@ If you want to use rootLoader, run script with this command line:
 
 java -cp lib/groovy-all-1.7.5.jar org.codehaus.groovy.tools.GroovyStarter --classpath lib/groovy-all-1.7.5.jar --main groovy.ui.GroovyMain YourGroovyScript.groovy
 
+output.classesDir: /home/ericm/github/my_groovy_apps_001/active_jdbc/build/classes/main
 

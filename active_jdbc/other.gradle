@@ -1,6 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'maven'
-apply plugin: 'groovy'
+// apply plugin: 'groovy'
 
 import org.apache.commons.codec.binary.Base64
 import org.javalite.instrumentation.Instrumentation
@@ -82,7 +82,12 @@ task runJava(type: JavaExec) {
      dependsOn classes
      description = 'Run gradle.sample.SampleApp'
      // Java main class to execute.
-     main = 'org.xbill.Lookup'
+     if ( rootProject.hasProperty("mainClass") ) {     
+     	main = mainClass
+     } else {
+       main = 'activejdbc.examples.simple.SimpleExample'
+     }
+
      // We need to set the classpath.
      classpath sourceSets.main.runtimeClasspath
      // Extra options can be set.
@@ -131,10 +136,13 @@ def addUrlIfNotPresent( to, what) {
   }
 }
 
-def instrumentThisPal() { 
+// def instrumentThisPal() { 
+compileJava.doLast {
+  println("In compileJava.doLast")
   // if (activejdbcInstrumentSpyFile.exists()) return
   Instrumentation instrumentation = new Instrumentation()
-  projectMainClassesDir = "/home/ericm/github/my_groovy_apps_001/active_jdbc/build/classes/main" // /activejdbc/examples/simple/
+  projectMainClassesDir = sourceSets.main.output.classesDir.getPath()
+  // "/home/ericm/github/my_groovy_apps_001/active_jdbc/build/classes/main" // /activejdbc/examples/simple/
   rootLoader = this.class.classLoader.rootLoader
     instrumentation.outputDirectory = projectMainClassesDir
     addUrlIfNotPresent rootLoader, projectMainClassesDir
