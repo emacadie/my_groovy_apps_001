@@ -1,11 +1,10 @@
 # /home/ericm/github/my_groovy_apps_001/active_jdbc/build/classes/main
 echo "Starting"
-groovy -classpath \
+groovysh -classpath \
 /home/ericm/.gradle/caches/artifacts-26/filestore/commons-codec/commons-codec/1.6/jar/b7f0fc8f61ecadeb3695f0b9464755eee44374d4/commons-codec-1.6.jar:\
 /home/ericm/.gradle/caches/artifacts-26/filestore/io.netty/netty/3.5.7.Final/bundle/811465e6dfc89d7c78d21de6a9747b6046cb5403/netty-3.5.7.Final.jar:\
 /home/ericm/.gradle/caches/artifacts-26/filestore/org.apache.commons/commons-math3/3.1.1/jar/6719d757a98ff24a83d9d727bef9cec83f59b6e1/commons-math3-3.1.1.jar:\
 /home/ericm/.gradle/caches/artifacts-26/filestore/org.slf4j/slf4j-api/1.7.5/jar/6b262da268f8ad9eff941b25503a9198f0a0ac93/slf4j-api-1.7.5.jar:\
-/home/ericm/.gradle/caches/artifacts-26/filestore/org.codehaus.groovy/groovy-all/2.1.0/jar/a14306a090eec2fa91017b77ac079361f68e1830/groovy-all-2.1.0.jar:\
 /home/ericm/.gradle/caches/artifacts-26/filestore/org.javalite/activejdbc/1.4.1/jar/fc87b225ef3c8dfbc05e21704830d8880fac92c6/activejdbc-1.4.1.jar:\
 /home/ericm/.gradle/caches/artifacts-26/filestore/org.javalite/activejdbc-instrumentation/1.4.1/maven-plugin/1cd6590aeb50719640a910aa1bee308c3e2d8ece/activejdbc-instrumentation-1.4.1.jar:\
 /home/ericm/.gradle/caches/artifacts-26/filestore/mysql/mysql-connector-java/5.0.4/jar/ce259b62d08cce86a68a8f17f5f9c8218371b235/mysql-connector-java-5.0.4.jar:\
@@ -31,8 +30,11 @@ groovy -classpath \
 /home/ericm/.gradle/caches/artifacts-26/filestore/stax/stax-api/1.0.1/jar/49c100caf72d658aca8e58bd74a4ba90fa2b0d70/stax-api-1.0.1.jar:\
 /home/ericm/.gradle/caches/artifacts-26/filestore/log4j/log4j/1.2.12/jar/57b8740427ee6d7b0b60792751356cad17dc0d9/log4j-1.2.12.jar:\
 /home/ericm/.gradle/caches/artifacts-26/filestore/commons-logging/commons-logging-api/1.1/jar/7d4cf5231d46c8524f9b9ed75bb2d1c69ab93322/commons-logging-api-1.1.jar:\
-/home/ericm/github/my_groovy_apps_001/active_jdbc/build/classes/main/activejdbc/examples/simple/ SimpleExample
+/home/ericm/github/my_groovy_apps_001/active_jdbc/build/libs/*:\
+/home/ericm/github/my_groovy_apps_001/active_jdbc/build/classes/main/activejdbc/examples/simple/* 
 
+# SimpleExample
+# /home/ericm/.gradle/caches/artifacts-26/filestore/org.codehaus.groovy/groovy-all/2.1.0/jar/a14306a090eec2fa91017b77ac079361f68e1830/groovy-all-2.1.0.jar:\
 # total 24
 # -rw-rw-r-- 1 ericm ericm 12876 Jan 19 00:01 Employee.class
 # -rw-rw-r-- 1 ericm ericm  8057 Jan 19 00:01 SimpleExample.class

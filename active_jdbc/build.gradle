@@ -29,12 +29,6 @@ allprojects {
     compile 'commons-codec:commons-codec:1.6'
     compile 'io.netty:netty:3.5.7.Final'
 
-    // for shell: 
-    // groovy "org.fusesource.jansi:jansi:1.10"
-
-    // math jar
-    compile 'org.apache.commons:commons-math3:3.1.1'
-
     // logging
     compile 'org.slf4j:slf4j-api:1.7.+'
     testRuntime 'org.slf4j:slf4j-ext:1.7.+'
@@ -124,56 +118,10 @@ task printClassPath(type:JavaExec) {
      println "reportsDirName: ${reportsDirName}"
 }
 
-// task(shell, dependsOn: ':core:compileJava', type: JavaExec) {
-//   main = 'org.codehaus.groovy.tools.shell.Main'
-//   classpath configurations.shell + project(':core').sourceSets.main.runtimeClasspath
-//   standardInput = System.in
-// }
-// need to get jansi-1.6.jar in there
-/*
-task(runShell, type: JavaExec) {
-   dependsOn compileJava
-   main = 'org.codehaus.groovy.tools.shell.Main'
-   // classpath  configurations.shell + sourceSets.main.runtimeClasspath
-   classpath sourceSets.main.runtimeClasspath
-   standardInput = System.in
-}
-*/
 
-task(runShell, dependsOn: 'compileJava', type: JavaExec) {
-  main = 'org.codehaus.groovy.tools.shell.Main'
-  // main = 'groovy.lang.GroovyShell'
-  classpath = sourceSets.main.runtimeClasspath
-  // standardInput = System.in
-}
-// you can type "gradle console" and get a console with all your classes
 task(console, dependsOn: 'classes', type: JavaExec) {
   main = 'groovy.ui.Console'
   classpath = sourceSets.main.runtimeClasspath
 }
 
-
-// task instrumentation(dependsOn: compileJava, type: JavaExec) {
-compileJava.dolast { 
-     if ( rootProject.hasProperty("mainClass") ) {     
-     	main = mainClass
-     } else {
-       main = 'org.javalite.instrumentation.Main'
-     }
-
-     classpath sourceSets.main.runtimeClasspath
-     // Extra options can be set.
-     // systemProperty 'iterations', System.properties['iterations']
-     systemProperty 'outputDirectory', 'build/classes/main'
-     // systemProp.outputDirectory=build/main
-     // System.properties['outputDirectory']
-     // jvmArgs '-client'
-     // We can pass arguments to the main() method of gradle.sample.SampleApp.
-     args 'www.yahoo.com'
-}
-
-
-// apply from: file('gradle/activejdbc.gradle')
-
-// ant.importBuild 'build.xml'
 

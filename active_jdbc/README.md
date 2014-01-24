@@ -6,6 +6,10 @@ So far it is all Java. Groovy coming up.
 
 gradle -b other.gradle runJava -PmainClass="activejdbc.examples.simple.SimpleExample"    
 
+To run the Groovy class that calls Java:   
+gradle -b other.gradle runGroovy -PmainClass="info.shelfunit.SecondExample"   
+
+bash run.example.sh to use the Groovy shell   
 
 
 Griffon with activeJDBC at https://github.com/griffon/griffon-activejdbc-plugin/blob/master/scripts/ActivejdbcInstrument.groovy    

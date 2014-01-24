@@ -1,6 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'maven'
-// apply plugin: 'groovy'
+apply plugin: 'groovy'
 
 import org.apache.commons.codec.binary.Base64
 import org.javalite.instrumentation.Instrumentation
@@ -14,8 +14,7 @@ buildscript {
     dependencies {
         classpath group: 'org.javalite', name: 'activejdbc', version: '1.4.1'
         classpath group: 'org.javalite', name: 'activejdbc-instrumentation', version: '1.4.1'	
-        classpath group: 'commons-codec', name: 'commons-codec', version: '1.2'
-	
+        classpath group: 'commons-codec', name: 'commons-codec', version: '1.2'	
     }
 }
 
