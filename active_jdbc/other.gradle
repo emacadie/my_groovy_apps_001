@@ -61,11 +61,6 @@ dependencies {
     testRuntime "com.h2database:h2:1.2.147"
 }
 
-task encode << {
-    def byte[] encodedString = new Base64().encode('hello world\n'.getBytes())
-    println new String(encodedString)
-}
-
 task runJava(type: JavaExec) {
      println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
      dependsOn classes
