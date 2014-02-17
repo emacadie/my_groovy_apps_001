@@ -1,33 +1,26 @@
-// Some code from Griffon project and Griffon ActiveJDBC plugin
-// Griffon with activeJDBC at https://github.com/griffon/griffon-activejdbc-plugin/blob/master/scripts/ActivejdbcInstrument.groovy
-// xaddUrlIfNotPresent is at https://github.com/codehaus/griffon-git/blob/master/src/main/scripts/_GriffonClasspath.groovy
-
+// import org.javalite.instrumentation.Instrumentation
 
 apply plugin: 'java'
 apply plugin: 'maven'
-apply plugin: 'groovy'
+// apply plugin: 'groovy'
 
-import org.apache.commons.codec.binary.Base64
-import org.javalite.instrumentation.Instrumentation
-import org.codehaus.groovy.tools.RootLoader;
-import java.net.URL;
+repositories {
+  mavenCentral()
+}
 
 buildscript {
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath group: 'org.javalite', name: 'activejdbc', version: '1.4.1'
-        classpath group: 'org.javalite', name: 'activejdbc-instrumentation', version: '1.4.1'	
-        classpath group: 'commons-codec', name: 'commons-codec', version: '1.2'	
+        classpath group: 'org.javalite', name: 'activejdbc-instrumentation', version: '1.4.1'
     }
 }
 
-repositories {
-  mavenCentral()
-}
+allprojects {
 
-dependencies {
+  dependencies {
+ 
     testCompile 'junit:junit:4.10'
     testCompile 'org.mockito:mockito-all:[1.8.5,)'
     // From Maven, it's GroupId:ArtifactId:Version 
@@ -50,6 +43,7 @@ dependencies {
      
     // from Spock
     testCompile "org.spockframework:spock-core:0.5-groovy-1.7"
+
     // active jdbc
     compile 'org.javalite:activejdbc:1.4.1'
     compile 'org.javalite:activejdbc-instrumentation:1.4.1'
@@ -64,6 +58,15 @@ dependencies {
 
     // dependencies used by examples in this project (not required for using Spock)
     testRuntime "com.h2database:h2:1.2.147"
+    // runShell "org.fusesource.jansi:jansi:1.6"    
+  }
+}
+
+test {
+  maxParallelForks = 5
+  forkEvery = 50
+  // this will make it run the test every time you run 'gradle test'
+  outputs.upToDateWhen { false }
 }
 
 task runJava(type: JavaExec) {
@@ -71,12 +74,7 @@ task runJava(type: JavaExec) {
      dependsOn classes
      description = 'Run gradle.sample.SampleApp'
      // Java main class to execute.
-     if ( rootProject.hasProperty("mainClass") ) {     
-     	main = mainClass
-     } else {
-       main = 'activejdbc.examples.simple.SimpleExample'
-     }
-
+     main = 'org.xbill.Lookup'
      // We need to set the classpath.
      classpath sourceSets.main.runtimeClasspath
      // Extra options can be set.
@@ -105,42 +103,25 @@ task runGroovy(type: JavaExec) {
      args 'www.yahoo.com'
 }
 
-// from the Griffon ActiveJDBC plugin
-def addUrlIfNotPresent( to, what) { 
-  if(!to || !what) return
-  def urls = to.URLs.toList()
-  switch(what.class) { 
-  case URL: what = new File(what.toURI()); break
-  case String: what = new File(what); break
-  case GString: what = new File(what.toString()); break
-  case File: break; // ok
-  default:
-             println "Don't know how to deal with $what as it is not an URL nor a File"
-             System.exit(1)
-  }
-
-  if(what.directory && !what.exists()) what.mkdirs()
-  def url = what.toURI().toURL()
-  if(!urls.contains(url) && (what.directory || !urls.find{ it.path.endsWith(what.name)})) { 
-    to.addURL(url)
-  }
+task printClassPath(type:JavaExec) {
+     println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
+     dependsOn classes
+     description = 'this prints out the class path'
+     
+     println("Printed the path")
+     runtimeClasspath.getAsPath().tokenize(":").each { theFile ->
+        println theFile    
+     }
+     println "\n"
+     // println "destinationDir: " + destinationDir.getAbsolutePath
+     println "output.classesDir: " + sourceSets.main.output.classesDir.getPath()
+     println "reportsDirName: ${reportsDirName}"
 }
 
-// from the Griffon ActiveJDBC plugin
-compileJava.doLast {
-    println("In compileJava.doLast")
-    Instrumentation instrumentation = new Instrumentation()
-    projectMainClassesDir = sourceSets.main.output.classesDir.getPath()
-    rootLoader = this.class.classLoader.rootLoader
-    instrumentation.outputDirectory = projectMainClassesDir
-    addUrlIfNotPresent rootLoader, projectMainClassesDir
-    addUrlIfNotPresent Instrumentation.class.classLoader, projectMainClassesDir
-    instrumentation.instrument()
-    activejdbcInstrumentSpyFile = new File(".activejdbc_instrument")
-    activejdbcInstrumentSpyFile.text = new Date().toString()
-}
 
 task(console, dependsOn: 'classes', type: JavaExec) {
   main = 'groovy.ui.Console'
   classpath = sourceSets.main.runtimeClasspath
 }
+
+

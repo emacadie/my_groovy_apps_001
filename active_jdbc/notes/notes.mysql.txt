@@ -1,0 +1,11 @@
+create database shellf_db001;   
+GRANT ALL PRIVILEGES ON shellf_db001.* TO 'shellf'@'localhost' IDENTIFIED BY 'bTe3-45rC' WITH GRANT OPTION;   
+GRANT ALL PRIVILEGES ON shellf_db001.* TO 'shellf'@'%' IDENTIFIED BY 'bTe3-45rC' WITH GRANT OPTION;   
+flush privileges;  
+commit;   
+
+mysql --user=shellf --password=bTe3-45rC --database=shellf_db001    
+mysql -u shellf -pbTe3-45rC --database=shellf_db001    
+mysql -u shellf -pbTe3-45rC < ./dump.new.txt    
+
+

@@ -18,7 +18,7 @@
 *~
 [#]*
 env_vars
-# notes.*txt
+notes.*txt
 tree*txt
 
 # for Maven projects
@@ -27,16 +27,16 @@ tree*txt
 maven/target/*
 java/target/*
 # gradle build artifacts
-java/build/classes/*
-java/build/dependency-cache/*
-java/build/libs/*
-java/build/resources/*
-java/build/reports/*
-java/build/reports/tests/*
-java/build/test-results/*
-java/build/tmp/test/*
-java/build/tmp/*
-java/build/docs/*
+build/classes/*
+build/dependency-cache/*
+build/libs/*
+build/resources/*
+build/reports/*
+build/reports/tests/*
+build/test-results/*
+build/tmp/test/*
+build/tmp/*
+build/docs/*
 # build/*
 java/.gradle/*
 .gradle/*

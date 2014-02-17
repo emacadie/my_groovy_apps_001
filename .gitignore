@@ -17,7 +17,7 @@
 # Ignore emacs backup files
 *~
 env_vars
-notes.*txt
+# notes.*txt
 tree*txt
 
 # for Maven projects
