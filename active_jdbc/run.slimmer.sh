@@ -1,4 +1,3 @@
-# /home/ericm/github/my_groovy_apps_001/active_jdbc/build/classes/main
 echo "Starting"
 groovysh -classpath \
 /home/ericm/.gradle/caches/artifacts-26/filestore/commons-codec/commons-codec/1.6/jar/b7f0fc8f61ecadeb3695f0b9464755eee44374d4/commons-codec-1.6.jar:\
@@ -13,7 +12,6 @@ groovysh -classpath \
 /home/ericm/.gradle/caches/artifacts-26/filestore/javassist/javassist/3.8.0.GA/jar/14abc3c5c1e70cd7e59b6a5dedf41378fafaa968/javassist-3.8.0.GA.jar:\
 /home/ericm/.gradle/caches/artifacts-26/filestore/org.apache.maven/maven-project/3.0-alpha-2/jar/fd7d64f9e8ec392132c716f07d35416051a7d09a/maven-project-3.0-alpha-2.jar:\
 /home/ericm/.gradle/caches/artifacts-26/filestore/org.slf4j/slf4j-simple/1.5.10/jar/668ea4241110683101685c4f79f479ef98ef1e8e/slf4j-simple-1.5.10.jar:\
-/home/ericm/.gradle/caches/artifacts-26/filestore/junit/junit/4.8.2/jar/c94f54227b08100974c36170dcb53329435fe5ad/junit-4.8.2.jar:\
 /home/ericm/.gradle/caches/artifacts-26/filestore/org.apache.maven/maven-model/3.0-alpha-2/jar/6c60f0e0fd9bf589b091d1826c79e6ccddf8941e/maven-model-3.0-alpha-2.jar:\
 /home/ericm/.gradle/caches/artifacts-26/filestore/org.codehaus.plexus/plexus-utils/1.5.6/jar/8fb6b798a4036048b3005e058553bf21a87802ed/plexus-utils-1.5.6.jar:\
 /home/ericm/.gradle/caches/artifacts-26/filestore/org.codehaus.plexus/plexus-interpolation/1.1/jar/66a644c26e8a1cd2945981422c33ba247226a2ef/plexus-interpolation-1.1.jar:\
@@ -32,5 +30,7 @@ groovysh -classpath \
 /home/ericm/.gradle/caches/artifacts-26/filestore/commons-logging/commons-logging-api/1.1/jar/7d4cf5231d46c8524f9b9ed75bb2d1c69ab93322/commons-logging-api-1.1.jar:\
 /home/ericm/github/my_groovy_apps_001/active_jdbc/build/libs/*:\
 /home/ericm/github/my_groovy_apps_001/active_jdbc/build/classes/main/activejdbc/examples/simple/* 
+
+# /home/ericm/.gradle/caches/artifacts-26/filestore/junit/junit/4.8.2/jar/c94f54227b08100974c36170dcb53329435fe5ad/junit-4.8.2.jar:\
 
 echo "Done"

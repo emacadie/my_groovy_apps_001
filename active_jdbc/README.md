@@ -10,6 +10,7 @@ To run the Groovy class that calls Java:
 gradle -b other.gradle runGroovy -PmainClass="info.shelfunit.SecondExample"   
 
 bash run.example.sh to use the Groovy shell   
+bash run.slimmer.sh to use the reduced classpath
 
 To clean:   
 gradle -b other.gradle clean   

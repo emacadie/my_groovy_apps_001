@@ -10,6 +10,8 @@ Employee e = Employee.findFirst("first_name = ?", "John");
 println(e.get("last_name") + ", id: " + e.get("id"))
 e.set("last_name", "Steinbeck2").saveIt();
 
+
+-----------------------
 In the shell:
 import org.javalite.activejdbc.Base;
 import org.slf4j.Logger;
@@ -19,3 +21,18 @@ Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/active_web_001",
 e = Employee.findFirst("first_name = ?", "John");
 println(e.get("last_name") + ", id: " + e.get("id"))
 Steinbeck, id: 7
+-----------------------
+In shell:
+e2 = new Employee();
+e2.set("first_name", "John");
+e2.set("last_name", "Doe");
+e2.saveIt();
+
+e3 = new Employee()
+e3.set("first_name", "John")
+e3.set("last_name", "John")
+e3.saveIt()
+Cannot do "def" or put in the object
+
+
+
