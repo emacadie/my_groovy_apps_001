@@ -44,3 +44,4 @@ java -cp lib/groovy-all-1.7.5.jar org.codehaus.groovy.tools.GroovyStarter --clas
 
 output.classesDir: /home/ericm/github/my_groovy_apps_001/active_jdbc/build/classes/main
 
+After reading chapter 9 in Venkat Subramaniam's Programming Groovy, 2nd Edition, I wonder if there is any need for this.
