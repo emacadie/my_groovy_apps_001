@@ -30,9 +30,8 @@ CREATE TABLE employee
 (
  id INT(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,
  LastName VARCHAR(20),
- department_id INT,
- 
-);
+ department_id INT
+ );
  
 INSERT INTO department(DepartmentID, DepartmentName) VALUES(31, 'Sales');
 INSERT INTO department(DepartmentID, DepartmentName) VALUES(33, 'Engineering');
@@ -47,3 +46,4 @@ INSERT INTO employee(LastName, DepartmentID) VALUES('Smith', 34);
 INSERT INTO employee(LastName, DepartmentID) VALUES('John', NULL);
 
 I wasted a night scrambling because I forgot root password.
+Now: Tables created.
