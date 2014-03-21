@@ -25,6 +25,7 @@ allprojects {
     testCompile 'org.mockito:mockito-all:[1.8.5,)'
     // From Maven, it's GroupId:ArtifactId:Version 
     testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
+    testCompile 'xmlunit:xmlunit:1.5'
 
     compile 'commons-codec:commons-codec:1.6'
     compile 'io.netty:netty:3.5.7.Final'
@@ -103,6 +104,7 @@ task runGroovy(type: JavaExec) {
      args 'www.yahoo.com'
 }
 
+/*
 task printClassPath(type:JavaExec) {
      println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
      dependsOn classes
@@ -117,7 +119,7 @@ task printClassPath(type:JavaExec) {
      println "output.classesDir: " + sourceSets.main.output.classesDir.getPath()
      println "reportsDirName: ${reportsDirName}"
 }
-
+*/
 
 task(console, dependsOn: 'classes', type: JavaExec) {
   main = 'groovy.ui.Console'
