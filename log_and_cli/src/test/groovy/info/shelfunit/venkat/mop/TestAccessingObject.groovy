@@ -9,6 +9,7 @@ class TestAccessingObject extends GroovyTestCase {
     
     def str = 'hello'
 
+    // so I guess the properties are maps
     assertEquals str[usrRequestedProperty], [104, 101, 108, 108, 111]
     assertEquals str."$usrRequestedProperty", [104, 101, 108, 108, 111]
     assertEquals str."$usrRequestedMethod"(), 'HELLO'
