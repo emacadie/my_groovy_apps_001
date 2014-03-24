@@ -1,6 +1,6 @@
 package info.shelfunit.venkat.mop
 
-// from Programming Groovy 2 by Venkat Subramaniam
+// from Programming Groovy 2 by Venkat Subramaniam, chapter 11
 
 import java.lang.Integer
 
