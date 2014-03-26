@@ -2,6 +2,8 @@ package info.shelfunit.venkat.mop
 
 // from Programming Groovy 2 by Venkat Subramaniam, chapter 11
 
+import groovy.lang.GroovyInterceptable
+
 import java.lang.Integer
 
 class TestMethodInvocation extends GroovyTestCase { 
@@ -64,7 +66,7 @@ class AnInterceptable implements GroovyInterceptable {
     return 'this is the other method'
   }
 
-} // end class  AnInterceptable 
+} // end class AnInterceptable 
 
 class AGroovyObject { 
   def existingMethod() { 'existingMethod' }
