@@ -10,3 +10,4 @@ gradle runGroovy -PmainClass=info.shelfunit.venkat.ch012.SecondCallIntercepter
 
 gradle runGroovy -PmainClass=info.shelfunit.venkat.ch012.IntegerIntercepter         
 
+gradle runGroovy -PmainClass=info.shelfunit.venkat.ch012.MetaClassUser   
