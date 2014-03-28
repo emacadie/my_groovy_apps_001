@@ -12,6 +12,9 @@ SecondCallIntercepter also creates an intercepter. But here we do it outside the
 He puts it like this on page 189: The delegate within the intercepting closure refers to the target object whose methods are being intercepted.   
 
 There are a few other minor differences.    
+
+MetaClassUser creates a few objects, looks at their meta classes, adds some methods to the meta class, and looks at the meta classes again. After you add a method, you are using a different meta class. Actually, I think the metaClass stays the same, but the delegate changes. Dr S says this is something to be aware of.        
+
  
 
 

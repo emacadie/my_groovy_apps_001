@@ -25,7 +25,7 @@ class MetaClassUser {
 
     def obj1 = new MyClass( "obj1" )
     printMetaClassInfo( obj1 )
-    println "Adding a methodto MyClass metaClass"
+    println "Adding a method to MyClass metaClass"
     MyClass.metaClass.someNewMethod = { -> /* */ }
     printMetaClassInfo( obj1 )
 

@@ -1,6 +1,6 @@
 Some classes are from Venkat Subraminian's book "Programming Groovy 2"   
 
-Up to page 188.
+Up to page 196.    
 
 gradle runGroovy -PmainClass=info.shelfunit.logandcli.CLIRunner    
 
@@ -11,3 +11,7 @@ gradle runGroovy -PmainClass=info.shelfunit.venkat.ch012.SecondCallIntercepter
 gradle runGroovy -PmainClass=info.shelfunit.venkat.ch012.IntegerIntercepter         
 
 gradle runGroovy -PmainClass=info.shelfunit.venkat.ch012.MetaClassUser   
+
+gradle runGroovy -PmainClass=info.shelfunit.venkat.ch013.UsingCategories     
+
+gradle runGroovy -PmainClass=info.shelfunit.venkat.ch013.UsingCategoriesAnnotations     
