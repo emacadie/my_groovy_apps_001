@@ -1,6 +1,6 @@
 package info.shelfunit.venkat.ch013
 
-// from Programming Groovy 2 by Venkat Subramaniam, chapter 12
+// from Programming Groovy 2 by Venkat Subramaniam, chapter 13
 
 class StringUtil { 
   // write toSSN( String self ) to restrict to String
@@ -24,7 +24,8 @@ class FindUtil {
 
 class UsingCategories { 
 
-  def doStuffPage194() { 
+  def doStuffPage194() {
+    println "In doStuffPage194"
     use( StringUtil ) { 
       println "123456789".toSSN()
       println new StringBuilder( "987654321" ).toSSN()
@@ -38,8 +39,18 @@ class UsingCategories {
   }
 
   def doStuffPage196() { 
+    println "\nIn doStuffPage196"
     use( FindUtil ) { 
       println "121254123".extractOnly{ it == '4' || it == '5' }
+    }
+  }
+
+  def doStuffPage197() { 
+    println "\nIn doStuffPage197"
+    use( StringUtil, FindUtil ) {
+      def str = "123487651"
+      println str.toSSN()
+      println str.extractOnly { it == '8' || it == '1' }
     }
   }
 
@@ -47,6 +58,7 @@ class UsingCategories {
     def uc = new UsingCategories()
     uc.doStuffPage194()
     uc.doStuffPage196()
+    uc.doStuffPage197()
 
   } // end main
 } // end class UsingCategories

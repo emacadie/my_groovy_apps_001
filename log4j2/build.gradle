@@ -2,11 +2,12 @@
 
 apply plugin: 'java'
 apply plugin: 'maven'
-// apply plugin: 'groovy'
+apply plugin: 'groovy'
 
 repositories {
   mavenCentral()
 }
+
 
 buildscript {
     repositories {
@@ -25,12 +26,19 @@ allprojects {
     testCompile 'org.mockito:mockito-all:[1.8.5,)'
     // From Maven, it's GroupId:ArtifactId:Version 
     testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
+    testCompile 'xmlunit:xmlunit:1.5'
 
-    // compile 'commons-codec:commons-codec:1.6'
-    // compile 'io.netty:netty:3.5.7.Final'
+    compile 'commons-cli:commons-cli:1.2'
+    compile 'commons-codec:commons-codec:1.6'
+    compile 'io.netty:netty:3.5.7.Final'
 
     // logging
     compile 'org.slf4j:slf4j-api:1.7.+'
+    // compile 'org.apache.logging.log4j:log4j:2.0-rc1'
+    compile 'org.apache.logging.log4j:log4j-api:2.0-rc1'
+    compile 'org.apache.logging.log4j:log4j-core:2.0-rc1'
+    // compile 'log4j:log4j:1.2.17'
+
     testRuntime 'org.slf4j:slf4j-ext:1.7.+'
     testRuntime 'org.slf4j:jcl-over-slf4j:1.7.+'
     testRuntime 'org.slf4j:jul-to-slf4j:1.7.+'
@@ -45,11 +53,11 @@ allprojects {
     testCompile "org.spockframework:spock-core:0.5-groovy-1.7"
 
     // active jdbc
-    compile 'org.javalite:activejdbc:1.4.1'
-    compile 'org.javalite:activejdbc-instrumentation:1.4.1'
+    // compile 'org.javalite:activejdbc:1.4.1'
+    // compile 'org.javalite:activejdbc-instrumentation:1.4.1'
 
     // MySQL
-    compile 'mysql:mysql-connector-java:5.0.4'
+    // compile 'mysql:mysql-connector-java:5.0.4'
 
     // optional dependencies for using Spock
     testCompile "org.hamcrest:hamcrest-core:1.2" // only necessary if Hamcrest matchers are used
@@ -57,7 +65,7 @@ allprojects {
     testRuntime "org.objenesis:objenesis:1.2" // enables mocking of classes without default constructor (together with CGLIB)
 
     // dependencies used by examples in this project (not required for using Spock)
-    // testRuntime "com.h2database:h2:1.2.147"
+    testRuntime "com.h2database:h2:1.2.147"
     // runShell "org.fusesource.jansi:jansi:1.6"    
   }
 }
@@ -69,7 +77,7 @@ test {
   outputs.upToDateWhen { false }
 }
 
-task runJava( type: JavaExec ) {
+task runJava(type: JavaExec) {
      println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
      dependsOn classes
      description = 'Run gradle.sample.SampleApp'
@@ -89,7 +97,7 @@ task runGroovy(type: JavaExec) {
      dependsOn classes
      description = 'Run gradle.sample.SampleApp'
      // to set main class from command line
-     if ( rootProject.hasProperty( "mainClass" ) ) {     
+     if ( rootProject.hasProperty("mainClass") ) {     
      	main = mainClass
      } else {
        main = 'info.shelfunit.app.math.FirstRunner'
@@ -103,7 +111,8 @@ task runGroovy(type: JavaExec) {
      args 'www.yahoo.com'
 }
 
-task printClassPath( type:JavaExec ) {
+/*
+task printClassPath(type:JavaExec) {
      println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
      dependsOn classes
      description = 'this prints out the class path'
@@ -117,7 +126,7 @@ task printClassPath( type:JavaExec ) {
      println "output.classesDir: " + sourceSets.main.output.classesDir.getPath()
      println "reportsDirName: ${reportsDirName}"
 }
-
+*/
 
 task(console, dependsOn: 'classes', type: JavaExec) {
   main = 'groovy.ui.Console'
