@@ -13,3 +13,8 @@ In IntegerExpando we use MetaClass to add methods to the pre-existing java.lang.
 In MethodOnHierarchy, Dr S defines a method as a closure, and then adds it to two metaclasses, Integer and Long. Then he adds a method for java.lang.Number, and it shows up in two instances of Number's subclasses: Integer and Long.   
 
 Then we go back to IntegerExpando to add a static method and a constructor. Then we override a constructor. We use "<<" to add, "=" to override.      
+
+IntegerEMCDSL uses MetaClass to inject methods and constructors. EMCDSL is ExpandoMetaClass Domain Specific Language. It uses the ExpandoMetaClass DSL to defind them all in one block.    
+
+
+

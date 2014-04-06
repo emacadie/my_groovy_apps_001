@@ -45,7 +45,6 @@ class IntegerExpando {
     }
     println "Using overridden constructor: new Integer(4): ${new Integer(4)}"
     println "Using new constructor: new Integer(Calendar.instance): ${new Integer(Calendar.instance)}"
-
   }
 
   static void main( String[] args ) { 

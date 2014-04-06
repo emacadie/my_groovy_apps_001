@@ -11,13 +11,13 @@ class IntegerEMCDSL {
     Integer.metaClass { 
       daysFromNow = { ->
 	Calendar today = Calendar.instance
-	today.add( Calender.DAY_OF_MONTH, delegate )
+	today.add( Calendar.DAY_OF_MONTH, delegate )
 	today.time
       }
 
       getDaysFromNow = { ->
 	Calendar today = Calendar.instance
-	today.add( Calender.DAY_OF_MONTH, delegate )
+	today.add( Calendar.DAY_OF_MONTH, delegate )
 	today.time
       }
 
@@ -36,6 +36,15 @@ class IntegerEMCDSL {
       }
 
     } // end metaClass
+
+    println "5.daysFromNow(): ${5.daysFromNow()}"
+    println "5.daysFromNow: ${5.daysFromNow}"
+    println "Is 2 even?: ${Integer.isEven(2)}"
+    println "Is 3 even?: ${Integer.isEven(3)}"
+    println "new constructor: ${new Integer( Calendar.instance )}"
+    println "Using overridden constructor: new Integer(4): ${new Integer( 4 )}"
+    println "Using new constructor: new Integer(Calendar.instance): ${new Integer(Calendar.instance)}"
+
   } // end main
 
 } // end class IntegerEMCDSL

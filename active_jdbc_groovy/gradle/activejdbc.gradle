@@ -1,0 +1,15 @@
+// import org.javalite.instrumentation.Instrumentation
+
+/*
+target(activejdbcInstrument: "Instrument source code with Activejdbc") {
+    activejdbcInstrumentSpyFile = new File("${projectWorkDir}/.activejdbc_instrument")
+    if (activejdbcInstrumentSpyFile.exists()) return
+    org.javalite.instrumentation.Instrumentation instrumentation = new org.javalite.instrumentation.Instrumentation()
+    instrumentation.outputDirectory = projectMainClassesDir
+    addUrlIfNotPresent rootLoader, projectMainClassesDir
+    addUrlIfNotPresent org.javalite.instrumentation.Instrumentation.class.classLoader, projectMainClassesDir
+    instrumentation.instrument()
+    activejdbcInstrumentSpyFile.text = new Date().toString()
+    setDefaultTarget(activejdbcInstrument)
+}
+*/

@@ -14,3 +14,6 @@ gradle runGroovy -PmainClass=info.shelfunit.venkat.ch013.UsingCategoriesAnnotati
 gradle runGroovy -PmainClass=info.shelfunit.venkat.ch013.IntegerExpando     
 gradle runGroovy -PmainClass=info.shelfunit.venkat.ch013.MethodOnHierarchy     
 gradle runGroovy -PmainClass=info.shelfunit.venkat.ch013.IntegerEMCDSL     
+gradle runGroovy -PmainClass=info.shelfunit.venkat.ch013.InstanceInjector     
+
+

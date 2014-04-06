@@ -1,0 +1,9 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<testsuite name="info.shelfunit.IncludeExcludeExtension" tests="3" failures="0" errors="0" timestamp="2014-04-04T05:21:33" hostname="finance" time="0.001">
+  <properties/>
+  <testcase name="a fast method" classname="info.shelfunit.IncludeExcludeExtension" time="0.0"/>
+  <testcase name="a slow method" classname="info.shelfunit.IncludeExcludeExtension" time="0.001"/>
+  <testcase name="a neither fast nor slow method" classname="info.shelfunit.IncludeExcludeExtension" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

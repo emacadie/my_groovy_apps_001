@@ -20,16 +20,18 @@ mysql --user=activej001 --password=activej_p001 --database=activej_db001
 mysql -u activej001 -pactivej_p001 --database=activej_db001    
 mysql -u activej001 -pactivej_p001 < ./dump.new.txt    
 
-CREATE TABLE department
+CREATE TABLE departments
 (
  id INT(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,
- DepartmentName VARCHAR(20)
+ department_name VARCHAR(20)
 );
- 
-CREATE TABLE employee
+
+DROP TABLE IF EXISTS employees;
+CREATE TABLE employees
 (
  id INT(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,
- LastName VARCHAR(20),
+ first_name VARCHAR( 56 ),
+ last_name VARCHAR( 56 ),
  department_id INT
  );
  
