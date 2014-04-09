@@ -1,0 +1,61 @@
+# Ignore the backup files
+*~
+
+# .gitignore for Grails 1.2 and 1.3
+
+# web application files
+/web-app/WEB-INF
+web-app/WEB-INF
+
+*jar
+
+# IDE support files
+/.classpath
+/.launch
+/.project
+/.settings
+/*.launch
+/*.tmproj
+/ivy*
+/eclipse
+
+# default HSQL database files for production mode
+/prodDb.*
+
+# general HSQL database files
+*Db.properties
+*Db.script
+
+# logs
+/stacktrace.log
+/test/reports
+/logs
+stacktrace.log
+test/reports
+logs
+
+# project release file
+/*.war
+*.war
+
+# plugin release file
+/*.zip
+*.zip
+
+# older plugin install locations
+/plugins
+/web-app/plugins
+/web-app/WEB-INF/classes
+web-app/WEB-INF/classes
+
+# "temporary" build files
+/target
+target
+
+# other
+*.iws
+
+# per-app. Not the best way to do it.
+# web application files
+collab-todo/web-app/WEB-INF
+

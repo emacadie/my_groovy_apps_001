@@ -1,0 +1,19 @@
+mysql --user=activej001 --password=activej_p001 --database=activej_db001    
+mysql -u activej001 -pactivej_p001 --database=activej_db001    
+mysql -u activej001 -pactivej_p001 < ./dump.new.txt  
+
+sudo -u postgres psql postgres
+
+create user collab_dev with password 'dev-word-to-pass001';
+create database spring_security_002_dev_db with owner collab_dev;
+grant all privileges on database spring_security_002_dev_db to collab_dev;
+
+To log in: psql -h localhost -U collab_dev -d spring_security_002_dev_db
+
+create user collab_test with password 'test-word-to-pass001';
+create database spring_security_002_test_db with owner collab_test;
+grant all privileges on database spring_security_002_test_db to collab_test;
+
+jdbc:postgresql://localhost:5432/
+To log in: psql -h localhost -U collab_test -d spring_security_002_test_db 
+

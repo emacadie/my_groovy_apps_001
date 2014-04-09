@@ -1,0 +1,10 @@
+grails create-app active_grails_web  
+grails compile
+http://localhost:8080/active_grails_web
+
+grails create-domain-class info.shelfunit.activejdbc.SingleState
+add fields
+grails generate-all info.shelfunit.activejdbc.SingleState
+grails run-app
+
+
