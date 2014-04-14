@@ -1,18 +1,19 @@
 mysql --user=activej001 --password=activej_p001 --database=activej_db001    
 mysql -u activej001 -pactivej_p001 --database=activej_db001    
 mysql -u activej001 -pactivej_p001 < ./dump.new.txt  
+mysql --user=active_gwudev --password=active-grails-12 --database=active_gw_dev_001
 
 sudo -u postgres psql postgres
 
-create user collab_dev with password 'dev-word-to-pass001';
-create database spring_security_002_dev_db with owner collab_dev;
-grant all privileges on database spring_security_002_dev_db to collab_dev;
+create user active_gwudev with password 'active-grails-12';
+create database active_gw_dev_001 with owner active_gwudev;
+grant all privileges on database active_gw_dev_001 to active_gwudev;
 
-To log in: psql -h localhost -U collab_dev -d spring_security_002_dev_db
+To log in: psql -h localhost -U active_gwudev -d active_gw_dev_001
 
-create user collab_test with password 'test-word-to-pass001';
-create database spring_security_002_test_db with owner collab_test;
-grant all privileges on database spring_security_002_test_db to collab_test;
+create user active_gwutest with password 'active-grails-13';
+create database active_gw_test_001 with owner active_gwutest;
+grant all privileges on database active_gw_test_001 to active_gwutest;
 
 jdbc:postgresql://localhost:5432/
 To log in: psql -h localhost -U collab_test -d spring_security_002_test_db 
