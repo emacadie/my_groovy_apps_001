@@ -5,6 +5,8 @@ Please update your dependency to directly use the correct version 'xml-apis#xml-
 gradle test   
 gradle  -Dtest.single=FileReadingTest test -info    
 
+gradle runGroovy -PmainClass=org.groovy.cookbook.CriminalDataService
+
 For the parallel collections, I can only get the multithreaded file readers to be 10% faster with 2 threads. I guess I don't understand this stuff yet. I thought IO stuff worked well with more threads. Plus it seems to matter if I run all the tests or some.  
 
 They use Guava a lot: https://google-collections.googlecode.com/svn/trunk/javadoc/com/google/common/collect/Lists.html  
