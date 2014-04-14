@@ -1,0 +1,43 @@
+Yes, I know it is bad practice to put credentials in source control. But this is not a prod database.   
+
+mysql --database=active_web_001 --user=collab-dev-admin --password=dev-word-to-pass 
+
+create database activej_db001;   
+GRANT ALL PRIVILEGES ON activej_db001.* TO 'activej001'@'localhost' IDENTIFIED BY 'activej_p001' WITH GRANT OPTION;   
+GRANT ALL PRIVILEGES ON activej_db001.* TO 'activej001'@'%' IDENTIFIED BY 'activej_p001' WITH GRANT OPTION;   
+flush privileges;  
+commit;   
+
+mysql --user=activej001 --password=activej_p001 --database=activej_db001    
+mysql -u activej001 -pactivej_p001 --database=activej_db001    
+mysql -u activej001 -pactivej_p001 < ./dump.new.txt    
+
+CREATE TABLE departments
+(
+ id INT(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,
+ department_name VARCHAR(20)
+);
+ 
+DROP TABLE IF EXISTS employees;
+CREATE TABLE employees
+(
+ id INT(11) AUTO_INCREMENT NOT NULL PRIMARY KEY,
+ first_name VARCHAR( 56 ),
+ last_name VARCHAR( 56 ),
+ department_id INT
+ );
+ 
+INSERT INTO department(DepartmentID, DepartmentName) VALUES(31, 'Sales');
+INSERT INTO department(DepartmentID, DepartmentName) VALUES(33, 'Engineering');
+INSERT INTO department(DepartmentID, DepartmentName) VALUES(34, 'Clerical');
+INSERT INTO department(DepartmentID, DepartmentName) VALUES(35, 'Marketing');
+ 
+INSERT INTO employee(LastName, DepartmentID) VALUES('Rafferty', 31);
+INSERT INTO employee(LastName, DepartmentID) VALUES('Jones', 33);
+INSERT INTO employee(LastName, DepartmentID) VALUES('Heisenberg', 33);
+INSERT INTO employee(LastName, DepartmentID) VALUES('Robinson', 34);
+INSERT INTO employee(LastName, DepartmentID) VALUES('Smith', 34);
+INSERT INTO employee(LastName, DepartmentID) VALUES('John', NULL);
+
+I wasted a night scrambling because I forgot root password.
+Now: Tables created.

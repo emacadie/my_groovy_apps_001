@@ -26,8 +26,8 @@ allprojects {
     // From Maven, it's GroupId:ArtifactId:Version 
     testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
 
-    compile 'commons-codec:commons-codec:1.6'
-    compile 'io.netty:netty:3.5.7.Final'
+    // compile 'commons-codec:commons-codec:1.6'
+    // compile 'io.netty:netty:3.5.7.Final'
 
     // logging
     compile 'org.slf4j:slf4j-api:1.7.+'
@@ -57,7 +57,7 @@ allprojects {
     testRuntime "org.objenesis:objenesis:1.2" // enables mocking of classes without default constructor (together with CGLIB)
 
     // dependencies used by examples in this project (not required for using Spock)
-    testRuntime "com.h2database:h2:1.2.147"
+    // testRuntime "com.h2database:h2:1.2.147"
     // runShell "org.fusesource.jansi:jansi:1.6"    
   }
 }
@@ -69,7 +69,7 @@ test {
   outputs.upToDateWhen { false }
 }
 
-task runJava(type: JavaExec) {
+task runJava( type: JavaExec ) {
      println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
      dependsOn classes
      description = 'Run gradle.sample.SampleApp'
@@ -89,7 +89,7 @@ task runGroovy(type: JavaExec) {
      dependsOn classes
      description = 'Run gradle.sample.SampleApp'
      // to set main class from command line
-     if ( rootProject.hasProperty("mainClass") ) {     
+     if ( rootProject.hasProperty( "mainClass" ) ) {     
      	main = mainClass
      } else {
        main = 'info.shelfunit.app.math.FirstRunner'
@@ -103,7 +103,7 @@ task runGroovy(type: JavaExec) {
      args 'www.yahoo.com'
 }
 
-task printClassPath(type:JavaExec) {
+task printClassPath( type:JavaExec ) {
      println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
      dependsOn classes
      description = 'this prints out the class path'

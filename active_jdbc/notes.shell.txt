@@ -1,3 +1,4 @@
+mysql --database=active_web_001 --user=collab-dev-admin --password=dev-word-to-pass
 In the console:
 import org.javalite.activejdbc.Base;
 import org.slf4j.Logger;

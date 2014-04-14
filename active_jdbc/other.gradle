@@ -6,6 +6,7 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'groovy'
+apply plugin:'application'
 
 import org.apache.commons.codec.binary.Base64
 import org.javalite.instrumentation.Instrumentation
@@ -33,8 +34,8 @@ dependencies {
     // From Maven, it's GroupId:ArtifactId:Version 
     testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
 
-    compile 'commons-codec:commons-codec:1.6'
-    compile 'io.netty:netty:3.5.7.Final'
+    // compile 'commons-codec:commons-codec:1.6'
+    // compile 'io.netty:netty:3.5.7.Final'
 
     // logging
     compile 'org.slf4j:slf4j-api:1.7.+'
@@ -64,14 +65,16 @@ dependencies {
 
     // dependencies used by examples in this project (not required for using Spock)
     testRuntime "com.h2database:h2:1.2.147"
+    // zip 'org.codehaus.groovy:groovy-groovysh:2.1.0'
+    // distTar 'org.codehaus.groovy:groovy-groovysh:2.1.0'
 }
 
-task runJava(type: JavaExec) {
+task runJava( type: JavaExec ) {
      println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
      dependsOn classes
      description = 'Run gradle.sample.SampleApp'
      // Java main class to execute.
-     if ( rootProject.hasProperty("mainClass") ) {     
+     if ( rootProject.hasProperty( "mainClass" ) ) {     
      	main = mainClass
      } else {
        main = 'activejdbc.examples.simple.SimpleExample'
@@ -83,15 +86,17 @@ task runJava(type: JavaExec) {
      systemProperty 'sysProp', 'notUsed'
      jvmArgs '-client'
      // We can pass arguments to the main() method of gradle.sample.SampleApp.
-     args 'www.yahoo.com'
+     if ( rootProject.hasProperty( "mainArgs" ) ) {
+        args = mainArgs.tokenize() // args wants a List, so split by spaces if need be
+     }
 }
 
-task runGroovy(type: JavaExec) {
+task runGroovy( type: JavaExec ) {
      println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
      dependsOn classes
      description = 'Run gradle.sample.SampleApp'
      // to set main class from command line
-     if ( rootProject.hasProperty("mainClass") ) {     
+     if ( rootProject.hasProperty( "mainClass" ) ) {     
      	main = mainClass
      } else {
        main = 'info.shelfunit.app.math.FirstRunner'
@@ -101,34 +106,36 @@ task runGroovy(type: JavaExec) {
      // Extra options can be set.
      systemProperty 'sysProp', 'notUsed'
      jvmArgs '-client'
-     // We can pass arguments to the main() method of gradle.sample.SampleApp.
-     args 'www.yahoo.com'
+     if ( rootProject.hasProperty( "mainArgs" ) ) {
+        args = mainArgs.tokenize() // args wants a List, so split by spaces if need be
+     }
 }
 
 // from the Griffon ActiveJDBC plugin
-def addUrlIfNotPresent( to, what) { 
-  if(!to || !what) return
-  def urls = to.URLs.toList()
-  switch(what.class) { 
-  case URL: what = new File(what.toURI()); break
-  case String: what = new File(what); break
-  case GString: what = new File(what.toString()); break
-  case File: break; // ok
-  default:
-             println "Don't know how to deal with $what as it is not an URL nor a File"
-             System.exit(1)
-  }
+def addUrlIfNotPresent( to, what ) {
+    
+    if ( !to || !what ) { return } 
+    def urls = to.URLs.toList()
+    switch( what.class ) { 
+      case URL: what = new File( what.toURI() ); break
+      case String: what = new File( what ); break
+      case GString: what = new File( what.toString() ); break
+      case File: break; // ok
+      default:
+        println "Don't know how to deal with $what as it is not an URL nor a File"
+        System.exit( 1 )
+    }
 
-  if(what.directory && !what.exists()) what.mkdirs()
-  def url = what.toURI().toURL()
-  if(!urls.contains(url) && (what.directory || !urls.find{ it.path.endsWith(what.name)})) { 
-    to.addURL(url)
-  }
+    if ( what.directory && !what.exists() ) { what.mkdirs() }
+    def url = what.toURI().toURL()
+    if ( !urls.contains( url ) && ( what.directory || !urls.find{ it.path.endsWith( what.name ) } ) ) { 
+        to.addURL( url )
+    }
 }
 
 // from the Griffon ActiveJDBC plugin
 compileJava.doLast {
-    println("In compileJava.doLast")
+    println( "In compileJava.doLast" )
     Instrumentation instrumentation = new Instrumentation()
     projectMainClassesDir = sourceSets.main.output.classesDir.getPath()
     rootLoader = this.class.classLoader.rootLoader
@@ -136,27 +143,29 @@ compileJava.doLast {
     addUrlIfNotPresent rootLoader, projectMainClassesDir
     addUrlIfNotPresent Instrumentation.class.classLoader, projectMainClassesDir
     instrumentation.instrument()
-    activejdbcInstrumentSpyFile = new File(".activejdbc_instrument")
+    activejdbcInstrumentSpyFile = new File( ".activejdbc_instrument" )
     activejdbcInstrumentSpyFile.text = new Date().toString()
 }
 
-task printClassPath(type:JavaExec) {
+/*
+task printClassPath( type:JavaExec, dependsOn: 'classes' ) {
      dependsOn classes
      description = 'this prints out the class path'
      
-     println("Printed the path")
-     runtimeClasspath.getAsPath().tokenize(":").each { theFile ->
+     println( "Printed the path" )
+     runtimeClasspath.getAsPath().tokenize( ":" ).each { theFile ->
         println theFile    
      }
      println "\n"
      // println "destinationDir: " + destinationDir.getAbsolutePath
      println "output.classesDir: " + sourceSets.main.output.classesDir.getPath()
 }
+*/
 
-
-task(console, dependsOn: 'classes', type: JavaExec) {
+task( console, dependsOn: 'classes', type: JavaExec ) {
   main = 'groovy.ui.Console'
   classpath = sourceSets.main.runtimeClasspath
 }
 
+mainClassName = "org.codehaus.groovy.tools.shell.Main"
 
