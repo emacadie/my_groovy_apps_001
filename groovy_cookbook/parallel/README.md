@@ -9,6 +9,8 @@ gradle -Dtest.single=WordAnalyzerTest test -info
 gradle -Dtest.single=FileDownloaderTest2 test -info  
 gradle -Dtest.single=ActorBasedFrequencyTest test -info    
 gradle -Dtest.single=StmTest test -info    
+To run this one, run the Ratpack app first
+gradle -Dtest.single=CriminalServiceWithDataflowTest test -info    
 
 gradle runGroovy -PmainClass=org.groovy.cookbook.CriminalDataService
 
