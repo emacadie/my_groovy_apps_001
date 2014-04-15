@@ -11,7 +11,7 @@ hibernate {
 //    cache.region.factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory' // Hibernate 4
 }
 
-To log in: psql -h localhost -U active_gwudev -d 
+
 // environment specific settings
 environments {
     development {
