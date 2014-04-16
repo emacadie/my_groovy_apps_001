@@ -21,24 +21,7 @@ To log in: psql -h localhost -U collab_test -d spring_security_002_test_db
 pg_dump --no-acl --no-owner -h localhost -U active_sadev -t [table name] --data-only active_sa_dev_001 > table.dump
 pg_dump --no-acl --no-owner -h localhost -U active_sadev --data-only active_sa_dev_001 > table.dump
 
---
-
-SET statement_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SET check_function_bodies = false;
-SET client_min_messages = warning;
-
-SET search_path = public, pg_catalog;
-
-SET default_tablespace = '';
-
-SET default_with_oids = false;
-
---
--- Name: single_state; Type: TABLE; Schema: public; Owner: active_gwudev; Tablespace: 
---
--- must be plural for this database
+-- table names must be plural for this database
 CREATE TABLE single_states (
     id SERIAL PRIMARY KEY NOT NULL,
     version bigint NOT NULL,
@@ -46,7 +29,7 @@ CREATE TABLE single_states (
     largest_city character varying(255) NOT NULL,
     state_name character varying(255) NOT NULL,
     population integer NOT NULL,
-    UNIQUE (name)
+    UNIQUE (state_name)
 );
 
 

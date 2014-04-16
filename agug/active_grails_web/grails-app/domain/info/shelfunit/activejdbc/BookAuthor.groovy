@@ -8,7 +8,6 @@ class BookAuthor {
     String country
 
     static constraints = {
-        name blank: false, unique: true
         firstName blank: false
         lastName blank: false
         country blank: false
