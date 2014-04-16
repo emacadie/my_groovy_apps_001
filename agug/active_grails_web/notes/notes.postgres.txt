@@ -21,4 +21,7 @@ To log in: psql -h localhost -U collab_test -d spring_security_002_test_db
 pg_dump --no-acl --no-owner -h localhost -U active_gwudev -t [table name] --data-only active_gw_dev_001 > table.dump
 pg_dump --no-acl --no-owner -h localhost -U active_gwudev --data-only active_gw_dev_001 > table.dump
 
+pg_dump -U active_gwudev active_gw_dev_001 -t single_state --schema-only
+
+drop table single_state cascade
 

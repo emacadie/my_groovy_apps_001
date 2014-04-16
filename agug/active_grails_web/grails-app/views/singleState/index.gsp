@@ -24,35 +24,3 @@
 			<thead>
 					<tr>
 					
-						<g:sortableColumn property="name" title="${message(code: 'singleState.name.label', default: 'Name')}" />
-					
-						<g:sortableColumn property="largestCity" title="${message(code: 'singleState.largestCity.label', default: 'Largest City')}" />
-					
-						<g:sortableColumn property="capitalCity" title="${message(code: 'singleState.capitalCity.label', default: 'Capital City')}" />
-					
-						<g:sortableColumn property="population" title="${message(code: 'singleState.population.label', default: 'Population')}" />
-					
-					</tr>
-				</thead>
-				<tbody>
-				<g:each in="${singleStateInstanceList}" status="i" var="singleStateInstance">
-					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
-					
-						<td><g:link action="show" id="${singleStateInstance.id}">${fieldValue(bean: singleStateInstance, field: "name")}</g:link></td>
-					
-						<td>${fieldValue(bean: singleStateInstance, field: "largestCity")}</td>
-					
-						<td>${fieldValue(bean: singleStateInstance, field: "capitalCity")}</td>
-					
-						<td>${fieldValue(bean: singleStateInstance, field: "population")}</td>
-					
-					</tr>
-				</g:each>
-				</tbody>
-			</table>
-			<div class="pagination">
-				<g:paginate total="${singleStateInstanceCount ?: 0}" />
-			</div>
-		</div>
-	</body>
-</html>

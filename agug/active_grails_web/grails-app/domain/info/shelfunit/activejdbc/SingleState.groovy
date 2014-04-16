@@ -2,7 +2,7 @@ package info.shelfunit.activejdbc
 
 class SingleState {
     
-    String name
+    String stateName
     int population
     String largestCity
     String capitalCity
