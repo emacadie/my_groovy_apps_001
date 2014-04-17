@@ -1,11 +1,25 @@
 
-In the console:
-import org.javalite.activejdbc.Base;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import activejdbc.examples.simple.Employee;
+sudo -u postgres psql postgres
 
-Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/active_web_001", "collab-dev-admin", "dev-word-to-pass")
+create user active_gwudev with password 'active-grails-12';
+create database active_gw_dev_001 with owner active_gwudev;
+grant all privileges on database active_gw_dev_001 to active_gwudev;
+
+To log in: psql -h localhost -U active_gwudev -d active_gw_dev_001
+
+create user active_gwutest with password 'active-grails-13';
+create database active_gw_test_001 with owner active_gwutest;
+grant all privileges on database active_gw_test_001 to active_gwutest;
+
+jdbc:postgresql://localhost:5432/
+
+In the console:
+import org.javalite.activejdbc.Base
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+import info.shelfunit.active.share.SingleState 
+
+Base.open( "org.postgresql.Driver", "jdbc:postgresql://localhost:5432/active_gw_dev_001", "active_gwudev", "active-grails-12" ) 
 
 Employee e = Employee.findFirst("first_name = ?", "John");
 println(e.get("last_name") + ", id: " + e.get("id"))
