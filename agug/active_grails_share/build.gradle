@@ -7,6 +7,7 @@ apply plugin: 'java'
 // apply plugin: 'maven'
 apply plugin: 'groovy'
 apply plugin:'application'
+// apply plugin: 'distribution'
 
 import org.apache.commons.codec.binary.Base64
 import org.javalite.instrumentation.Instrumentation
@@ -147,20 +148,7 @@ compileGroovy.doLast {
     activejdbcInstrumentSpyFile = new File( ".activejdbc_instrument" )
     activejdbcInstrumentSpyFile.text = new Date().toString()
 }
-/*
-task printClassPath( type:JavaExec ) {
-     dependsOn classes
-     description = 'this prints out the class path'
-     
-     println( "Printed the path" )
-     runtimeClasspath.getAsPath().tokenize( ":" ).each { theFile ->
-        println theFile    
-     }
-     println "\n"
-     // println "destinationDir: " + destinationDir.getAbsolutePath
-     println "output.classesDir: " + sourceSets.main.output.classesDir.getPath()
-}
-*/
+
 
 task( console, dependsOn: 'classes', type: JavaExec ) {
   main = 'groovy.ui.Console'
@@ -168,4 +156,5 @@ task( console, dependsOn: 'classes', type: JavaExec ) {
 }
 
 mainClassName = "org.codehaus.groovy.tools.shell.Main"
+
 
