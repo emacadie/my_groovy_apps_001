@@ -12,11 +12,11 @@ ratpack {
             Thread.sleep( rnd( 10000L ) )
             render groovyTemplate( 'us.json' )
         }
-        get('/canada') {
+        get( "canada" ) {
             Thread.sleep( rnd( 5000L ) )
             render groovyTemplate( 'can.json' )
         }
-        get('/germany') {
+        get( "germany" ) {
             Thread.sleep( rnd( 7000L ) )
             render groovyTemplate( 'de.json' )
         }

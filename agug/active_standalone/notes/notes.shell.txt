@@ -1,0 +1,21 @@
+In the console:
+import org.javalite.activejdbc.Base;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import activejdbc.examples.simple.Employee;
+
+Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/active_web_001", "collab-dev-admin", "aaaaa")
+
+Employee e = Employee.findFirst("first_name = ?", "John");
+println(e.get("last_name") + ", id: " + e.get("id"))
+e.set("last_name", "Steinbeck2").saveIt();
+
+In the shell:
+import org.javalite.activejdbc.Base;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import activejdbc.examples.simple.Employee;
+Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/active_web_001", "collab-dev-admin", "aaaaa")
+e = Employee.findFirst("first_name = ?", "John");
+println(e.get("last_name") + ", id: " + e.get("id"))
+Steinbeck, id: 7

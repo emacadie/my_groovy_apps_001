@@ -58,4 +58,6 @@ target
 # per-app. Not the best way to do it.
 # web application files
 collab-todo/web-app/WEB-INF
-
+# Ignore emacs backup files
+*~
+#- EOF

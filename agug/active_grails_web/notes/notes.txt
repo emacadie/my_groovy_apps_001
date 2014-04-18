@@ -7,4 +7,11 @@ add fields
 grails generate-all info.shelfunit.activejdbc.SingleState
 grails run-app
 
+grails create-domain-class info.shelfunit.activejdbc.BookAuthor
+add fields
+grails generate-all info.shelfunit.activejdbc.BookAuthor
+
+Constraints: http://grails.org/doc/latest/ref/Constraints/Usage.html    
+
+
 

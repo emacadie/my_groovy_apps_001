@@ -1,0 +1,53 @@
+
+sudo -u postgres psql postgres
+
+create user active_gwudev with password 'active-grails-12';
+create database active_gw_dev_001 with owner active_gwudev;
+grant all privileges on database active_gw_dev_001 to active_gwudev;
+
+To log in: psql -h localhost -U active_gwudev -d active_gw_dev_001
+
+create user active_gwutest with password 'active-grails-13';
+create database active_gw_test_001 with owner active_gwutest;
+grant all privileges on database active_gw_test_001 to active_gwutest;
+
+jdbc:postgresql://localhost:5432/
+
+In the console:
+import org.javalite.activejdbc.Base
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+import info.shelfunit.active.share.SingleState 
+
+Base.open( "org.postgresql.Driver", "jdbc:postgresql://localhost:5432/active_gw_dev_001", "active_gwudev", "active-grails-12" ) 
+
+Employee e = Employee.findFirst("first_name = ?", "John");
+println(e.get("last_name") + ", id: " + e.get("id"))
+e.set("last_name", "Steinbeck2").saveIt();
+
+
+-----------------------
+In the shell:
+import org.javalite.activejdbc.Base;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import activejdbc.examples.simple.Employee;
+Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/active_web_001", "collab-dev-admin", "dev-word-to-pass")
+e = Employee.findFirst("first_name = ?", "John");
+println(e.get("last_name") + ", id: " + e.get("id"))
+Steinbeck, id: 7
+-----------------------
+In shell:
+e2 = new Employee();
+e2.set( "first_name", "Ryan" )
+e2.set( "last_name", new Date() )
+e2.saveIt()
+
+e3 = new Employee()
+e3.set("first_name", "John")
+e3.set("last_name", "John")
+e3.saveIt()
+Cannot do "def" or put in the object
+
+e = Employee.findFirst( "first_name = ?", "Ryan" )
+

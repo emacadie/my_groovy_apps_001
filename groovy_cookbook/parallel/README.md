@@ -3,7 +3,16 @@ POM relocation to an other version number is not fully supported in Gradle : xml
 Please update your dependency to directly use the correct version 'xml-apis#xml-apis;1.0.b2'.   
 
 gradle test   
-gradle  -Dtest.single=FileReadingTest test -info    
+gradle -Dtest.single=FileReadingTest test -info    
+gradle -Dtest.single=ParallelizerTest test -info   
+gradle -Dtest.single=WordAnalyzerTest test -info   
+gradle -Dtest.single=FileDownloaderTest2 test -info  
+gradle -Dtest.single=ActorBasedFrequencyTest test -info    
+gradle -Dtest.single=StmTest test -info    
+To run this one, run the Ratpack app first
+gradle -Dtest.single=CriminalServiceWithDataflowTest test -info    
+
+gradle runGroovy -PmainClass=org.groovy.cookbook.CriminalDataService
 
 For the parallel collections, I can only get the multithreaded file readers to be 10% faster with 2 threads. I guess I don't understand this stuff yet. I thought IO stuff worked well with more threads. Plus it seems to matter if I run all the tests or some.  
 

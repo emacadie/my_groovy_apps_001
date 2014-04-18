@@ -23,11 +23,11 @@
 			</g:if>
 			<ol class="property-list singleState">
 			
-				<g:if test="${singleStateInstance?.name}">
+				<g:if test="${singleStateInstance?.stateName}">
 				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="singleState.name.label" default="Name" /></span>
+					<span id="stateName-label" class="property-label"><g:message code="singleState.stateName.label" default="State Name" /></span>
 					
-						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${singleStateInstance}" field="name"/></span>
+						<span class="property-value" aria-labelledby="stateName-label"><g:fieldValue bean="${singleStateInstance}" field="stateName"/></span>
 					
 				</li>
 				</g:if>

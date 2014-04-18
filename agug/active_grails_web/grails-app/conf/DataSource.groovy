@@ -11,7 +11,7 @@ hibernate {
 //    cache.region.factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory' // Hibernate 4
 }
 
-To log in: psql -h localhost -U active_gwudev -d 
+
 // environment specific settings
 environments {
     development {
@@ -20,7 +20,6 @@ environments {
           url = "jdbc:postgresql://localhost:5432/active_gw_dev_001" // ?useUnicode=yes&characterEncoding=UTF-8"
           username = "active_gwudev"
           password = "active-grails-12"
-          
         }
     }
     test {

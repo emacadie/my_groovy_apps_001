@@ -24,7 +24,7 @@
 			<thead>
 					<tr>
 					
-						<g:sortableColumn property="name" title="${message(code: 'singleState.name.label', default: 'Name')}" />
+						<g:sortableColumn property="stateName" title="${message(code: 'singleState.stateName.label', default: 'State Name')}" />
 					
 						<g:sortableColumn property="largestCity" title="${message(code: 'singleState.largestCity.label', default: 'Largest City')}" />
 					
@@ -38,7 +38,7 @@
 				<g:each in="${singleStateInstanceList}" status="i" var="singleStateInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${singleStateInstance.id}">${fieldValue(bean: singleStateInstance, field: "name")}</g:link></td>
+						<td><g:link action="show" id="${singleStateInstance.id}">${fieldValue(bean: singleStateInstance, field: "stateName")}</g:link></td>
 					
 						<td>${fieldValue(bean: singleStateInstance, field: "largestCity")}</td>
 					

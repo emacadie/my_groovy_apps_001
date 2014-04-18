@@ -1,0 +1,6 @@
+build/*
+.gradle/*
+*class
+# Ignore emacs backup files
+*~
+#- EOF
