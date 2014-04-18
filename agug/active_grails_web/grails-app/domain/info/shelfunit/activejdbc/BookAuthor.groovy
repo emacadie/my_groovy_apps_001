@@ -11,7 +11,7 @@ class BookAuthor {
         firstName blank: false
         lastName blank: false
         country blank: false
-        yearOfBirth min: 1994
+        yearOfBirth max: 1994
     }
 }
 
