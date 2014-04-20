@@ -35,6 +35,29 @@ CREATE TABLE single_states (
 
 ALTER TABLE public.single_state OWNER TO active_gwudev;
 
+create table book_authors(
+    id SERIAL PRIMARY KEY NOT NULL,
+    version bigint NOT NULL,
+    country character varying(255) NOT NULL,
+    first_name character varying(255) NOT NULL,
+    last_name character varying(255) NOT NULL,
+    year_of_birth integer NOT NULL
+);
+
+create table books(
+    id SERIAL PRIMARY KEY NOT NULL,
+    version bigint NOT NULL,
+book;
+     Column     |          Type          | Modifiers 
+----------------+------------------------+-----------
+ id             | bigint                 | not null
+ version        | bigint                 | not null
+ author_id      | bigint                 | not null
+ summary        | text                   | not null
+ title          | character varying(255) | not null
+ year_published | integer                | not null
+
+
 --
 -- Name: single_state_name_key; Type: CONSTRAINT; Schema: public; Owner: active_gwudev; Tablespace: 
 --

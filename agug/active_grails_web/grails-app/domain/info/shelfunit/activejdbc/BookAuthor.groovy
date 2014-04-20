@@ -7,6 +7,7 @@ class BookAuthor {
     int yearOfBirth
     String country
 
+    static hasMany = [books: Book]
     static constraints = {
         firstName blank: false
         lastName blank: false

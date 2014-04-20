@@ -13,5 +13,9 @@ grails generate-all info.shelfunit.activejdbc.BookAuthor
 
 Constraints: http://grails.org/doc/latest/ref/Constraints/Usage.html    
 
+grails create-domain-class info.shelfunit.activejdbc.Book
+add fields, add bit to BookAuthor
+grails generate-all info.shelfunit.activejdbc.Book
+Change form
 
 
