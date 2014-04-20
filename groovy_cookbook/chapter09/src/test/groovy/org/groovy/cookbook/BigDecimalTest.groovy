@@ -8,7 +8,7 @@ import org.junit.*
 class BigDecimalTest { 
 
   static { 
-    String someName = "getInEuros"
+    
     BigDecimal.metaClass.getInEuros = { ->
       def exchangeRate = 0.763461
       def nf = NumberFormat.getCurrencyInstance( Locale.US )
