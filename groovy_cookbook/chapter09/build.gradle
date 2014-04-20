@@ -1,0 +1,39 @@
+apply plugin: 'groovy'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'org.codehaus.groovy:groovy-all:2.2.2'
+    // compile 'org.codehaus.gpars:gpars:1.1.0'
+    // compile 'com.google.guava:guava:14.0.1'
+    // compile group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.6'
+    // compile( 'org.multiverse:multiverse-beta:0.7-RC-1' ) {
+    //     transitive = false
+    // }
+    // compile 'org.multiverse:multiverse-core:0.7.0'
+    testCompile 'junit:junit:4.+'
+    // testCompile 'edu.stanford.nlp:stanford-corenlp:1.3.5'
+}
+
+task runGroovy(type: JavaExec) {
+     dependsOn classes
+     description = 'Run gradle.sample.SampleApp'
+     // main class to execute.
+     if ( rootProject.hasProperty("mainClass") ) {
+      main = mainClass
+     } else {
+       main = 'org.lookup'
+     }
+     // We need to set the classpath.
+     classpath sourceSets.main.runtimeClasspath
+     // Extra options can be set.
+     systemProperty 'sysProp', 'notUsed'
+     jvmArgs '-client'
+     
+     if ( rootProject.hasProperty( "mainArgs" ) ) {
+      args = mainArgs.tokenize() // args wants a List, so split by spaces if need be
+     }
+}
+

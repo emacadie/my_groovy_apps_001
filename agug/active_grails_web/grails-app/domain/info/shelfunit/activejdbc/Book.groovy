@@ -12,5 +12,10 @@ class Book {
     static mapping = {
         summary type: 'text'
     }
+    static constraints = {
+        title blank: false
+        summary blank: false
+        yearPublished blank: false
+    }
 }
 

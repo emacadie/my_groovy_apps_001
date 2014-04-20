@@ -13,3 +13,4 @@ class SingleState extends Model {
   }    
 
 }
+
