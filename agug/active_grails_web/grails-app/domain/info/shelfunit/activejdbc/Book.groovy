@@ -7,7 +7,8 @@ class Book {
     BookAuthor author
     int yearPublished
     
-    static belongsTo = [author: BookAuthor]
+    // static belongsTo = [author: BookAuthor]
+    static belongsTo = [BookAuthor]
     static mapping = {
         summary type: 'text'
     }

@@ -47,15 +47,11 @@ create table book_authors(
 create table books(
     id SERIAL PRIMARY KEY NOT NULL,
     version bigint NOT NULL,
-book;
-     Column     |          Type          | Modifiers 
-----------------+------------------------+-----------
- id             | bigint                 | not null
- version        | bigint                 | not null
- author_id      | bigint                 | not null
- summary        | text                   | not null
- title          | character varying(255) | not null
- year_published | integer                | not null
+    author_id bigint not null references book_authors(id),
+    summary text not null,
+    title character varying(255) not null,
+    year_published integer not null
+);
 
 
 --
