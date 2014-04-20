@@ -9,7 +9,7 @@
 	</label>
 	<g:textField name="summary" value="${bookInstance?.summary}"/>
 </div>
-
+<%-- This is my comment  
 <div class="fieldcontain ${hasErrors(bean: bookInstance, field: 'author', 'error')} required">
 	<label for="author">
 		<g:message code="book.author.label" default="Author" />
@@ -17,7 +17,9 @@
 	</label>
 	<g:select id="author" name="author.id" from="${info.shelfunit.activejdbc.BookAuthor.list()}" optionKey="id" required="" value="${bookInstance?.author?.id}" class="many-to-one"/>
 </div>
-
+--%>
+ <g:hiddenField name="author.id" value="${params.author}" />
+ 
 <div class="fieldcontain ${hasErrors(bean: bookInstance, field: 'title', 'error')} ">
 	<label for="title">
 		<g:message code="book.title.label" default="Title" />

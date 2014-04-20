@@ -60,6 +60,9 @@
 					
 				</li>
 				</g:if>
+				<g:if test="${bookAuthorInstance?.yearOfBirth}">
+				<li><g:link class="create" controller="book" action="create" params="[author: bookAuthorInstance.id]">Create a book by this author</g:link></li>
+				</g:if>
 			
 			</ol>
 			<g:form url="[resource:bookAuthorInstance, action:'delete']" method="DELETE">
