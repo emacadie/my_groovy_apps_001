@@ -51,3 +51,6 @@ Cannot do "def" or put in the object
 
 e = Employee.findFirst( "first_name = ?", "Ryan" )
 
+largest_city, capital_city, state_name, population
+
+

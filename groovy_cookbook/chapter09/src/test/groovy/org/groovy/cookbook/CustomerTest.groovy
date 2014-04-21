@@ -28,6 +28,21 @@ class CustomerTest {
     def c = new Customer('John')
     assert 'John' == c.name
 
+
+    Customer.metaClass.constructor << { 
+      Long id, String fullName ->
+      new Customer(
+        id: id,
+	name: fullName.split( ',' )[ 0 ],
+	lastName: fullName.split( ',' )[ 1 ]
+      )
+    }
+
+    def c0 = new Customer( 'Mike' )
+    c0.name = 'Mike'
+    def c1 = new Customer( 1000, 'Mike,Whitall' )
+    assert c1.name == 'Mike'
+    assert c1.lastName == 'Whitall'
   }
 
 }
