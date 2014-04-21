@@ -13,5 +13,10 @@ class SingleState {
         capitalCity blank: false
         population min: 10000
     }
+    /*
+    static mapping = {
+        id generator:'sequence', params:[sequence:'single_state_id_seq']
+    }
+    */
 }
 

@@ -16,7 +16,7 @@ create database active_sa_test_001 with owner active_satest;
 grant all privileges on database active_sa_test_001 to active_satest;
 
 jdbc:postgresql://localhost:5432/
-To log in: psql -h localhost -U collab_test -d spring_security_002_test_db 
+To log in: psql -h localhost -U active_sadev -d active_sa_dev_001
 
 pg_dump --no-acl --no-owner -h localhost -U active_sadev -t [table name] --data-only active_sa_dev_001 > table.dump
 pg_dump --no-acl --no-owner -h localhost -U active_sadev --data-only active_sa_dev_001 > table.dump

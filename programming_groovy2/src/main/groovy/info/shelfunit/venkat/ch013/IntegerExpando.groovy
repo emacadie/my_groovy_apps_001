@@ -9,6 +9,8 @@ class IntegerExpando {
 
   def doStuffPage199() { 
     println "\nIn doStuffPage199"
+    // This also works with Integer.metaClass."daysFromNow" 
+    // and Integer.metaClass.'daysFromNow'
     Integer.metaClass.daysFromNow = { ->
       Calendar today = Calendar.instance
       today.add( Calendar.DAY_OF_MONTH, delegate )

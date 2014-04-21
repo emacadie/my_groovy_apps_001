@@ -1,7 +1,5 @@
 active_grails_web
 
-
-
 create database active_gw_001;   
 GRANT ALL PRIVILEGES ON active_gw_001.* TO 'active_gwu001'@'localhost' IDENTIFIED BY 'active-grails-12' WITH GRANT OPTION;   
 GRANT ALL PRIVILEGES ON active_gw_001.* TO 'active_gwu001'@'%' IDENTIFIED BY 'active-grails-12' WITH GRANT OPTION;   

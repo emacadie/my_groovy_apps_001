@@ -20,7 +20,19 @@ import org.slf4j.LoggerFactory
 import info.shelfunit.active.share.SingleState 
 
 Base.open( "org.postgresql.Driver", "jdbc:postgresql://localhost:5432/active_gw_dev_001", "active_gwudev", "active-grails-12" ) 
+Base.open( 'com.mysql.jdbc.Driver', 'jdbc:mysql://localhost:3306/active_gw_001', 'active_gwu001', 'active-grails-12' )  
 
+texas = SingleState.find( 'id = 1' )
+
+new SingleState().set('state_name', 'Illinois2').set( 'largest_city', 'Chicago').set('capital_city', 'Springfield').set( 'population', 13000000).set('version', 0).saveIt()
+idaho = new SingleState()
+idaho.set('state_name', 'Idaho')
+idaho.set('capital_city', 'Boise')
+idaho.set('largest_city', 'Boise')
+idaho.set('population', 2500000)
+idaho.set('version', 0)
+
+set('id', Base.count('single_state') + 1).
 Employee e = Employee.findFirst("first_name = ?", "John");
 println(e.get("last_name") + ", id: " + e.get("id"))
 e.set("last_name", "Steinbeck2").saveIt();

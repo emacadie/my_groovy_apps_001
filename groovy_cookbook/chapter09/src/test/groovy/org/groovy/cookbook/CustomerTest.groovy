@@ -45,6 +45,22 @@ class CustomerTest {
     assert c1.lastName == 'Whitall'
   }
 
+  @Test
+  void testStaticMethods() { 
+    Customer.metaClass.'static'.sayHello = { ->
+      "hello, I am your customer"
+    }
+
+    assert "hello, I am your customer" == Customer.sayHello()
+    Customer.metaClass.gsm = null
+    def c = new Customer()
+    c.gsm = '123456'
+    assert '123456' == c.gsm
+    assert "hello, I am your customer" == c.sayHello()
+    
+
+  }
+
 }
 
 

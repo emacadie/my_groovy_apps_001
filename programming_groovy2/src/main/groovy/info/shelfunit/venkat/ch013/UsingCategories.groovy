@@ -22,6 +22,13 @@ class FindUtil {
   }
 } // end class FindUtil 
 
+class Helper { 
+  def static toString( String self ) { 
+    def method = self.metaClass.methods.find{ it.name == 'toString' }
+    '!!' + method.invoke( self, null ) + '!!'
+  }
+}
+
 class UsingCategories { 
 
   def doStuffPage194() {
@@ -52,7 +59,13 @@ class UsingCategories {
       println str.toSSN()
       println str.extractOnly { it == '8' || it == '1' }
     }
+
+    use( Helper ) { 
+      println 'hello'.toString()
+    }
+
   }
+
 
   static void main( String[] args ) { 
     def uc = new UsingCategories()

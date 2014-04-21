@@ -59,10 +59,10 @@ dependencies {
     compile 'org.javalite:activejdbc-instrumentation:1.4.1'
 
     // MySQL
-    // compile 'mysql:mysql-connector-java:5.0.4'
+    compile 'mysql:mysql-connector-java:5.0.4'
 
     // postgres
-    compile 'org.postgresql:postgresql:9.3-1101-jdbc41'
+    // compile 'org.postgresql:postgresql:9.3-1101-jdbc41'
 
     // optional dependencies for using Spock
     testCompile "org.hamcrest:hamcrest-core:1.2" // only necessary if Hamcrest matchers are used

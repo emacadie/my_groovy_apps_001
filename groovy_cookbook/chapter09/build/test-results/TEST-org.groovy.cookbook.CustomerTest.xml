@@ -1,8 +1,9 @@
 <?xml version="1.1" encoding="UTF-8"?>
-<testsuite name="org.groovy.cookbook.CustomerTest" tests="2" failures="0" errors="0" timestamp="2014-04-21T03:01:22" hostname="finance" time="0.287">
+<testsuite name="org.groovy.cookbook.CustomerTest" tests="3" failures="0" errors="0" timestamp="2014-04-21T03:04:38" hostname="finance" time="0.297">
   <properties/>
-  <testcase name="testInstanceMetaclass" classname="org.groovy.cookbook.CustomerTest" time="0.169"/>
-  <testcase name="testAddingConstructor" classname="org.groovy.cookbook.CustomerTest" time="0.117"/>
+  <testcase name="testStaticMethods" classname="org.groovy.cookbook.CustomerTest" time="0.098"/>
+  <testcase name="testInstanceMetaclass" classname="org.groovy.cookbook.CustomerTest" time="0.113"/>
+  <testcase name="testAddingConstructor" classname="org.groovy.cookbook.CustomerTest" time="0.085"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

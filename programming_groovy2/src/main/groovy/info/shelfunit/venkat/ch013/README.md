@@ -6,9 +6,11 @@ UsingCategoriesAnnotations creates a class and uses an annotation to signify tha
 
 I changed UseCategory to have another class called FindUtil. (Dr S usually likes to write scripts; I like classes with main methods). There is a method that uses multiple categories in a use block.  
 
-Dr S points out that categories can do as much WRT intercepting as MetaClass. But if you just want to intercept certain methods in certain situations, then it is a good choice.    
+I also added a Helper class to UseCategory. There we intercepted the toString() method, and added something to it.
 
-In IntegerExpando we use MetaClass to add methods to the pre-existing java.lang.Integer class. In doStuffPage199(), we use delegate instead of this since we are doing this outside of the class (since we don't have the code).    
+Dr S points out that categories can do as much WRT intercepting as MetaClass. But if you just want to intercept certain methods in certain situations, then it is a good choice. It is good for interception, not for injection.    
+
+In IntegerExpando we use MetaClass to add methods to the pre-existing java.lang.Integer class. In doStuffPage199(), we use delegate instead of this since we are doing this outside of the class (since we don't have the code). Or is it so we can add it to all instances?    
 
 In MethodOnHierarchy, Dr S defines a method as a closure, and then adds it to two metaclasses, Integer and Long. Then he adds a method for java.lang.Number, and it shows up in two instances of Number's subclasses: Integer and Long.   
 

@@ -1,7 +1,7 @@
 dataSource {
     pooled = true
-    driverClassName = "org.postgresql.Driver"
-    dialect = "org.hibernate.dialect.PostgreSQLDialect"
+    driverClassName = "com.mysql.jdbc.Driver"
+    dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
 }
 
 hibernate {
@@ -11,23 +11,23 @@ hibernate {
 //    cache.region.factory_class = 'org.hibernate.cache.ehcache.EhCacheRegionFactory' // Hibernate 4
 }
 
-
 // environment specific settings
 environments {
     development {
         dataSource {
-          dbCreate = "none" // "update" // one of 'create', 'create-drop', 'update', 'validate', ''
-          url = "jdbc:postgresql://localhost:5432/active_gw_dev_001" // ?useUnicode=yes&characterEncoding=UTF-8"
-          username = "active_gwudev"
+          dbCreate = "update" // one of 'create', 'create-drop', 'update', 'validate', ''
+          url = "jdbc:mysql://localhost:3306/active_gw_001" // ?useUnicode=yes&characterEncoding=UTF-8"
+          username = "active_gwu001"
           password = "active-grails-12"
+          
         }
     }
     test {
         dataSource {
             dbCreate = "create-drop" // "update"
-            url = "jdbc:postgresql://localhost:5432/active_gw_test_001"
-            username = "active_gwutest"
-            password = "active-grails-13"
+            url = "jdbc:mysql://localhost:3306/collab_todo_test"
+            username = "collab-tst-admin"
+            password = "test-word-to-pass"
         }
     }
     production {
@@ -48,4 +48,3 @@ environments {
         }
     }
 }
-
