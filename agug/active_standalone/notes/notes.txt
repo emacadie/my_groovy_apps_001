@@ -1,0 +1,48 @@
+'largest_city'.tokenize('_')
+===> [largest, city]
+groovy:000> 'largest_city'.tokenize('_').each{it.capitalize()}
+===> [largest, city]
+groovy:000> 'largest_city'.tokenize('_').each{println it.capitalize()}
+Largest
+City
+===> [largest, city]
+groovy:000> lcTokens = 'largest_city'.tokenize('_')
+===> [largest, city]
+groovy:000> ff = []
+===> []
+groovy:000> lcTokens.each { ff << it.capitalize() }
+===> [largest, city]
+groovy:000> ff
+===> [Largest, City]
+gg = []
+===> []
+groovy:000> gg[0] = 'get'
+===> get
+groovy:000> lcTokens.each { gg << it.capitalize() }
+===> [largest, city]
+groovy:000> gg
+===> [get, Largest, City]
+groovy:000> gg.join()
+===> getLargestCity
+
+getters = []
+setter = []
+
+ largest_city
+next prop is capital_city
+next prop is state_name
+next prop is population
+
+This kind of works:
+SingleState.metaClass."${'get' + ff.join()}" { ->
+                    delegate.get( theProp )
+                }
+                println "Making setter"
+                this.metaClass."${'set' + ff.join()}" { Object arg ->
+                    this.set( theProp, arg )
+                }
+For this one,
+This setter works for the first instance you make, but not others
+The getter works for all but the first
+
+

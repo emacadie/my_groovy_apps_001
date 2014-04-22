@@ -24,7 +24,7 @@ pg_dump --no-acl --no-owner -h localhost -U active_sadev --data-only active_sa_d
 -- table names must be plural for this database
 CREATE TABLE single_states (
     id SERIAL PRIMARY KEY NOT NULL,
-    version bigint NOT NULL,
+    record_version bigint NOT NULL,
     capital_city character varying(255) NOT NULL,
     largest_city character varying(255) NOT NULL,
     state_name character varying(255) NOT NULL,
@@ -37,7 +37,7 @@ ALTER TABLE public.single_state OWNER TO active_gwudev;
 
 create table book_authors(
     id SERIAL PRIMARY KEY NOT NULL,
-    version bigint NOT NULL,
+    record_version bigint NOT NULL,
     country character varying(255) NOT NULL,
     first_name character varying(255) NOT NULL,
     last_name character varying(255) NOT NULL,
@@ -46,7 +46,7 @@ create table book_authors(
 
 create table books(
     id SERIAL PRIMARY KEY NOT NULL,
-    version bigint NOT NULL,
+    record_version bigint NOT NULL,
     author_id bigint not null references book_authors(id),
     summary text not null,
     title character varying(255) not null,

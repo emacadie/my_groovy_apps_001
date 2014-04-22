@@ -1,10 +1,15 @@
 In the console:
-import org.javalite.activejdbc.Base;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import activejdbc.examples.simple.Employee;
+import org.javalite.activejdbc.Base
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+import info.shelfunit.active.standalone.BookAuthor
+import info.shelfunit.active.standalone.SingleState
+Base.open( "org.postgresql.Driver", "jdbc:postgresql://localhost:5432/active_sa_dev_001", "active_sadev", "active-stand-13" )
 
+texas = SingleState.findFirst( 'id = 1' )
 Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/active_web_001", "collab-dev-admin", "aaaaa")
+
+l -h localhost -U active_sadev -d active_sa_dev_001
 
 Employee e = Employee.findFirst("first_name = ?", "John");
 println(e.get("last_name") + ", id: " + e.get("id"))
