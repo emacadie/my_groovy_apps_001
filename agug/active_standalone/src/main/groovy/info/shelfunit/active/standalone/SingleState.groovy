@@ -9,8 +9,13 @@ class SingleState extends Model {
     static theTokens = []
     static ff = []
     static String methodName
-    /*
+    
     static {
+        println "making static method findByLargestCity"
+        SingleState.metaClass.static.findByLargestCity = { String arg ->
+            SingleState.where( "largest_city = ?", arg )
+        }
+                /*
         SingleState.metaClass.'static'.findByLargestCity { String arg ->
                     println "In the body for the static method, here is arg: ${arg}"
                     SingleState.where( "largest_city = ?", ":" + arg )
@@ -37,9 +42,9 @@ class SingleState extends Model {
                 }
                 
          } // end each
-         
+         */
     }
-    */
+    
     public SingleState() {
         super()
         // make getters and setters for instance
@@ -62,12 +67,14 @@ class SingleState extends Model {
         } // end each
         println "Look at me!!"
         if ( !performedMagic ) {
+            /*
             println "making static method findByLargestCity"
-            // Book.metaClass.static.create << { String title -> new Book(title:title) }
+          
             SingleState.metaClass.static.findByLargestCity = { String arg ->
-                    // println "In the body for the static method, here is arg: ${arg}"
-                    SingleState.where( "largest_city = ?", ":${arg}"  )
+                    
+                    SingleState.where( "largest_city = ?", arg )
                 }
+                */
             /*
             // ===> [largest_city, capital_city, state_name, population]
             getMetaModel().getAttributeNamesSkipGenerated().each { theProp ->
