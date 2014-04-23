@@ -44,5 +44,14 @@ SingleState.metaClass."${'get' + ff.join()}" { ->
 For this one,
 This setter works for the first instance you make, but not others
 The getter works for all but the first
+----------------
+this.metaClass."${'get' + ff.join()}" { ->
+                    delegate.get( theProp )
+                }
+                println "Making setter"
+                this.metaClass."${'set' + ff.join()}" { Object arg ->
+                    this.set( theProp, arg )
+                }
+For this one, they both worked for the first
 
 

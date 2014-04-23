@@ -9,13 +9,66 @@ class SingleState extends Model {
     static theTokens = []
     static ff = []
     static String methodName
-    
+    /*
+    static {
+        SingleState.metaClass.'static'.findByLargestCity { String arg ->
+                    println "In the body for the static method, here is arg: ${arg}"
+                    SingleState.where( "largest_city = ?", ":" + arg )
+                }
+                
+        getMetaModel().getAttributeNamesSkipGenerated().each { theProp ->
+                println "next prop is ${theProp}"
+                theTokens.clear()
+                ff.clear()
+                theTokens = theProp.tokenize('_')
+                
+                theTokens.each { ff << it.capitalize() }
+                println "making static method ${'findBy' + ff.join()}"
+                methodName = 'get' + ff.join()
+                SingleState.metaClass.'static'."${'findBy' + ff.join()}" { Object arg ->
+                    println "In the body for the static method, here is arg: ${arg}"
+                    // SingleState.where( "${theProp} = ?", arg )
+                }
+                println "done making static method ${'findBy' + ff.join()}"
+                
+                println "Making setter"
+                this.metaClass."${'set' + ff.join()}" { Object arg ->
+                    this.set( theProp, arg )
+                }
+                
+         } // end each
+         
+    }
+    */
     public SingleState() {
         super()
-        
+        // make getters and setters for instance
+        getMetaModel().getAttributeNamesSkipGenerated().each { theProp ->
+            println "next prop is ${theProp}"
+            theTokens.clear()
+            ff.clear()
+            theTokens = theProp.tokenize('_')
+                
+            theTokens.each { ff << it.capitalize() }
+            println "Trying to make ${'get' + ff.join()}"
+            methodName = 'get' + ff.join()
+            this.metaClass."${'get' + ff.join()}" { ->
+                    delegate.get( theProp )
+            }
+            println "Making setter"
+            this.metaClass."${'set' + ff.join()}" { Object arg ->
+                    this.set( theProp, arg )
+            }
+        } // end each
         println "Look at me!!"
         if ( !performedMagic ) {
-            
+            println "making static method findByLargestCity"
+            // Book.metaClass.static.create << { String title -> new Book(title:title) }
+            SingleState.metaClass.static.findByLargestCity = { String arg ->
+                    // println "In the body for the static method, here is arg: ${arg}"
+                    SingleState.where( "largest_city = ?", ":${arg}"  )
+                }
+            /*
             // ===> [largest_city, capital_city, state_name, population]
             getMetaModel().getAttributeNamesSkipGenerated().each { theProp ->
                 println "next prop is ${theProp}"
@@ -24,16 +77,25 @@ class SingleState extends Model {
                 theTokens = theProp.tokenize('_')
                 
                 theTokens.each { ff << it.capitalize() }
+                println "making static method ${'findBy' + ff.join()}"
+                methodName = 'get' + ff.join()
+                SingleState.metaClass.'static'."${'findBy' + ff.join()}" { Object arg ->
+                    // println "In the body for the static method, here is arg: ${arg}"
+                    SingleState.where( "${theProp} = ?", arg )
+                }
+                /*
                 println "Trying to make ${'get' + ff.join()}"
                 methodName = 'get' + ff.join()
-                SingleState.metaClass."${'get' + ff.join()}" { ->
+                this.metaClass."${'get' + ff.join()}" { ->
                     delegate.get( theProp )
                 }
                 println "Making setter"
                 this.metaClass."${'set' + ff.join()}" { Object arg ->
                     this.set( theProp, arg )
                 }
-                 } // end each
+                
+            } // end each
+            */
             performedMagic = true
         }
                 
