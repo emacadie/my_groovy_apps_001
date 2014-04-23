@@ -28,4 +28,5 @@ jar_extract_*_tmp
 */test-results/*
 active_jdbc/build/*
 active_jdbc_groovy/build/*
+*/.gradle/*
 #- EOF
