@@ -48,11 +48,12 @@ create table books(
     id SERIAL PRIMARY KEY NOT NULL,
     record_version bigint NOT NULL,
     author_id bigint not null references book_authors(id),
+    num_pages integer not null,
     summary text not null,
     title character varying(255) not null,
     year_published integer not null
 );
-
+alter table books add column num_pages integer not null;
 
 --
 -- Name: single_state_name_key; Type: CONSTRAINT; Schema: public; Owner: active_gwudev; Tablespace: 

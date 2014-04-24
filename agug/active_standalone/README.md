@@ -20,6 +20,8 @@ To make one yourself, edit the bash file produced by distZip. Remove the groovy-
 
 http://javalite.io/activejdbc   
 
+PostGres data types; http://www.postgresql.org/docs/9.1/static/datatype.html    
+
 Griffon with activeJDBC at https://github.com/griffon/griffon-activejdbc-plugin/blob/master/scripts/ActivejdbcInstrument.groovy    
 
 addUrlIfNotPresent is at https://github.com/codehaus/griffon-git/blob/master/src/main/scripts/_GriffonClasspath.groovy  
