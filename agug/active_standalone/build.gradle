@@ -46,28 +46,23 @@ dependencies {
     
     testRuntime 'ch.qos.logback:logback-core:1.0.+'
     testRuntime 'ch.qos.logback:logback-classic:1.0.+'
-    // Groovy version 2.1
-    compile 'org.codehaus.groovy:groovy-all:2.1.0'
+    
+    compile 'org.codehaus.groovy:groovy-all:2.1.0' // Groovy version 2.1
      
     // from Spock
     testCompile "org.spockframework:spock-core:0.5-groovy-1.7"
     // active jdbc
     compile 'org.javalite:activejdbc:1.4.1'
     compile 'org.javalite:activejdbc-instrumentation:1.4.1'
-
-    // MySQL
-    // compile 'mysql:mysql-connector-java:5.0.4'
-
-    // postgres
-    compile 'org.postgresql:postgresql:9.3-1101-jdbc41'
+    
+    // compile 'mysql:mysql-connector-java:5.0.4' // MySQL
+    compile 'org.postgresql:postgresql:9.3-1101-jdbc41' // postgres
 
     // optional dependencies for using Spock
     testCompile "org.hamcrest:hamcrest-core:1.2" // only necessary if Hamcrest matchers are used
     testRuntime "cglib:cglib-nodep:2.2"     // enables mocking of classes (in addition to interfaces)
     testRuntime "org.objenesis:objenesis:1.2" // enables mocking of classes without default constructor (together with CGLIB)
 
-    // dependencies used by examples in this project (not required for using Spock)
-    // testRuntime "com.h2database:h2:1.2.147"
 }
 
 task runJava( type: JavaExec ) {
@@ -136,7 +131,7 @@ def addUrlIfNotPresent( to, what ) {
 
 // from the Griffon ActiveJDBC plugin
 compileGroovy.doLast {
-    println( "In compileJava.doLast" )
+    println( "In compileGroovy.doLast" )
     Instrumentation instrumentation = new Instrumentation()
     projectMainClassesDir = sourceSets.main.output.classesDir.getPath()
     rootLoader = this.class.classLoader.rootLoader
@@ -147,20 +142,6 @@ compileGroovy.doLast {
     activejdbcInstrumentSpyFile = new File( ".activejdbc_instrument" )
     activejdbcInstrumentSpyFile.text = new Date().toString()
 }
-/*
-task printClassPath( type:JavaExec ) {
-     dependsOn classes
-     description = 'this prints out the class path'
-     
-     println( "Printed the path" )
-     runtimeClasspath.getAsPath().tokenize( ":" ).each { theFile ->
-        println theFile    
-     }
-     println "\n"
-     // println "destinationDir: " + destinationDir.getAbsolutePath
-     println "output.classesDir: " + sourceSets.main.output.classesDir.getPath()
-}
-*/
 
 task( console, dependsOn: 'classes', type: JavaExec ) {
   main = 'groovy.ui.Console'
