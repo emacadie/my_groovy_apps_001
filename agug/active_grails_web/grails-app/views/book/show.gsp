@@ -23,24 +23,6 @@
 			</g:if>
 			<ol class="property-list book">
 			
-				<g:if test="${bookInstance?.summary}">
-				<li class="fieldcontain">
-					<span id="summary-label" class="property-label"><g:message code="book.summary.label" default="Summary" /></span>
-					
-						<span class="property-value" aria-labelledby="summary-label"><g:fieldValue bean="${bookInstance}" field="summary"/></span>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${bookInstance?.author}">
-				<li class="fieldcontain">
-					<span id="author-label" class="property-label"><g:message code="book.author.label" default="Author" /></span>
-					
-						<span class="property-value" aria-labelledby="author-label"><g:link controller="bookAuthor" action="show" id="${bookInstance?.author?.id}">${bookInstance?.author?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
 				<g:if test="${bookInstance?.title}">
 				<li class="fieldcontain">
 					<span id="title-label" class="property-label"><g:message code="book.title.label" default="Title" /></span>
@@ -50,11 +32,38 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${bookInstance?.summary}">
+				<li class="fieldcontain">
+					<span id="summary-label" class="property-label"><g:message code="book.summary.label" default="Summary" /></span>
+					
+						<span class="property-value" aria-labelledby="summary-label"><g:fieldValue bean="${bookInstance}" field="summary"/></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${bookInstance?.yearPublished}">
 				<li class="fieldcontain">
 					<span id="yearPublished-label" class="property-label"><g:message code="book.yearPublished.label" default="Year Published" /></span>
 					
 						<span class="property-value" aria-labelledby="yearPublished-label"><g:fieldValue bean="${bookInstance}" field="yearPublished"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${bookInstance?.numberOfPages}">
+				<li class="fieldcontain">
+					<span id="numberOfPages-label" class="property-label"><g:message code="book.numberOfPages.label" default="Number Of Pages" /></span>
+					
+						<span class="property-value" aria-labelledby="numberOfPages-label"><g:fieldValue bean="${bookInstance}" field="numberOfPages"/></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${bookInstance?.author}">
+				<li class="fieldcontain">
+					<span id="author-label" class="property-label"><g:message code="book.author.label" default="Author" /></span>
+					
+						<span class="property-value" aria-labelledby="author-label"><g:link controller="bookAuthor" action="show" id="${bookInstance?.author?.id}">${bookInstance?.author?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

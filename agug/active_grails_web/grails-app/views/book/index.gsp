@@ -24,13 +24,15 @@
 			<thead>
 					<tr>
 					
-						<g:sortableColumn property="summary" title="${message(code: 'book.summary.label', default: 'Summary')}" />
-					
-						<th><g:message code="book.author.label" default="Author" /></th>
-					
 						<g:sortableColumn property="title" title="${message(code: 'book.title.label', default: 'Title')}" />
 					
+						<g:sortableColumn property="summary" title="${message(code: 'book.summary.label', default: 'Summary')}" />
+					
 						<g:sortableColumn property="yearPublished" title="${message(code: 'book.yearPublished.label', default: 'Year Published')}" />
+					
+						<g:sortableColumn property="numberOfPages" title="${message(code: 'book.numberOfPages.label', default: 'Number Of Pages')}" />
+					
+						<th><g:message code="book.author.label" default="Author" /></th>
 					
 					</tr>
 				</thead>
@@ -38,13 +40,15 @@
 				<g:each in="${bookInstanceList}" status="i" var="bookInstance">
 					<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 					
-						<td><g:link action="show" id="${bookInstance.id}">${fieldValue(bean: bookInstance, field: "summary")}</g:link></td>
+						<td><g:link action="show" id="${bookInstance.id}">${fieldValue(bean: bookInstance, field: "title")}</g:link></td>
 					
-						<td>${fieldValue(bean: bookInstance, field: "author")}</td>
-					
-						<td>${fieldValue(bean: bookInstance, field: "title")}</td>
+						<td>${fieldValue(bean: bookInstance, field: "summary")}</td>
 					
 						<td>${fieldValue(bean: bookInstance, field: "yearPublished")}</td>
+					
+						<td>${fieldValue(bean: bookInstance, field: "numberOfPages")}</td>
+					
+						<td>${fieldValue(bean: bookInstance, field: "author")}</td>
 					
 					</tr>
 				</g:each>

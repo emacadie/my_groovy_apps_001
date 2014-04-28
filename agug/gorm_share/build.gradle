@@ -1,0 +1,121 @@
+// Some code from Griffon project and Griffon ActiveJDBC plugin
+// Griffon with activeJDBC at https://github.com/griffon/griffon-activejdbc-plugin/blob/master/scripts/ActivejdbcInstrument.groovy
+// addUrlIfNotPresent is at https://github.com/codehaus/griffon-git/blob/master/src/main/scripts/_GriffonClasspath.groovy
+
+
+apply plugin: 'java'
+// apply plugin: 'maven'
+apply plugin: 'groovy'
+apply plugin:'application'
+
+// import org.apache.commons.codec.binary.Base64
+// import org.javalite.instrumentation.Instrumentation
+// import org.codehaus.groovy.tools.RootLoader;
+// import java.net.URL;
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+/*
+    dependencies {
+        classpath group: 'org.javalite', name: 'activejdbc', version: '1.4.1'
+        classpath group: 'org.javalite', name: 'activejdbc-instrumentation', version: '1.4.1'	
+        classpath group: 'commons-codec', name: 'commons-codec', version: '1.2'	
+    }
+*/
+}
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.10'
+    testCompile 'org.mockito:mockito-all:[1.8.5,)'
+    // From Maven, it's GroupId:ArtifactId:Version 
+    testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
+
+    // compile 'commons-codec:commons-codec:1.6'
+    // compile 'io.netty:netty:3.5.7.Final'
+
+    // logging
+    compile 'org.slf4j:slf4j-api:1.7.+'
+    testRuntime 'org.slf4j:slf4j-ext:1.7.+'
+    testRuntime 'org.slf4j:jcl-over-slf4j:1.7.+'
+    testRuntime 'org.slf4j:jul-to-slf4j:1.7.+'
+    testRuntime 'org.slf4j:log4j-over-slf4j:1.7.+'
+    
+    testRuntime 'ch.qos.logback:logback-core:1.0.+'
+    testRuntime 'ch.qos.logback:logback-classic:1.0.+'
+    
+    compile 'org.codehaus.groovy:groovy-all:2.1.0' // Groovy version 2.1
+     
+    // from Spock
+    testCompile "org.spockframework:spock-core:0.5-groovy-1.7"
+    // active jdbc
+    // compile 'org.javalite:activejdbc:1.4.1'
+    // compile 'org.javalite:activejdbc-instrumentation:1.4.1'
+    
+    compile 'mysql:mysql-connector-java:5.0.4' // MySQL
+    // compile 'org.postgresql:postgresql:9.3-1101-jdbc41' // postgres
+    compile 'org.grails:grails-datastore-gorm-hibernate4:3.0.0.RELEASE'
+    compile 'org.grails:grails-spring:2.3.6'
+
+
+    // optional dependencies for using Spock
+    testCompile "org.hamcrest:hamcrest-core:1.2" // only necessary if Hamcrest matchers are used
+    testRuntime "cglib:cglib-nodep:2.2"     // enables mocking of classes (in addition to interfaces)
+    testRuntime "org.objenesis:objenesis:1.2" // enables mocking of classes without default constructor (together with CGLIB)
+
+}
+
+task runJava( type: JavaExec ) {
+     println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
+     dependsOn classes
+     description = 'Run gradle.sample.SampleApp'
+     // Java main class to execute.
+     if ( rootProject.hasProperty( "mainClass" ) ) {     
+     	main = mainClass
+     } else {
+       main = 'activejdbc.examples.simple.SimpleExample'
+     }
+
+     // We need to set the classpath.
+     classpath sourceSets.main.runtimeClasspath
+     // Extra options can be set.
+     systemProperty 'sysProp', 'notUsed'
+     jvmArgs '-client'
+     // We can pass arguments to the main() method of gradle.sample.SampleApp.
+     if ( rootProject.hasProperty( "mainArgs" ) ) {
+        args = mainArgs.tokenize() // args wants a List, so split by spaces if need be
+     }
+}
+
+task runGroovy( type: JavaExec ) {
+     println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
+     dependsOn classes
+     description = 'Run gradle.sample.SampleApp'
+     // to set main class from command line
+     if ( rootProject.hasProperty( "mainClass" ) ) {     
+     	main = mainClass
+     } else {
+       main = 'info.shelfunit.app.math.FirstRunner'
+     }
+
+     classpath sourceSets.main.runtimeClasspath
+     // Extra options can be set.
+     systemProperty 'sysProp', 'notUsed'
+     jvmArgs '-client'
+     if ( rootProject.hasProperty( "mainArgs" ) ) {
+        args = mainArgs.tokenize() // args wants a List, so split by spaces if need be
+     }
+}
+
+task( console, dependsOn: 'classes', type: JavaExec ) {
+  main = 'groovy.ui.Console'
+  classpath = sourceSets.main.runtimeClasspath
+}
+
+mainClassName = "org.codehaus.groovy.tools.shell.Main"
+

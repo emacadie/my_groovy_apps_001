@@ -1,4 +1,4 @@
-package info.shelfunit.active.standalone
+package info.shelfunit.active.share
 
 import org.javalite.activejdbc.Model
 import org.javalite.activejdbc.ColumnMetadata
@@ -6,7 +6,7 @@ import org.javalite.activejdbc.ColumnMetadata
 class MetaLoader {
     
     static void createNewMethods() {
-        def classList = [ BookAuthor.class, SingleState.class ]
+        def classList = [ Book.class, BookAuthor.class, SingleState.class ]
         def theTokens = []
         def capTokens = []
         
@@ -60,5 +60,4 @@ class MetaLoader {
         
     } // createNewMethods
 }
-
 

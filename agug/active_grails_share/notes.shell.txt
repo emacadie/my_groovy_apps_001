@@ -20,10 +20,12 @@ import org.slf4j.LoggerFactory
 import info.shelfunit.active.share.SingleState 
 import info.shelfunit.active.share.BookAuthor
 import info.shelfunit.active.share.Book
+import info.shelfunit.active.share.MetaLoader
 
 Base.open( "org.postgresql.Driver", "jdbc:postgresql://localhost:5432/active_gw_dev_001", "active_gwudev", "active-grails-12" ) 
 Base.open( 'com.mysql.jdbc.Driver', 'jdbc:mysql://localhost:3306/active_gw_001', 'active_gwu001', 'active-grails-12' )  
 
+MetaLoader.createNewMethods()
 texas = SingleState.find( 'id = 1' )
 
 new SingleState().set('state_name', 'Illinois2').set( 'largest_city', 'Chicago').set('capital_city', 'Springfield').set( 'population', 13000000).set('version', 0).saveIt()

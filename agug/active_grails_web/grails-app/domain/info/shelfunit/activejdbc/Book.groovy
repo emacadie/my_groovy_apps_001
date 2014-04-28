@@ -6,6 +6,7 @@ class Book {
     String summary
     BookAuthor author
     int yearPublished
+    int numberOfPages
     
     // static belongsTo = [author: BookAuthor]
     static belongsTo = [BookAuthor]
@@ -14,8 +15,9 @@ class Book {
     }
     static constraints = {
         title blank: false
-        summary blank: false
-        yearPublished blank: false
+        summary blank: false 
+        yearPublished blank: false,  max: 1994
+        numberOfPages blank: false, min: 10
     }
 }
 

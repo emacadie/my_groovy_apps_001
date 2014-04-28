@@ -1,0 +1,12 @@
+import com.mysql.jdbc.Driver
+import grails.orm.bootstrap.*
+import grails.persistence.*
+import org.springframework.jdbc.datasource.DriverManagerDataSource
+import  info.shelfunit.gorm.share.SingleState
+
+def dataSource = new DriverManagerDataSource(Driver.name, 'jdbc:mysql://localhost:3306/active_gw_001', 'active_gwu001', 'active-grails-12')
+
+
+init = new HibernateDatastoreSpringInitializer(SingleState)
+
+init.configureForDataSource(dataSource) 

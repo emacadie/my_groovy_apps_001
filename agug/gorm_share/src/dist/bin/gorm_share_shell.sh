@@ -2,14 +2,14 @@
 
 ##############################################################################
 ##
-##  active_grails_share start up script for UN*X
+##  gorm_share start up script for UN*X
 ##
 ##############################################################################
 
-# Add default JVM options here. You can also use JAVA_OPTS and ACTIVE_GRAILS_SHARE_OPTS to pass JVM options to this script.
+# Add default JVM options here. You can also use JAVA_OPTS and GORM_SHARE_OPTS to pass JVM options to this script.
 DEFAULT_JVM_OPTS=""
 
-APP_NAME="active_grails_share"
+APP_NAME="gorm_share"
 APP_BASE_NAME=`basename "$0"`
 
 # Use the maximum available, or set MAX_FD != -1 to use that value.
@@ -64,18 +64,25 @@ SAVED="`pwd`"
 cd "`dirname \"$PRG\"`/.." >&-
 APP_HOME="`pwd -P`"
 cd "$SAVED" >&-
-# $APP_HOME/lib/mysql-connector-java-5.0.4.jar
-# $APP_HOME/lib/postgresql-9.3-1101-jdbc41.jar
-CLASSPATH=$APP_HOME/lib/active_grails_share.jar:$APP_HOME/lib/slf4j-api-1.7.7.jar:$APP_HOME/lib/activejdbc-1.4.1.jar
-CLASSPATH=$CLASSPATH:$APP_HOME/lib/activejdbc-instrumentation-1.4.1.jar:$APP_HOME/lib/mysql-connector-java-5.0.4.jar
-CLASSPATH=$CLASSPATH:$APP_HOME/lib/javalite-common-1.4.1.jar:$APP_HOME/lib/maven-plugin-api-2.0.jar:$APP_HOME/lib/javassist-3.8.0.GA.jar
-CLASSPATH=$CLASSPATH:$APP_HOME/lib/maven-project-3.0-alpha-2.jar:$APP_HOME/lib/slf4j-simple-1.5.10.jar:$APP_HOME/lib/junit-4.8.2.jar
-CLASSPATH=$CLASSPATH:$APP_HOME/lib/maven-model-3.0-alpha-2.jar:$APP_HOME/lib/plexus-utils-1.5.6.jar:$APP_HOME/lib/plexus-interpolation-1.1.jar
-CLASSPATH=$CLASSPATH:$APP_HOME/lib/maven-compat-3.0-alpha-2.jar:$APP_HOME/lib/plexus-container-default-1.0-beta-3.0.5.jar
-CLASSPATH=$CLASSPATH:$APP_HOME/lib/wstx-asl-3.2.6.jar:$APP_HOME/lib/model-builder-1.3.jar:$APP_HOME/lib/maven-project-builder-3.0-alpha-2.jar
-CLASSPATH=$CLASSPATH:$APP_HOME/lib/plexus-component-annotations-1.0-beta-3.0.5.jar:$APP_HOME/lib/wagon-provider-api-1.0-beta-4.jar
-CLASSPATH=$CLASSPATH:$APP_HOME/lib/plexus-classworlds-1.4.jar:$APP_HOME/lib/xbean-reflect-3.4.jar
-CLASSPATH=$CLASSPATH:$APP_HOME/lib/google-collect-snapshot-20080530.jar:$APP_HOME/lib/stax-api-1.0.1.jar:$APP_HOME/lib/log4j-1.2.12.jar:$APP_HOME/lib/commons-logging-api-1.1.jar
+
+CLASSPATH=$APP_HOME/lib/gorm_share.jar:$APP_HOME/lib/slf4j-api-1.7.7.jar:$APP_HOME/lib/mysql-connector-java-5.0.4.jar
+CLASSPATH=$CLASSPATH:$APP_HOME/lib/grails-datastore-gorm-hibernate4-3.0.0.RELEASE.jar:$APP_HOME/lib/grails-spring-2.3.6.jar
+CLASSPATH=$CLASSPATH:$APP_HOME/lib/grails-datastore-gorm-hibernate-core-3.0.0.RELEASE.jar:$APP_HOME/lib/hibernate-validator-5.0.1.Final.jar
+CLASSPATH=$CLASSPATH:$APP_HOME/lib/hibernate-commons-annotations-4.0.4.Final.jar:$APP_HOME/lib/hibernate-core-4.3.1.Final.jar
+CLASSPATH=$CLASSPATH:$APP_HOME/lib/dom4j-1.6.1.jar:$APP_HOME/lib/jcl-over-slf4j-1.7.5.jar:$APP_HOME/lib/spring-web-3.2.7.RELEASE.jar
+CLASSPATH=$CLASSPATH:$APP_HOME/lib/grails-bootstrap-2.3.6.jar:$APP_HOME/lib/spring-tx-3.2.7.RELEASE.jar:$APP_HOME/lib/grails-async-2.3.6.jar
+CLASSPATH=$CLASSPATH:$APP_HOME/lib/spring-orm-3.2.7.RELEASE.jar:$APP_HOME/lib/grails-datastore-gorm-3.0.0.RELEASE.jar
+CLASSPATH=$CLASSPATH:$APP_HOME/lib/grails-datastore-core-3.0.0.RELEASE.jar:$APP_HOME/lib/grails-datastore-gorm-plugin-support-3.0.0.RELEASE.jar
+CLASSPATH=$CLASSPATH:$APP_HOME/lib/spring-core-3.2.7.RELEASE.jar:$APP_HOME/lib/spring-jdbc-3.2.7.RELEASE.jar:$APP_HOME/lib/grails-core-2.3.6.jar
+CLASSPATH=$CLASSPATH:$APP_HOME/lib/jta-1.1.jar:$APP_HOME/lib/antlr-2.7.7.jar:$APP_HOME/lib/validation-api-1.1.0.Final.jar
+CLASSPATH=$CLASSPATH:$APP_HOME/lib/classmate-0.8.0.jar:$APP_HOME/lib/jboss-logging-annotations-1.2.0.Beta1.jar
+CLASSPATH=$CLASSPATH:$APP_HOME/lib/jboss-transaction-api_1.2_spec-1.0.0.Final.jar:$APP_HOME/lib/hibernate-jpa-2.1-api-1.0.0.Final.jar
+CLASSPATH=$CLASSPATH:$APP_HOME/lib/jandex-1.1.0.Final.jar:$APP_HOME/lib/spring-aop-3.2.7.RELEASE.jar
+CLASSPATH=$CLASSPATH:$APP_HOME/lib/spring-beans-3.2.7.RELEASE.jar:$APP_HOME/lib/spring-context-3.2.7.RELEASE.jar
+CLASSPATH=$CLASSPATH:$APP_HOME/lib/gpars-1.1.0.jar:$APP_HOME/lib/concurrentlinkedhashmap-lru-1.3.1.jar
+CLASSPATH=$CLASSPATH:$APP_HOME/lib/aopalliance-1.0.jar:$APP_HOME/lib/spring-expression-3.2.7.RELEASE.jar
+CLASSPATH=$CLASSPATH:$APP_HOME/lib/multiverse-core-0.7.0.jar:$APP_HOME/lib/jsr166y-1.7.0.jar
+CLASSPATH=$CLASSPATH:$APP_HOME/lib/jboss-logging-3.1.3.GA.jar:$APP_HOME/lib/javassist-3.18.1-GA.jar
 
 # Determine the Java command to use to start the JVM.
 if [ -n "$JAVA_HOME" ] ; then
@@ -164,13 +171,12 @@ if $cygwin ; then
     esac
 fi
 
-# Split up the JVM_OPTS And ACTIVE_GRAILS_SHARE_OPTS values into an array, following the shell quoting and substitution rules
+# Split up the JVM_OPTS And GORM_SHARE_OPTS values into an array, following the shell quoting and substitution rules
 function splitJvmOpts() {
     JVM_OPTS=("$@")
 }
-eval splitJvmOpts $DEFAULT_JVM_OPTS $JAVA_OPTS $ACTIVE_GRAILS_SHARE_OPTS
-
+eval splitJvmOpts $DEFAULT_JVM_OPTS $JAVA_OPTS $GORM_SHARE_OPTS
 echo "Here is classpath"
 echo $CLASSPATH
 
-exec groovysh "${JVM_OPTS[@]}" -classpath "$CLASSPATH"
+exec groovysh "${JVM_OPTS[@]}" -classpath "$CLASSPATH" 
