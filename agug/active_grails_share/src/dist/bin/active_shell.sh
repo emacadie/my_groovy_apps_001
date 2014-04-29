@@ -170,7 +170,7 @@ function splitJvmOpts() {
 }
 eval splitJvmOpts $DEFAULT_JVM_OPTS $JAVA_OPTS $ACTIVE_GRAILS_SHARE_OPTS
 
-echo "Here is classpath"
-echo $CLASSPATH
+# echo "Here is classpath"
+# echo $CLASSPATH
 
 exec groovysh "${JVM_OPTS[@]}" -classpath "$CLASSPATH"

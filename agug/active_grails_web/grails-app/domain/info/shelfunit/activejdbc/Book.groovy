@@ -16,7 +16,7 @@ class Book {
     static constraints = {
         title blank: false
         summary blank: false 
-        yearPublished blank: false,  max: 1994
+        yearPublished blank: false
         numberOfPages blank: false, min: 10
     }
 }

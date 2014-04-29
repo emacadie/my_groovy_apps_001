@@ -12,7 +12,7 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				<%--  <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li> --%>
 			</ul>
 		</div>
 		<div id="list-book" class="content scaffold-list" role="main">
@@ -44,11 +44,11 @@
 					
 						<td>${fieldValue(bean: bookInstance, field: "summary")}</td>
 					
-						<td>${fieldValue(bean: bookInstance, field: "yearPublished")}</td>
+						<td>${bookInstance.yearPublished}</td>
 					
 						<td>${fieldValue(bean: bookInstance, field: "numberOfPages")}</td>
 					
-						<td>${fieldValue(bean: bookInstance, field: "author")}</td>
+						<td>${bookInstance.author.firstName} ${bookInstance.author.lastName}</td>
 					
 					</tr>
 				</g:each>

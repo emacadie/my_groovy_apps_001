@@ -1,9 +1,11 @@
 package info.shelfunit.active.share
 
 import org.javalite.activejdbc.Model
+import org.javalite.activejdbc.annotations.BelongsTo
 import org.javalite.activejdbc.annotations.Table
 
 @Table( "book" )
+@BelongsTo(parent = BookAuthor.class, foreignKeyName = "author_id")
 class Book extends Model {
 
   static{ 

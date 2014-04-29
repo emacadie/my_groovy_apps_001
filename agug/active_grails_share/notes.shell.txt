@@ -43,15 +43,46 @@ e.set("last_name", "Steinbeck2").saveIt();
 
 
 -----------------------
-In the shell:
-import org.javalite.activejdbc.Base;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import activejdbc.examples.simple.Employee;
-Base.open("com.mysql.jdbc.Driver", "jdbc:mysql://localhost:3306/active_web_001", "collab-dev-admin", "dev-word-to-pass")
-e = Employee.findFirst("first_name = ?", "John");
-println(e.get("last_name") + ", id: " + e.get("id"))
-Steinbeck, id: 7
+p = new BookAuthor()
+p.set( 'first_name', 'Jonathan').set( 'last_name', 'Franzen' ).set( 'country', 'USA!!!' ).set( 'year_of_birth', 1959 ).set( 'version', 0 ).saveIt()
+ba2 = new BookAuthor()
+ba2.setFirstName('David').setLastName('Hume').setCountry('Scotland').setYearOfBirth(1711).setVersion(0).saveIt()
+
+bho = new BookAuthor()
+bho.setFirstName('Barack').setLastName('Obama').setCountry('USA!!!').setYearOfBirth(1971).setVersion(0).saveIt()
+
+Where returns a list, we want the first:
+obama = BookAuthor.findByLastName('Obama')[0] // this is case sensitive
+jf = BookAuthor.findByLastName('Franzen').getAt(0)
+
+hp1 = new Book()
+hp1.setTitle('Harry Potter and the Wrath of Khan')
+
+freedom = new Book()
+freedom.setTitle('Freedom').setSummary('A good book').setYearPublished(2010).setVersion(0).setNumberOfPages(500)
+jf.add(freedom)
+
+threeWeekProjects = programmer.get(Project.class, "duration_weeks = ?", 3)
+scottishBooks = Book.get(
+select * from book where author_id in (select id from book_author where country = 'Scotland')
+Book.where('author_id in (select id from book_author where country = ?)', 'Scotland')
+
+Book.where('author_id in (select id from book_author where country = ?) and year_published < ?', 'Scotland', 2000)
+
+-----------------------
+From a map:
+stateMap = [:]
+stateMap.state_name = 'Iowa'
+stateMap.capital_city = 'Des Moines'
+stateMap.largest_city = 'Iowa City'
+stateMap.version = 0
+stateMap.population = 5000000
+
+ss = new SingleState()
+ss.fromMap( stateMap )
+ss.saveIt()
+===> true
+
 -----------------------
 In shell:
 e2 = new Employee();
