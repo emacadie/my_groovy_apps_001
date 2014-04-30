@@ -33,7 +33,7 @@ class MetaLoader {
                 }
                 println "column ${theProp} is a ${columnMap[theProp].getTypeName()}"
                 switch ( columnMap[ theProp ].getTypeName() ) {
-                    case "int4":
+                    case "int":
                         println "Making static method findWhere${capTokens.join()}GreaterThan"
                         nextClass.metaClass.static."${'findWhere' + capTokens.join() + 'GreaterThan'}" = { int arg ->
                             nextClass.where( "${theProp} > ?", arg )
