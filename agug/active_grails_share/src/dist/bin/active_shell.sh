@@ -75,7 +75,8 @@ CLASSPATH=$CLASSPATH:$APP_HOME/lib/maven-compat-3.0-alpha-2.jar:$APP_HOME/lib/pl
 CLASSPATH=$CLASSPATH:$APP_HOME/lib/wstx-asl-3.2.6.jar:$APP_HOME/lib/model-builder-1.3.jar:$APP_HOME/lib/maven-project-builder-3.0-alpha-2.jar
 CLASSPATH=$CLASSPATH:$APP_HOME/lib/plexus-component-annotations-1.0-beta-3.0.5.jar:$APP_HOME/lib/wagon-provider-api-1.0-beta-4.jar
 CLASSPATH=$CLASSPATH:$APP_HOME/lib/plexus-classworlds-1.4.jar:$APP_HOME/lib/xbean-reflect-3.4.jar
-CLASSPATH=$CLASSPATH:$APP_HOME/lib/google-collect-snapshot-20080530.jar:$APP_HOME/lib/stax-api-1.0.1.jar:$APP_HOME/lib/log4j-1.2.12.jar:$APP_HOME/lib/commons-logging-api-1.1.jar
+CLASSPATH=$CLASSPATH:$APP_HOME/lib/google-collect-snapshot-20080530.jar:$APP_HOME/lib/stax-api-1.0.1.jar
+CLASSPATH=$CLASSPATH:$APP_HOME/lib/log4j-1.2.12.jar:$APP_HOME/lib/commons-logging-api-1.1.jar
 
 # Determine the Java command to use to start the JVM.
 if [ -n "$JAVA_HOME" ] ; then
