@@ -2,7 +2,6 @@
 // Griffon with activeJDBC at https://github.com/griffon/griffon-activejdbc-plugin/blob/master/scripts/ActivejdbcInstrument.groovy
 // addUrlIfNotPresent is at https://github.com/codehaus/griffon-git/blob/master/src/main/scripts/_GriffonClasspath.groovy
 
-
 apply plugin: 'java'
 // apply plugin: 'maven'
 apply plugin: 'groovy'
@@ -33,9 +32,6 @@ dependencies {
     testCompile 'org.mockito:mockito-all:[1.8.5,)'
     // From Maven, it's GroupId:ArtifactId:Version 
     testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
-
-    // compile 'commons-codec:commons-codec:1.6'
-    // compile 'io.netty:netty:3.5.7.Final'
 
     // logging
     compile 'org.slf4j:slf4j-api:1.7.+'
