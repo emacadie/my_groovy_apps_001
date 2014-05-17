@@ -5,7 +5,7 @@ import java.lang.annotation.Annotation
 import info.shelfunit.properties.annotations.StringAnnotation
 
 class SampleRunner {
-   
+   /*
     def doMovieStuff001() {
         def m1 = new Movie()
         m1.title = "Star Trek"
@@ -23,24 +23,24 @@ class SampleRunner {
 
         println "movie 1 is ${m3.title} which came out in ${m3.year}"
 
-
     } // def doMovieStuff001()
-   
+    */
+    
     def seeBookMethods() {
         println "\n\nStarting seeBookMethods"
         def bmc = Book.metaClass
         bmc.methods.each {
-            print "name: ${it.getName()} "
+            print "name: ${it.getName()}, "
         }
         print "\n\n"
         println "Now properties"
         bmc.properties.each {
-            print "name: ${it.getName()} "
+            print "name: ${it.getName()}, "
         }
         print "\n\n"
         println "Now get meta methods"
         bmc.metaMethods.each {
-            print "name: ${it.getName()} "
+            print "name: ${it.getName()}, "
         }
         print "\n\n"
         println "Ending seeBookMethods"
@@ -99,7 +99,7 @@ class SampleRunner {
         }
         */
        
-       
+       /*
         Book.metaClass.invokeMethod = { String name, args ->
             println "Method name in standalone invokeMethod is ${name}"
             if ( name == 'setTitle' ) {
@@ -113,10 +113,11 @@ class SampleRunner {
                 }
             }
         }
-       
+        */
+       /*
         Book.metaClass.setProperty = { String name, arg ->
             println "name in setProperty is ${name}"
-            if (name == 'title') {
+            if ( name == 'title' ) {
                 def field = Book.class.getDeclaredField( 'title' )
                 def stringAnnotation = field?.getAnnotation( StringAnnotation.class )
                 println "Looking at Book.setTitle"
@@ -138,7 +139,26 @@ class SampleRunner {
                 Book.class.metaClass.getMetaProperty(name).setProperty(delegate, arg) // this works
             }
         }
-       
+        */
+        Book.metaClass.setProperty = { String name, arg ->
+            println "name in setProperty is ${name}"
+            def field = Book.class.getDeclaredField( name )
+            def stringAnnotation = field?.getAnnotation( StringAnnotation.class )
+            println "-- Here is stringAnnotation: ${stringAnnotation}"
+            if ( stringAnnotation ) {
+                println "Looking at Book.set${name.capitalize()}"
+                if ( !( arg.length() < stringAnnotation.min() ) &&
+                    !( arg.length() > stringAnnotation.max() ) ) {
+                    Book.class.metaClass.getMetaProperty( name ).setProperty( delegate, arg.toString() )
+                } else {
+                    println "Cannot call Book.setTitle"
+                }
+            } else {
+                def mName = "set${name.capitalize()}"
+                println "LET'S TRY CALLING ${mName}"
+                Book.class.metaClass.getMetaProperty( name ).setProperty( delegate, arg ) // this works
+            }
+        }
 
         println " \n========"
         def bTest1 = new Book()
@@ -164,7 +184,7 @@ class SampleRunner {
     sr.seeBookMethods()
     sr.doStuff001()
     // sr.doMovieStuff001()
-    sr.seeBookMethods()
+    // sr.seeBookMethods()
   }
 
 }

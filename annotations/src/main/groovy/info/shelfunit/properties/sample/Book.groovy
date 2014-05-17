@@ -1,14 +1,19 @@
 package info.shelfunit.properties.sample
 
-
 import info.shelfunit.properties.annotations.SomeAnnotation
-import info.shelfunit.properties.annotations.SecondAnnotation
+import info.shelfunit.properties.annotations.StringAnnotation
 
-class Book { 
+class Book {
   @SomeAnnotation(name='annotation name', value='the value')
   int pages
 
-  @SecondAnnotation(name='second annotation name', value='second value')
+  @StringAnnotation(min=5, max=20)
   String title
-  long year
+  int year
+
+  def doStuff() {
+    println "In book.doStuff"
+  }
+ 
 }
+
