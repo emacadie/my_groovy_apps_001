@@ -16,7 +16,6 @@ import org.codehaus.groovy.transform.GroovyASTTransformationClass
 public @interface IntAnnotation {
   public int min() default 0
   public int max()
-  // public boolean throwException() default false
 }
 
 
