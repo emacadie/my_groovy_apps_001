@@ -14,8 +14,9 @@ import org.codehaus.groovy.transform.GroovyASTTransformationClass
 @GroovyASTTransformationClass(['info.shelfunit.properties.annotations.Transform'])
 
 public @interface IntAnnotation {
-  public int min() default 0
-  public int max()
+  public int minValue() default 0
+  public int maxValue() default 2147483647 // Integer.MAX_VALUE as int
+                           
 }
 
 
