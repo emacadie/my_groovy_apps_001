@@ -114,32 +114,7 @@ class SampleRunner {
             }
         }
         */
-       /*
-        Book.metaClass.setProperty = { String name, arg ->
-            println "name in setProperty is ${name}"
-            if ( name == 'title' ) {
-                def field = Book.class.getDeclaredField( 'title' )
-                def stringAnnotation = field?.getAnnotation( StringAnnotation.class )
-                println "Looking at Book.setTitle"
-                if ( !( arg.length() < stringAnnotation.min() ) &&
-                    !( arg.length() > stringAnnotation.max() ) ) {
-                    // Book.metaClass.invokeMissingMethod(delegate, name, args)
-                    // this works: Book.metaClass.getMetaMethod('setTitle').invoke(delegate, arg)
-                    // Book.metaClass.getMetaMethod("set${name.capitalize()}").invoke(delegate, arg)
-                    Book.class.metaClass.getMetaProperty(name).setProperty(delegate, arg)
-                } else {
-                    println "Cannot call Book.setTitle"
-                }
-            } else {
-                def mName = "set${name.capitalize()}"
-                println "LET'S TRY CALLING ${mName}"
-               
-                // Book.metaClass.getMetaMethod("year").invoke(delegate, arg)
-                // Book.metaClass.getMetaMethod("set${name.capitalize()}").invoke(delegate, arg)
-                Book.class.metaClass.getMetaProperty(name).setProperty(delegate, arg) // this works
-            }
-        }
-        */
+
         Book.metaClass.setProperty = { String name, arg ->
             println "name in setProperty is ${name}"
             def field = Book.class.getDeclaredField( name )
@@ -155,7 +130,8 @@ class SampleRunner {
                 }
             } else {
                 def mName = "set${name.capitalize()}"
-                println "LET'S TRY CALLING ${mName}"
+                def propClassName = Book.class.metaClass.getMetaProperty( name ).getType().getName()
+                println "LET'S TRY CALLING ${mName}, it's a ${propClassName}"
                 Book.class.metaClass.getMetaProperty( name ).setProperty( delegate, arg ) // this works
             }
         }
