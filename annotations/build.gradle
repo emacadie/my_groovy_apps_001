@@ -37,7 +37,7 @@ repositories {
     testRuntime 'ch.qos.logback:logback-classic:1.0.+'
     // Groovy version 2.1
     compile 'org.codehaus.groovy:groovy-all:2.1.0'
-    compile(project(':ast'))
+    // compile(project(':ast'))
      
     // from Spock
     testCompile "org.spockframework:spock-core:0.5-groovy-1.7"

@@ -154,6 +154,21 @@ class SampleRunner {
         bTest1.year = 2014
         println "bTest1.year: ${bTest1.year} "
     } // def doStuff001()
+    
+    def tryFirstSubject() {
+        println "\n\n Starting tryFirstSubject"
+        def fs001 = new FirstSubject()
+        def fs002 = new FirstSubject()
+        // @IntAnnotation(minValue=30, maxValue=400)
+        // int firstNum
+        println "1. fs001.firstNum is ${fs001.firstNum}"
+        fs001.firstNum = 100
+        println "2. fs001.firstNum is ${fs001.firstNum}"
+        fs001.firstNum = 10
+        println "3. fs001.firstNum is ${fs001.firstNum}"
+        fs001.firstNum = 10000
+        println "4. fs001.firstNum is ${fs001.firstNum}"
+    } // tryFirstSubject
 
   static void main( String[] args ) {
     def sr = new SampleRunner()
@@ -161,6 +176,7 @@ class SampleRunner {
     sr.doStuff001()
     // sr.doMovieStuff001()
     // sr.seeBookMethods()
+    sr.tryFirstSubject()
   }
 
 }
