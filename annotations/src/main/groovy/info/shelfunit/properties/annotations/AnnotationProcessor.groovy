@@ -9,6 +9,7 @@ class AnnotationProcessor {
             print ", name in setProperty is ${name}"
             def field = theClass.getDeclaredField( name )
             def intAnnotation = field?.getAnnotation( IntAnnotation.class )
+            def stringAnnotation = field?.getAnnotation( StringAnnotation.class )
             print ", -- Here is intAnnotation: ${intAnnotation}"
             if ( intAnnotation ) {
                 print ", Looking at ${theClass.name}.set${name.capitalize()}"
@@ -17,6 +18,13 @@ class AnnotationProcessor {
                     theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg )
                 } else {
                     print ", Cannot call set${name.capitalize()}"
+                }
+            } else if ( stringAnnotation ) {
+                if ( !( arg.length() < stringAnnotation.min() ) &&
+                    !( arg.length() > stringAnnotation.max() ) ) {
+                    theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg.toString() )
+                } else {
+                    println "Cannot call Book.setTitle"
                 }
             } else {
                 def mName = "set${name.capitalize()}"
