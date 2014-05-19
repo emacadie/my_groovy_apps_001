@@ -8,17 +8,17 @@ class Book {
     static { 
         AnnotationProcessor.process( Book.class ) 
     }
-  
-  int pages
-
-  @StringAnnotation( min = 5, max = 20 )
-  String title
-  
-  int year
-
-  def doStuff() {
-    println "In book.doStuff"
-  }
+    
+    int pages
+    
+    @StringAnnotation( min = 5, max = 20 )
+    String title
+      
+    int year
+    
+    def doStuff() {
+        println "In book.doStuff"
+    }
  
 }
 

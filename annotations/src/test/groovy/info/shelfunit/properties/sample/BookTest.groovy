@@ -10,7 +10,7 @@ class BookTest extends Specification {
     
     def "test the no arg constructor"() {
         def bTest1 = new Book()
-        bTest1.doStuff()
+        bTest1.pages = 100
        
         when:
         bTest1.title = "abcdefg"
@@ -26,7 +26,7 @@ class BookTest extends Specification {
         bTest1.title = "qwertyuiopasdfghjklzxcvbnm"
         then:
         bTest1.title == "abcdefg"
-        
+        bTest1.pages == 100
     }
 
 }
