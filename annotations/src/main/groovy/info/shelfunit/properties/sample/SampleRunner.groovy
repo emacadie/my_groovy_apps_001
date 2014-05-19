@@ -3,6 +3,7 @@ package info.shelfunit.properties.sample
 import java.lang.reflect.Field
 import java.lang.annotation.Annotation
 import info.shelfunit.properties.annotations.StringAnnotation
+import info.shelfunit.properties.annotations.AnnotationProcessor
 
 class SampleRunner {
    /*
@@ -157,6 +158,7 @@ class SampleRunner {
     
     def tryFirstSubject() {
         println "\n\n Starting tryFirstSubject"
+        // AnnotationProcessor.process( FirstSubject.class ) 
         def fs001 = new FirstSubject()
         println "1. Just called constructor for fs001"
         def fs002 = new FirstSubject()
@@ -169,11 +171,16 @@ class SampleRunner {
         println "3. fs001.secondNum is ${fs001.secondNum}, fs001.firstNum is ${fs001.firstNum}"
         fs001.firstNum = 10000
         println "4. fs001.secondNum is ${fs001.secondNum}, fs001.firstNum is ${fs001.firstNum}"
+        fs001.firstNum = "qwertyuiopasdfg"
+        println "5. fs001.secondNum is ${fs001.secondNum}, fs001.firstNum is ${fs001.firstNum}"
         println "About to call fs001.hello()"
         fs001.hello()
-        println "Instantiating with map, setting firstNum to 20"
-        def fsWithMap = new FirstSubject(firstNum: 20)
+        println "Instantiating with map, setting firstNum to 40"
+        def fsWithMap = new FirstSubject(firstNum: 40)
         println "fsWithMap.firstNum is ${fsWithMap.firstNum}"
+        println "Instantiating with map, setting firstNum to 20"
+        def fsWithMap2 = new FirstSubject(firstNum: 20)
+        println "fsWithMap2.firstNum is ${fsWithMap2.firstNum}"
     } // tryFirstSubject
 
   static void main( String[] args ) {

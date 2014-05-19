@@ -12,7 +12,7 @@ class AnnotationProcessor {
             print ", -- Here is intAnnotation: ${intAnnotation}"
             if ( intAnnotation ) {
                 print ", Looking at ${theClass.name}.set${name.capitalize()}"
-                if ( !( arg < intAnnotation.minValue() ) &&
+                if ( ( arg instanceof Integer ) && !( arg < intAnnotation.minValue() ) &&
                     !( arg > intAnnotation.maxValue() ) ) {
                     theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg )
                 } else {
@@ -31,51 +31,7 @@ class AnnotationProcessor {
             println "\n"
         }
         println "\n"
-        
-        ////////////////////////
-        /*
-        theClass.metaClass.constructor = { java.util.LinkedHashMap map ->
-            
-            println "Intercepting constructor call w/ map, and it is a ${map?.getClass().getName()}"
-            def constructor = theClass.getConstructor(map.getClass())
-            constructor.getParameterTypes().each {
-                println "Next arg in constructor  is a ${it.name}"
-            }
-            println "Done with loop"
-            def obj = constructor.newInstance()
-            println "obj is a ${obj.class.name}"
-          
-            
-        }
-          */
-        theClass.metaClass.constructor = { ->
-            println "Intercepting no -arg constructor call"
-            def fields = theClass.getDeclaredFields( )
-            def constructor = theClass.getConstructor()
-            constructor.getParameterTypes().each {
-                println "Next arg in constructor  is a ${it.name}"
-            }
-            println "Done with loop"
-            def obj = constructor.newInstance()
-            println "obj is a ${obj.class.name}"
-            obj.firstNum = null
-            /*
-            fields.each { field ->
-               
-                def intAnnotation = field?.getAnnotation( IntAnnotation.class )
-                def name = field.getName()
-                println "looking at ${name}, -- Here is intAnnotation: ${intAnnotation}"
-                if ( intAnnotation ) {
-                    println ", Looking at ${theClass.name}.set${name.capitalize()}"
-                    def mp = theClass.metaClass.getMetaProperty( name )
-                    println "mp is a ${mp.class.name}"
-                    mp.setProperty( delegate, 0 )
-                }
-            }
-            */
-            // constructor = theClass.getConstructor()
-            // constructor.newInstance()
-        }
+
         
     } // end process
 }
