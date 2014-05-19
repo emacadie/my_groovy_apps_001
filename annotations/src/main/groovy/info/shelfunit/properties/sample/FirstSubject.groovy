@@ -15,6 +15,10 @@ class FirstSubject {
     @IntAnnotation(minValue=30, maxValue=400)
     int firstNum
     int secondNum
+    
+    def hello() {
+        println "Hello from a FirstSubject"
+    }
 }
 
 
