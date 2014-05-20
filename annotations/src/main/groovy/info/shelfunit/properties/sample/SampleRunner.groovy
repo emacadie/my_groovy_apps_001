@@ -139,7 +139,6 @@ class SampleRunner {
 
         println " \n========"
         def bTest1 = new Book()
-        bTest1.doStuff()
        
         println "bTest1.title: ${bTest1.title} "
         bTest1.title = "abcdefg"
@@ -173,8 +172,7 @@ class SampleRunner {
         println "4. fs001.secondNum is ${fs001.secondNum}, fs001.firstNum is ${fs001.firstNum}"
         fs001.firstNum = "qwertyuiopasdfg"
         println "5. fs001.secondNum is ${fs001.secondNum}, fs001.firstNum is ${fs001.firstNum}"
-        println "About to call fs001.hello()"
-        fs001.hello()
+
         println "Instantiating with map, setting firstNum to 40"
         def fsWithMap = new FirstSubject(firstNum: 40)
         println "fsWithMap.firstNum is ${fsWithMap.firstNum}"

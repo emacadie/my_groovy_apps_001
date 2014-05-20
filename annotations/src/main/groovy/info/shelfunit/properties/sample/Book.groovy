@@ -13,10 +13,5 @@ class Book {
     @StringAnnotation( minLength = 5, maxLength = 20 )
     String title
     int year
-    
-    def doStuff() {
-        println "In book.doStuff"
-    }
- 
 }
 

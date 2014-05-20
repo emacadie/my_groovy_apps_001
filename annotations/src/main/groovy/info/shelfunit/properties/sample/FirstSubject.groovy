@@ -12,10 +12,6 @@ class FirstSubject {
     @IntAnnotation( minValue = 30, maxValue = 400 )
     def firstNum // this will let it be null
     int secondNum
-    
-    def hello() {
-        println "Hello from a FirstSubject"
-    }
 }
 
 
