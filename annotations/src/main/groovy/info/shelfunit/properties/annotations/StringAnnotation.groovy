@@ -6,13 +6,11 @@ import java.lang.annotation.Target
 import java.lang.annotation.ElementType
 import java.lang.annotation.RetentionPolicy
 
-// If doing AST transformation, this may need to be @Retention (RetentionPolicy.SOURCE)
 @Retention(RetentionPolicy.RUNTIME) 
 @Target(ElementType.FIELD)
 
 public @interface StringAnnotation {
-  public int min() default 0
-  public int max()
-  // public boolean throwException() default false
+  public int minLength() default 0
+  public int maxLength() default 2147483647 // Integer.MAX_VALUE
 }
 

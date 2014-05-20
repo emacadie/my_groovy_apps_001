@@ -16,8 +16,8 @@ class AnnotationProcessor {
                     theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg )
                 }
             } else if ( stringAnnotation ) {
-                if ( !( arg.length() < stringAnnotation.min() ) &&
-                    !( arg.length() > stringAnnotation.max() ) ) {
+                if ( !( arg.length() < stringAnnotation.minLength() ) &&
+                    !( arg.length() > stringAnnotation.maxLength() ) ) {
                     theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg.toString() )
                 }
             } else {

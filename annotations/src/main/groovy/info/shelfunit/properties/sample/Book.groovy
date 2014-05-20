@@ -10,10 +10,8 @@ class Book {
     }
     
     int pages
-    
-    @StringAnnotation( min = 5, max = 20 )
+    @StringAnnotation( minLength = 5, maxLength = 20 )
     String title
-      
     int year
     
     def doStuff() {
