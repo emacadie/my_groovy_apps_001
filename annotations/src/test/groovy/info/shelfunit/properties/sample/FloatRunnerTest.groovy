@@ -69,6 +69,28 @@ class FloatRunnerTest extends Specification {
         fr.thirdNum  == 1001f
 
     } // end "test just outside the ranges"
+    
+    def "test trying another number"() {
+        def fr = new FloatRunner()
+        when:
+        fr.firstNum  = 50f
+        fr.secondNum = 50f
+        fr.thirdNum  = 50f
+        then:
+        fr.firstNum  == 50f
+        fr.secondNum == 50f
+        fr.thirdNum  == 50f
+        
+        when:
+        fr.firstNum  = 50.3f
+        fr.secondNum = 50
+        fr.thirdNum  = 'hello'
+        then:
+        fr.firstNum  == 50.3f
+        fr.secondNum == 50
+        fr.thirdNum  == 50.0
+
+    } // end "test just outside the ranges"
 
 }
 
