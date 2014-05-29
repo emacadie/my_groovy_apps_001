@@ -38,13 +38,6 @@ class LongRunnerTest extends Specification {
         lr.thirdNum  == 1001L
 
     } // end "test the no arg constructor"
-        /*
-    @LongAnnotation( minValue = 0, maxValue = 1000 )
-    def firstNum
-    @LongAnnotation( maxValue = 1000 )
-    def secondNum
-    @LongAnnotation( minValue = 10 )
-    def thirdNum
-    */
+
 }
 

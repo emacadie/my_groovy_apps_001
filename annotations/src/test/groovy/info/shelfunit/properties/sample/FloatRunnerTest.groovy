@@ -69,13 +69,6 @@ class FloatRunnerTest extends Specification {
         fr.thirdNum  == 1001f
 
     } // end "test just outside the ranges"
-        /*
-    @fongAnnotation( minValue = 0, maxValue = 1000 )
-    def firstNum
-    @fongAnnotation( maxValue = 1000 )
-    def secondNum
-    @fongAnnotation( minValue = 10 )
-    def thirdNum
-    */
+
 }
 
