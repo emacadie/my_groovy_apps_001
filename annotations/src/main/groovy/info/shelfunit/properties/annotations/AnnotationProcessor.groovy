@@ -7,7 +7,7 @@ class AnnotationProcessor {
         theClass.metaClass.setProperty = { String name, arg ->
             
             def field = theClass.getDeclaredField( name )
-            def intAnnotation = field?.getAnnotation( IntAnnotation.class )
+            def intAnnotation    = field?.getAnnotation( IntAnnotation.class )
             def stringAnnotation = field?.getAnnotation( StringAnnotation.class )
             def doubleAnnotation = field?.getAnnotation( DoubleAnnotation.class )
             def floatAnnotation  = field?.getAnnotation( FloatAnnotation.class )
