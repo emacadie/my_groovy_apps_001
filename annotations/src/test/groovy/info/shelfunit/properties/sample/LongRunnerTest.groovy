@@ -27,6 +27,15 @@ class LongRunnerTest extends Specification {
         lr.firstNum  == 50L
         lr.secondNum == 50L
         lr.thirdNum  == 50L
+        
+        when:
+        lr.firstNum  = 1001L
+        lr.secondNum = 1001L
+        lr.thirdNum  = 1001L
+        then:
+        lr.firstNum  == 50L
+        lr.secondNum == 50L
+        lr.thirdNum  == 1001L
 
     } // end "test the no arg constructor"
         /*
@@ -37,6 +46,5 @@ class LongRunnerTest extends Specification {
     @LongAnnotation( minValue = 10 )
     def thirdNum
     */
-
 }
 
