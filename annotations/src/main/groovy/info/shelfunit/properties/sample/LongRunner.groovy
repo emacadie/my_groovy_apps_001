@@ -15,6 +15,5 @@ class LongRunner {
     def secondNum
     @LongAnnotation( minValue = 10L )
     def thirdNum
-    
 }
 
