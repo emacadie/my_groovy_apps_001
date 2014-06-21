@@ -27,11 +27,13 @@ class FirstSubjectTest extends Specification {
     def "testing with map constructor"() {
         when:
         def fsWithMap = new FirstSubject(firstNum: 40)
+        println "fsWithMap.firstNum: ${fsWithMap.firstNum}"
         then:
         fsWithMap.firstNum == 40
         
         when:
         def fsWithMap2 = new FirstSubject(firstNum: 20)
+        println "fsWithMap2.firstNum: ${fsWithMap2.firstNum}"
         then:
         fsWithMap2.firstNum == null
     }

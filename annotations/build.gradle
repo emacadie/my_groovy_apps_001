@@ -13,19 +13,14 @@ repositories {
 
   dependencies {
 
- 
     testCompile 'junit:junit:4.10'
     testCompile 'org.mockito:mockito-all:[1.8.5,)'
     // From Maven, it's GroupId:ArtifactId:Version 
     testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
     testCompile 'xmlunit:xmlunit:1.5'
 
-    // compile 'commons-codec:commons-codec:1.6'
-    // compile 'io.netty:netty:3.5.7.Final'
-
     // logging
     compile 'org.slf4j:slf4j-api:1.7.+'
-    // compile 'org.apache.logging.log4j:log4j:2.0-rc1'
     compile 'log4j:log4j:1.2.17'
 
     testRuntime 'org.slf4j:slf4j-ext:1.7.+'
@@ -62,7 +57,7 @@ test {
   outputs.upToDateWhen { false }
 }
 
-task runJava(type: JavaExec) {
+task runJava( type: JavaExec ) {
      println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
      dependsOn classes
      description = 'Run gradle.sample.SampleApp'
@@ -77,12 +72,12 @@ task runJava(type: JavaExec) {
      args 'www.yahoo.com'
 }
 
-task runGroovy(type: JavaExec) {
+task runGroovy( type: JavaExec ) {
      println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
      dependsOn classes
      description = 'Run gradle.sample.SampleApp'
      // to set main class from command line
-     if ( rootProject.hasProperty("mainClass") ) {     
+     if ( rootProject.hasProperty( "mainClass" ) ) {     
      	main = mainClass
      } else {
        main = 'info.shelfunit.app.math.FirstRunner'
@@ -96,10 +91,14 @@ task runGroovy(type: JavaExec) {
      args 'www.yahoo.com'
 }
 
-// run gradle console for this one
-task(console, dependsOn: 'classes', type: JavaExec) {
+// run "gradle console" for this one
+task( console, dependsOn: 'classes', type: JavaExec ) {
   main = 'groovy.ui.Console'
   classpath = sourceSets.main.runtimeClasspath
+}
+
+groovydoc {
+    exclude "info/shelfunit/properties/sample/*"
 }
 
 mainClassName = "info.shelfunit.properties.sample.SampleRunner"

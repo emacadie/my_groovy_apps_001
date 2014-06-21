@@ -28,6 +28,25 @@ class BookTest extends Specification {
         bTest1.title == "abcdefg"
         bTest1.pages == 100
     }
+    
+    def "test the map constructor"() {
+        def bTest1 = new Book( pages: 100, title: "abcdefg", year: 1979 )
+        bTest1.pages = 100
+       
+        expect:
+        bTest1.title == "abcdefg"
+       
+        when:
+        bTest1.title = "qw"
+        then:
+        bTest1.title == "abcdefg"
+        
+        when:
+        bTest1.title = "qwertyuiopasdfghjklzxcvbnm"
+        then:
+        bTest1.title == "abcdefg"
+        bTest1.pages == 100
+    }
 
 }
 

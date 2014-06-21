@@ -14,5 +14,8 @@ http://oval.sourceforge.net/
 
 This is intended to be pretty small    
 
+This works with the setters. I cannot get it to work with map-based constructors.
 
+gradle -Dtest.single=FirstImmutableSampleTest test -info    
+gradle -Dtest.single=BookTest test -info    
 

@@ -33,7 +33,6 @@ class Transform implements ASTTransformation {
         // def classToTransform = Class.forName( classNode.name )
         def classToTransform = ClassLoader.getSystemClassLoader().loadClass( classNode.name )
         transformClass( classToTransform )
-        
     }
     
     def transformClass( classToTransform ) {
@@ -58,13 +57,6 @@ class Transform implements ASTTransformation {
             }
         }
     } // transformClass
-    /*
-    MethodNode makeMethod(ClassNode source) {
-        def ast = new AstBuilder().buildFromString(CompilePhase.INSTRUCTION_SELECTION, false,
-                "def added() { println 'Added' }"
-        )
-        return (MethodNode) ast[1].methods.find { it.name == 'added' }
-    }
-    */
-}
+
+} // end class Transform
 
