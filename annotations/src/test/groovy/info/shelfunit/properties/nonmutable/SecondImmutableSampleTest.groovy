@@ -34,7 +34,7 @@ class SecondImmutableSampleTest extends Specification {
         println "In test ${name.methodName}, bTest1: ${bTest1.toString()}"
         expect:
         bTest1.firstString == "Hello1"
-        bTest1.secondInt == 2000
+        bTest1.secondInt == 0
          
     } // end "test the no arg constructor"
     

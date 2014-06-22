@@ -58,11 +58,11 @@ class FirstImmutableSampleTest extends Specification {
         }
         */
         
-        def bTest1 = new FirstImmutableSample( firstString: "Hello3", secondString: "Goodbye", firstInt: 21, secondInt: 200 )
+        def bTest1 = new FirstImmutableSample( firstString: "Hello3", secondString: "Goodbye", firstInt: 21, secondInt: 401 )
         println "In test ${name.methodName}, bTest1: ${bTest1.toString()}"
         expect:
         bTest1.firstString == "Hello3"
-        bTest1.secondInt == 200
+        bTest1.secondInt == null
         
     } // end "test the no arg constructor again"
 

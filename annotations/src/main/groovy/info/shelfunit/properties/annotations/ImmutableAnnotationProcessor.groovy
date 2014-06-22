@@ -13,7 +13,7 @@ import java.lang.annotation.Annotation
 <p>This is pretty simple and a bit limited, but that is the intent. I want to add some easy validation to Groovy Beans. As far as I know, nobody has really done this for Groovy. There is project on Sourceforge called <a href="http://oval.sourceforge.net/">OVal</a>. That does a LOT of stuff, far beyond this project. It has <a href="http://oval.sourceforge.net/dependencies.html">22 dependencies</a>, 3 of them for logging alone. There is also <a href="http://hibernate.org/validator/">Hibernate Validator</a>. It implements some JSR, but when I read the documentation, it said I had to add two or three other JSRs. If that is what you need, go for it. Those are Java projects. This is for Groovy beans. The goal is to keep this as clean and simple as possible.</p>
 
 */
-class AnnotationProcessor {
+class ImmutableAnnotationProcessor {
     
     /**
     <p>This is the method that actually processes the annotations.</p>
@@ -38,12 +38,19 @@ class AnnotationProcessor {
     */
     static process( Class theClass ) {
         println "Just got called for class ${theClass.getName()}"
+        def imAnnotation = theClass.getAnnotation( ImmutableAnnotation )
+        if ( imAnnotation ) {
+            println "${theClass.name} has ImmutableAnnotation"
+            def classNode = ClassHelper.make( theClass )
+            println "classNode is a ${classNode.class.name} and its name is ${classNode.getUnresolvedName()}"
+        } else {
+            println "${theClass.name} does not have ImmutableAnnotation"
+        }
         
         
         // metaClass.constructor = { String arg -> }
         // Constructor: public info.shelfunit.properties.nonmutable.SecondImmutableSample(java.util.HashMap)
         // Constructor: public info.shelfunit.properties.nonmutable.SecondImmutableSample(java.lang.String,java.lang.String,int,int)
-        /*
         theClass.metaClass.constructor = { Map theMap ->
             println "In the map constructor"
             theMap.each { entry ->
@@ -57,10 +64,11 @@ class AnnotationProcessor {
                 println "Just set the prop in the map"
             }
         }
+        /*
+        theClass.metaClass.constructor = { a, b, c, d ->
+            println "In the other constructor: a is a ${a.class.name}, c is a ${c.class.name}"
+        }
         */
-        
-
-      
         theClass.metaClass.setProperty = { String name, arg ->
             println " In set property for ${theClass.getName()} for property ${name} with arg ${arg}"
             def field = theClass.getDeclaredField( name )
@@ -94,20 +102,9 @@ class AnnotationProcessor {
                     theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg )
                 }
             } else if ( floatAnnotation ) {
-                if ( ( arg instanceof Float ) && 
-                    ( arg >= floatAnnotation.minValue() ) &&
-                    ( arg <= floatAnnotation.maxValue() ) &&
-                    ( arg >= Float.MIN_VALUE ) &&
-                    ( arg <= Float.MAX_VALUE ) ) {
-                    theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg )
-                }
+                handleFloat( theClass, name, delegate, arg, floatAnnotation )
             } else if ( longAnnotation ) {
-                if ( ( arg instanceof Long ) && ( arg >= longAnnotation.minValue() ) &&
-                    ( arg <= longAnnotation.maxValue() ) &&
-                    ( arg >= Long.MIN_VALUE ) &&
-                    ( arg <= Long.MAX_VALUE ) ) {
-                    theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg )
-                }
+                handleLong( theClass, name, delegate, arg, longAnnotation )
             } else {
                 theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg ) // this works
             }
@@ -115,5 +112,23 @@ class AnnotationProcessor {
         
     } // end process - line 44
     
+    static handleFloat( theClass, name, delegate, arg, floatAnnotation ) {
+        if ( ( arg instanceof Float ) && 
+                    ( arg >= floatAnnotation.minValue() ) &&
+                    ( arg <= floatAnnotation.maxValue() ) &&
+                    ( arg >= Float.MIN_VALUE ) &&
+                    ( arg <= Float.MAX_VALUE ) ) {
+                    theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg )
+                }
+    }
+
+    static handleLong( theClass, name, delegate, arg, longAnnotation ) {
+        if ( ( arg instanceof Long ) && ( arg >= longAnnotation.minValue() ) &&
+                    ( arg <= longAnnotation.maxValue() ) &&
+                    ( arg >= Long.MIN_VALUE ) &&
+                    ( arg <= Long.MAX_VALUE ) ) {
+                    theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg )
+                }
+    }
 } // end class AnnotationProcessor - line 128
 
