@@ -59,7 +59,9 @@ class TrulyImmutable001Test extends Specification {
         
         def bTest1 = new TrulyImmutable001( firstString: "Hello3", secondString: "Goodbye", firstInt: 21, secondInt: 401 )
         println "In test ${name.methodName}, bTest1: ${bTest1.toString()}"
-        println "bTest1.firstString: ${bTest1.firstString}, bTest1.secondString: ${bTest1.secondString}"
+        // println "bTest1.firstString: ${bTest1.firstString}, bTest1.secondString: ${bTest1.secondString}"
+        bTest1.secondString = "ChumbaWumba"
+        println "Still in test ${name.methodName}, bTest1: ${bTest1.toString()}"
         expect:
         bTest1.firstString == "Hello3"
         bTest1.secondInt == null

@@ -49,27 +49,46 @@ class ImmutableAnnotationProcessor {
         } else {
             println "${theClass.name} does not have ImmutableAnnotation"
         }
-        
+        def inConstructor = false
         
         // metaClass.constructor = { String arg -> }
         // Constructor: public info.shelfunit.properties.nonmutable.SecondImmutableSample(java.util.HashMap)
         // Constructor: public info.shelfunit.properties.nonmutable.SecondImmutableSample(java.lang.String,java.lang.String,int,int)
-        
+     
         theClass.metaClass.constructor = { Map theMap ->
+            inConstructor = true
             println "\nIn the map constructor"
-        
+            println "theMap[ secondString ]: ${ theMap[ "secondString" ]}"
             def instance = theClass.newInstance()
+            println "instance is a ${instance.class.name}  and delegate is a ${delegate.class.name}"
+            delegate = instance
+            println "instance is a ${instance.class.name}  and now delegate is a ${delegate.class.name}"
+            // instance.setProperty( "secondString", "Voyager2" )
+            // instance.setProperty( "firstString", "Voyager" )
+            // instance.setProperty( "secondInt", 222 )
+            // instance.setProperty( "firstInt", 333 )
             println "instance is a ${instance.class.name}"
+            // def field = theClass.getDeclaredField( entry.key )
+            //     def intAnnotation    = field?.getAnnotation( IntAnnotation.class )
+            //     def stringAnnotation = field?.getAnnotation( StringAnnotation.class )
+            
+            ///////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////
+            
+            
+        // } // theMap
+          
+            // http://burtbeckwith.com/blog/?p=1003
             def methods = instance.metaClass.getMethods()
             methods.each {
-                println "Method: ${it.toString()}"
+                // println "Method: ${it.toString()}"
             }
             theMap.each { entry ->
-                if ( entry.key == "secondString" ) {
-                    println "We have second String"
-                    instance.setProperty( "secondString", "Voyager" )
-                }
-                /*
+                // if ( entry.key == "secondString" ) {
+                //     println "We have second String"
+                //     instance.setProperty( "secondString", "Voyager" )
+                // }
+                
                 def field = theClass.getDeclaredField( entry.key )
                 def intAnnotation    = field?.getAnnotation( IntAnnotation.class )
                 def stringAnnotation = field?.getAnnotation( StringAnnotation.class )
@@ -83,9 +102,9 @@ class ImmutableAnnotationProcessor {
                         ( entry.value <= intAnnotation.maxValue() ) &&
                         ( entry.value >= Integer.MIN_VALUE ) &&
                         ( entry.value <= Integer.MAX_VALUE ) ) {
-                        // theClass.metaClass.getMetaProperty( entry.key ).setProperty( delegate, entry.value )
+                        theClass.metaClass.getMetaProperty( entry.key ).setProperty( instance, entry.value )
                         println "setting the int method"
-                        instance."${'set' + entry.key.capitalize()}"( entry.value )
+                        // instance."${'set' + entry.key.capitalize()}"( entry.value )
                            
                     } else {
                         def currentVal = instance."${entry.key}"
@@ -100,8 +119,10 @@ class ImmutableAnnotationProcessor {
                             // instance."${'set' + entry.key.capitalize()}"( entry.value )
                             def qq = entry.value + entry.value
                             // metaMethod.invoke( instance, entry.value )
-                            instance."${entry.key}" == qq
+                            // instance."${entry.key}" == qq
                             // metaMethod.invoke( instance, qq )
+                            // theClass.metaClass.getMetaProperty( entry.key ).setProperty( delegate, qq ) // entry.value )
+                            theClass.metaClass.getMetaProperty( entry.key ).setProperty( instance, qq ) // entry.value )
                             println "calling invoke for the String method"
                     } else {
                         def currentVal = instance."${entry.key}"
@@ -112,10 +133,12 @@ class ImmutableAnnotationProcessor {
                         
                     }
                 } else {} // end annotation   
-                */
+                
             } // map.each
             println "Here is instance.getProperty( secondString ) : ${instance.getProperty( "secondString" )} "
+            instance
         } // constructor
+        
         
         /*
                             
@@ -177,9 +200,14 @@ class ImmutableAnnotationProcessor {
             println "In the other constructor: a is a ${a.class.name}, c is a ${c.class.name}"
         }
         */
-        /*
+       // *
         theClass.metaClass.setProperty = { String name, arg ->
             println " In set property for ${theClass.getName()} for property ${name} with arg ${arg},  and delegate is a ${delegate.class.name}"
+            println "totally skipping it"
+            println "Are we in constructor? Look: ${inConstructor}"
+        }
+        /*
+             
             def field = theClass.getDeclaredField( name )
             def intAnnotation    = field?.getAnnotation( IntAnnotation.class )
             def stringAnnotation = field?.getAnnotation( StringAnnotation.class )
@@ -197,11 +225,13 @@ class ImmutableAnnotationProcessor {
                     theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg )
                 }
             } else if ( stringAnnotation ) {
-                println "Here is arg for string: ${arg}"
+                println "Here is arg for string ${name}: ${arg}"
+                println "Value before change is ${theClass.metaClass.getMetaProperty( name ).getProperty( delegate )}"
                 if ( ( arg.length() >= stringAnnotation.minLength() ) &&
                     ( arg.length() <= stringAnnotation.maxLength() ) ) {
                     theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg.toString() )
                 }
+                println "Value after change is ${theClass.metaClass.getMetaProperty( name ).getProperty( delegate )}"
             } else if ( doubleAnnotation ) {
                 if ( ( arg instanceof Double ) && 
                     ( arg >= doubleAnnotation.minValue() ) &&
