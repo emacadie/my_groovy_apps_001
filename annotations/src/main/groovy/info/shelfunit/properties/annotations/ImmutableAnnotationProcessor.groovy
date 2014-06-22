@@ -54,11 +54,70 @@ class ImmutableAnnotationProcessor {
         // metaClass.constructor = { String arg -> }
         // Constructor: public info.shelfunit.properties.nonmutable.SecondImmutableSample(java.util.HashMap)
         // Constructor: public info.shelfunit.properties.nonmutable.SecondImmutableSample(java.lang.String,java.lang.String,int,int)
-        /*
+        
         theClass.metaClass.constructor = { Map theMap ->
             println "\nIn the map constructor"
         
+            def instance = theClass.newInstance()
+            println "instance is a ${instance.class.name}"
+            def methods = instance.metaClass.getMethods()
+            methods.each {
+                println "Method: ${it.toString()}"
+            }
+            theMap.each { entry ->
+                if ( entry.key == "secondString" ) {
+                    println "We have second String"
+                    instance.setProperty( "secondString", "Voyager" )
+                }
+                /*
+                def field = theClass.getDeclaredField( entry.key )
+                def intAnnotation    = field?.getAnnotation( IntAnnotation.class )
+                def stringAnnotation = field?.getAnnotation( StringAnnotation.class )
+                    
+                if ( ( entry.value instanceof Integer ) && ( intAnnotation ) ) {
+                    println "Here is arg for int in constructor: ${entry.value} and it is a ${entry.value.class.name}"
+                    println "delegate is a ${delegate.class.name}, owner is a ${owner.class.name}"
+                    
+                    if ( ( entry.value instanceof Integer ) && 
+                        ( entry.value >= intAnnotation.minValue() ) &&
+                        ( entry.value <= intAnnotation.maxValue() ) &&
+                        ( entry.value >= Integer.MIN_VALUE ) &&
+                        ( entry.value <= Integer.MAX_VALUE ) ) {
+                        // theClass.metaClass.getMetaProperty( entry.key ).setProperty( delegate, entry.value )
+                        println "setting the int method"
+                        instance."${'set' + entry.key.capitalize()}"( entry.value )
+                           
+                    } else {
+                        def currentVal = instance."${entry.key}"
+                        instance."${'set' + entry.key.capitalize()}"( currentVal )
+                        println "${entry.value} did not pass the tests"
+                    }
+                } else if ( ( stringAnnotation ) && ( entry.value instanceof String ) ) {
+                    println "setting the String method"
+                    def metaMethod = theClass.metaClass.getMetaMethod( "${'set' + entry.key.capitalize()}",  entry.value )
+                    if ( ( entry.value.length() >= stringAnnotation.minLength() ) &&
+                        ( entry.value.length() <= stringAnnotation.maxLength() ) ) {
+                            // instance."${'set' + entry.key.capitalize()}"( entry.value )
+                            def qq = entry.value + entry.value
+                            // metaMethod.invoke( instance, entry.value )
+                            instance."${entry.key}" == qq
+                            // metaMethod.invoke( instance, qq )
+                            println "calling invoke for the String method"
+                    } else {
+                        def currentVal = instance."${entry.key}"
+                        println "${entry.value} did not pass the tests, and currentVal is ${currentVal}"
+                        
+                        // instance."${'set' + entry.key.capitalize()}"( currentVal )
+                        // metaMethod.invoke( instance, []  )
+                        
+                    }
+                } else {} // end annotation   
+                */
+            } // map.each
+            println "Here is instance.getProperty( secondString ) : ${instance.getProperty( "secondString" )} "
+        } // constructor
         
+        /*
                             
                 // this causes "object is not an instance of declaring class"
                 // println "Is it already set?: ${theClass.metaClass.getMetaProperty( entry.key ).getProperty( entry.key )}"
@@ -118,8 +177,9 @@ class ImmutableAnnotationProcessor {
             println "In the other constructor: a is a ${a.class.name}, c is a ${c.class.name}"
         }
         */
+        /*
         theClass.metaClass.setProperty = { String name, arg ->
-            println " In set property for ${theClass.getName()} for property ${name} with arg ${arg}"
+            println " In set property for ${theClass.getName()} for property ${name} with arg ${arg},  and delegate is a ${delegate.class.name}"
             def field = theClass.getDeclaredField( name )
             def intAnnotation    = field?.getAnnotation( IntAnnotation.class )
             def stringAnnotation = field?.getAnnotation( StringAnnotation.class )
@@ -157,7 +217,8 @@ class ImmutableAnnotationProcessor {
             } else {
                 theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg ) // this works
             }
-        }
+        } // setProperty
+        */
         
     } // end process - line 44
     

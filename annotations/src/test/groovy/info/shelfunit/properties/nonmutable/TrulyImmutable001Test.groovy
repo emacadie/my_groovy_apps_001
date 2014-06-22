@@ -27,7 +27,7 @@ class TrulyImmutable001Test extends Specification {
         def throwaway = new TrulyImmutable001( firstString: "Not Junk", secondString: "Goodbye Junk", firstInt: 21 )
         throwaway.firstString = "Throwaway"
         println "Just made throwaway, about to make bTest1"
-        def bTest1 = new TrulyImmutable001( firstString: "Hello1", secondString: "Goodbye", firstInt: 21, secondInt: 2000 )
+        def bTest1 = new TrulyImmutable001( firstString: "Hello1", secondString: "Goodbye", firstInt: 21, secondInt: 200 )
         println "In test ${name.methodName}, bTest1: ${bTest1.toString()}"
         expect:
         bTest1.firstString == "Hello1"
@@ -59,6 +59,7 @@ class TrulyImmutable001Test extends Specification {
         
         def bTest1 = new TrulyImmutable001( firstString: "Hello3", secondString: "Goodbye", firstInt: 21, secondInt: 401 )
         println "In test ${name.methodName}, bTest1: ${bTest1.toString()}"
+        println "bTest1.firstString: ${bTest1.firstString}, bTest1.secondString: ${bTest1.secondString}"
         expect:
         bTest1.firstString == "Hello3"
         bTest1.secondInt == null
