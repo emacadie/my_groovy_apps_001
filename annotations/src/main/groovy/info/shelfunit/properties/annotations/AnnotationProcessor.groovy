@@ -38,29 +38,6 @@ class AnnotationProcessor {
     */
     static process( Class theClass ) {
         println "Just got called for class ${theClass.getName()}"
-        
-        
-        // metaClass.constructor = { String arg -> }
-        // Constructor: public info.shelfunit.properties.nonmutable.SecondImmutableSample(java.util.HashMap)
-        // Constructor: public info.shelfunit.properties.nonmutable.SecondImmutableSample(java.lang.String,java.lang.String,int,int)
-        /*
-        theClass.metaClass.constructor = { Map theMap ->
-            println "In the map constructor"
-            theMap.each { entry ->
-                println "key $entry.key has value $entry.value"
-                // this causes "object is not an instance of declaring class"
-                // println "Is it already set?: ${theClass.metaClass.getMetaProperty( entry.key ).getProperty( entry.key )}"
-                // this is okay: println "Is it already set?: ${theClass.metaClass.getProperty( entry.key ).getProperty( entry.key )}"
-                // println "Is it already set?: ${theClass.metaClass.getMetaProperty( entry.key ).getProperty( delegate, entry.key )}"
-                // println "Is it already set?: ${delegate.getProperty( entry.key )}"
-                // theClass.metaClass.getMetaProperty( entry.key ).setProperty( delegate, entry.value )
-                println "Just set the prop in the map"
-            }
-        }
-        */
-        
-
-      
         theClass.metaClass.setProperty = { String name, arg ->
             println " In set property for ${theClass.getName()} for property ${name} with arg ${arg}"
             def field = theClass.getDeclaredField( name )
@@ -80,7 +57,7 @@ class AnnotationProcessor {
                     theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg )
                 }
             } else if ( stringAnnotation ) {
-                println "Here is arg for string: ${arg}"
+                println "Here is arg for string: ${arg}, and delegate is a ${delegate.class.name}"
                 if ( ( arg.length() >= stringAnnotation.minLength() ) &&
                     ( arg.length() <= stringAnnotation.maxLength() ) ) {
                     theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg.toString() )

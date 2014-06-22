@@ -3,6 +3,8 @@ package info.shelfunit.properties.annotations
 import org.codehaus.groovy.ast.ClassHelper 
 import org.codehaus.groovy.ast.ClassNode 
 
+import static org.codehaus.groovy.transform.ToStringASTTransformation.createToString
+
 import java.lang.annotation.Annotation
 
 /**
@@ -43,6 +45,7 @@ class ImmutableAnnotationProcessor {
             println "${theClass.name} has ImmutableAnnotation"
             def classNode = ClassHelper.make( theClass )
             println "classNode is a ${classNode.class.name} and its name is ${classNode.getUnresolvedName()}"
+            // createToString( classNode, false, false, null, null, false, true )
         } else {
             println "${theClass.name} does not have ImmutableAnnotation"
         }
@@ -51,19 +54,65 @@ class ImmutableAnnotationProcessor {
         // metaClass.constructor = { String arg -> }
         // Constructor: public info.shelfunit.properties.nonmutable.SecondImmutableSample(java.util.HashMap)
         // Constructor: public info.shelfunit.properties.nonmutable.SecondImmutableSample(java.lang.String,java.lang.String,int,int)
+        /*
         theClass.metaClass.constructor = { Map theMap ->
-            println "In the map constructor"
-            theMap.each { entry ->
-                println "key $entry.key has value $entry.value"
+            println "\nIn the map constructor"
+        
+        
+                            
                 // this causes "object is not an instance of declaring class"
                 // println "Is it already set?: ${theClass.metaClass.getMetaProperty( entry.key ).getProperty( entry.key )}"
                 // this is okay: println "Is it already set?: ${theClass.metaClass.getProperty( entry.key ).getProperty( entry.key )}"
                 // println "Is it already set?: ${theClass.metaClass.getMetaProperty( entry.key ).getProperty( delegate, entry.key )}"
                 // println "Is it already set?: ${delegate.getProperty( entry.key )}"
                 // theClass.metaClass.getMetaProperty( entry.key ).setProperty( delegate, entry.value )
+               
+                    def field = theClass.getDeclaredField( entry.key )
+                    def intAnnotation    = field?.getAnnotation( IntAnnotation.class )
+                    def stringAnnotation = field?.getAnnotation( StringAnnotation.class )
+                    
+                    if ( intAnnotation ) {
+                        println "Here is arg for int in constructor: ${entry.value}"
+                        println "delegate is a ${delegate.class.name}, owner is a ${owner.class.name}"
+                    }
+                
+                
+                    if ( ( entry.value instanceof Integer ) && 
+                        ( entry.value >= intAnnotation.minValue() ) &&
+                        ( entry.value <= intAnnotation.maxValue() ) &&
+                        ( entry.value >= Integer.MIN_VALUE ) &&
+                        ( entry.value <= Integer.MAX_VALUE ) ) {
+                        theClass.metaClass.getMetaProperty( entry.key ).setProperty( delegate, entry.value )
+                    }
+                    
+                } else if ( stringAnnotation ) {
+                    println "Here is arg for string: ${entry.value}"
+                    if ( ( entry.value.length() >= stringAnnotation.minLength() ) &&
+                        ( entry.value.length() <= stringAnnotation.maxLength() ) ) {
+                        theClass.metaClass.getMetaProperty( entry.key ).setProperty( delegate, entry.value )
+                    }
+                
+                } else if ( doubleAnnotation ) {
+                    if ( ( arg instanceof Double ) && 
+                        ( arg >= doubleAnnotation.minValue() ) &&
+                        ( arg <= doubleAnnotation.maxValue() ) &&
+                        ( arg >= Double.MIN_VALUE ) &&
+                        ( arg <= Double.MAX_VALUE ) ) {
+                        theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg )
+                    }
+                } else if ( floatAnnotation ) {
+                    handleFloat( theClass, name, delegate, arg, floatAnnotation )
+                } else if ( longAnnotation ) {
+                    handleLong( theClass, name, delegate, arg, longAnnotation )
+                
+                } else {
+                    theClass.metaClass.getMetaProperty( name ).setProperty( delegate, entry.value ) // this works
+                }
+                
                 println "Just set the prop in the map"
             }
-        }
+        } //  end constructor
+        */
         /*
         theClass.metaClass.constructor = { a, b, c, d ->
             println "In the other constructor: a is a ${a.class.name}, c is a ${c.class.name}"
