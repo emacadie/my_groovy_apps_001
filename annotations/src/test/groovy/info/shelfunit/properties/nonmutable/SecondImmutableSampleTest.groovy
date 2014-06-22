@@ -68,9 +68,9 @@ class SecondImmutableSampleTest extends Specification {
         bTest1.firstString == "Hello3"
         bTest1.secondInt == 200
         
-        println "About to try a different way"
-        def bTest2 = new SecondImmutableSample( 'Hello', 'Second', 21, 21 )
-        println "In test ${name.methodName}, bTest2: ${bTest2.toString()}"
+        // println "About to try a different way"
+        // def bTest2 = new SecondImmutableSample( 'Hello', 'Second', 21, 21 )
+        // println "In test ${name.methodName}, bTest2: ${bTest2.toString()}"
         
     } // end "test the no arg constructor again"
     

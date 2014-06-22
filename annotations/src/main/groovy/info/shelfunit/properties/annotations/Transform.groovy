@@ -16,10 +16,10 @@ import org.codehaus.groovy.transform.GroovyASTTransformation
 @GroovyASTTransformation( phase = CompilePhase.CLASS_GENERATION ) // SEMANTIC_ANALYSIS ) // INSTRUCTION_SELECTION )
 class Transform implements ASTTransformation {
     void visit( ASTNode[] astNodes, SourceUnit sourceUnit ) {
-        if (!astNodes) return
-        if (!astNodes[0]) return
-        if (!astNodes[1]) return
-        if (!(astNodes[0] instanceof AnnotationNode)) return
+        if ( !astNodes ) return
+        if ( !astNodes[ 0 ] ) return
+        if ( !astNodes[ 1 ] ) return
+        if ( !( astNodes[ 0 ] instanceof AnnotationNode ) ) return
         // if (astNodes[0].classNode?.name != Marker.class.name) return
 
         // ClassNode annotatedClass = (ClassNode) astNodes[1]

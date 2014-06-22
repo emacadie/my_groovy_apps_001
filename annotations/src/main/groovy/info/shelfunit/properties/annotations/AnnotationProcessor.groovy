@@ -1,5 +1,10 @@
 package info.shelfunit.properties.annotations
 
+import org.codehaus.groovy.ast.ClassHelper 
+import org.codehaus.groovy.ast.ClassNode 
+
+import java.lang.annotation.Annotation
+
 /**
 <p>This is a class that will process the annotations {@link info.shelfunit.properties.annotations.DoubleAnnotation}, {@link info.shelfunit.properties.annotations.FloatAnnotation}, {@link info.shelfunit.properties.annotations.IntAnnotation}, {@link info.shelfunit.properties.annotations.LongAnnotation} and {@link info.shelfunit.properties.annotations.StringAnnotation}</p>
 
@@ -33,8 +38,16 @@ class AnnotationProcessor {
     */
     static process( Class theClass ) {
         println "Just got called for class ${theClass.getName()}"
+        def imAnnotation = theClass.getAnnotation( ImmutableAnnotation )
+        if ( imAnnotation ) {
+            println "${theClass.name} has ImmutableAnnotation"
+            def classNode = ClassHelper.make( theClass )
+            println "classNode is a ${classNode.class.name} and its name is ${classNode.getUnresolvedName()}"
+        } else {
+            println "${theClass.name} does not have ImmutableAnnotation"
+        }
         
-        /*
+        
         // metaClass.constructor = { String arg -> }
         // Constructor: public info.shelfunit.properties.nonmutable.SecondImmutableSample(java.util.HashMap)
         // Constructor: public info.shelfunit.properties.nonmutable.SecondImmutableSample(java.lang.String,java.lang.String,int,int)
@@ -51,7 +64,7 @@ class AnnotationProcessor {
                 println "Just set the prop in the map"
             }
         }
-        
+        /*
         theClass.metaClass.constructor = { a, b, c, d ->
             println "In the other constructor: a is a ${a.class.name}, c is a ${c.class.name}"
         }
@@ -89,26 +102,33 @@ class AnnotationProcessor {
                     theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg )
                 }
             } else if ( floatAnnotation ) {
-                if ( ( arg instanceof Float ) && 
-                    ( arg >= floatAnnotation.minValue() ) &&
-                    ( arg <= floatAnnotation.maxValue() ) &&
-                    ( arg >= Float.MIN_VALUE ) &&
-                    ( arg <= Float.MAX_VALUE ) ) {
-                    theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg )
-                }
+                handleFloat( theClass, name, delegate, arg, floatAnnotation )
             } else if ( longAnnotation ) {
-                if ( ( arg instanceof Long ) && 
-                    ( arg >= longAnnotation.minValue() ) &&
-                    ( arg <= longAnnotation.maxValue() ) &&
-                    ( arg >= Long.MIN_VALUE ) &&
-                    ( arg <= Long.MAX_VALUE ) ) {
-                    theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg )
-                }
+                handleLong( theClass, name, delegate, arg, longAnnotation )
             } else {
                 theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg ) // this works
             }
         }
         
     } // end process - line 44
-} // end class AnnotationProcessor
+    
+    static handleFloat( theClass, name, delegate, arg, floatAnnotation ) {
+        if ( ( arg instanceof Float ) && 
+                    ( arg >= floatAnnotation.minValue() ) &&
+                    ( arg <= floatAnnotation.maxValue() ) &&
+                    ( arg >= Float.MIN_VALUE ) &&
+                    ( arg <= Float.MAX_VALUE ) ) {
+                    theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg )
+                }
+    }
+
+    static handleLong( theClass, name, delegate, arg, longAnnotation ) {
+        if ( ( arg instanceof Long ) && ( arg >= longAnnotation.minValue() ) &&
+                    ( arg <= longAnnotation.maxValue() ) &&
+                    ( arg >= Long.MIN_VALUE ) &&
+                    ( arg <= Long.MAX_VALUE ) ) {
+                    theClass.metaClass.getMetaProperty( name ).setProperty( delegate, arg )
+                }
+    }
+} // end class AnnotationProcessor - line 128
 

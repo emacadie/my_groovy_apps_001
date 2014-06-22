@@ -2,10 +2,11 @@ package info.shelfunit.properties.nonmutable
 
 import groovy.transform.Immutable
 import info.shelfunit.properties.annotations.AnnotationProcessor
+import info.shelfunit.properties.annotations.ImmutableAnnotation
 import info.shelfunit.properties.annotations.IntAnnotation
 import info.shelfunit.properties.annotations.StringAnnotation
 
-@Immutable
+@ImmutableAnnotation
 class SecondImmutableSample {
     /*
     static { 
