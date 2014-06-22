@@ -6,7 +6,7 @@ import info.shelfunit.properties.annotations.StringAnnotation
 class Book {
     
     static { 
-        AnnotationProcessor.process( Book.class ) 
+        AnnotationProcessor.process( Book ) 
     }
     
     int pages

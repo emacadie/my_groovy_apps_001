@@ -6,8 +6,8 @@ import java.lang.annotation.Target
 import java.lang.annotation.ElementType
 import java.lang.annotation.RetentionPolicy
 
-@Retention(RetentionPolicy.RUNTIME) 
-@Target(ElementType.FIELD)
+@Retention( RetentionPolicy.RUNTIME ) 
+@Target( ElementType.FIELD )
 
 public @interface StringAnnotation {
   public int minLength() default 0
