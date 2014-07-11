@@ -12,30 +12,25 @@ import java.util.Properties;
  * @author ericm
  */
 public class FileTimestampRunner {
-           
 
     public void getListing( Properties theProp ) {
         File theDir = new File( theProp.getProperty( "sourceDirectory" ) );
-        File[] theList = theDir.listFiles();
+        File[] fileList = theDir.listFiles();
 
         GregorianCalendar theCal = new GregorianCalendar();
-        long longTime = 0;
-        String theTime = " ";
-        DateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd_HH.mm.ss" ); // .SSS");
+        DateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd_HH.mm.ss" ); 
         String separator = System.getProperty( "file.separator" );
 
-        for ( int i = 0; i < theList.length; i++ ) {
-            File theFile = theList[ i ];
-            longTime = theFile.lastModified();
-            theCal.setTimeInMillis( longTime );
+        fileList.each { nextFile ->
+            theCal.setTimeInMillis( nextFile.lastModified() );
 
-            System.out.println( "move \"" + theFile.getParent() +
-                separator + theFile.getName() + "\" " +
+            println( "move \"" + nextFile.parent +
+                separator + nextFile.name + "\" " +
                 "\"" + theProp.getProperty( "destDirectory" ) +
                 separator + formatter.format( theCal.getTime() ) + "." +
-                theFile.getName() + "\""
+                nextFile.name + "\""
             );
-        } // for ( int i = 0; i < theList.length; i++ )
+        } // for ( int i = 0; i < fileList.length; i++ )
 
     } // end method getListing
 

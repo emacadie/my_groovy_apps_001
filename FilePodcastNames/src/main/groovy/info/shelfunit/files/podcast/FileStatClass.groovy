@@ -12,15 +12,16 @@ public class FileStatClass {
     /**
      * @param args the command line arguments
      */
-    public static void main( String[] args ) {
-        String propFileName = System.getProperty( "propFile" );
+    def static void main( final String[] args ) {
+        String propFileName = args[ 0 ]
+        println "Here is propFileName: ${propFileName}"
         try {
-            Properties props = new Properties();
-            props.load( new FileInputStream( propFileName ) );
-            FileTimestampRunner fsRunner = new FileTimestampRunner();
-            fsRunner.getListing( props );
+            Properties props = new Properties()
+            props.load( new FileInputStream( propFileName ) )
+            FileTimestampRunner fsRunner = new FileTimestampRunner()
+            fsRunner.getListing( props )
         } catch ( Exception e ) {
-            e.printStackTrace();
+            e.printStackTrace()
         }
     } // end method main
 
