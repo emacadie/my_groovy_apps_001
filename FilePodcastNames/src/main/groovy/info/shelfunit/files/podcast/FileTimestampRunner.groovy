@@ -39,6 +39,6 @@ public class FileTimestampRunner {
 
     } // end method getListing
 
-} // end class info.shelfunit.files.podcast.FileTimestampRunner {
+} // end class info.shelfunit.files.podcast.FileTimestampRunner line 42
 
 
