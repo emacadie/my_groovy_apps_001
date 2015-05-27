@@ -7,6 +7,10 @@ Up to page 200.
 
 gradle runGroovy -PmainClass=info.shelfunit.logandcli.CLIRunner    
 
+gradle runGroovy -PmainClass=info.shelfunit.venkat.ch07.threadExample  
+gradle runGroovy -PmainClass=info.shelfunit.venkat.ch07.BetterThreadExample  
+
+
 gradle runGroovy -PmainClass=info.shelfunit.venkat.ch012.CallIntercepter     
 gradle runGroovy -PmainClass=info.shelfunit.venkat.ch012.SecondCallIntercepter     
 gradle runGroovy -PmainClass=info.shelfunit.venkat.ch012.IntegerIntercepter         
