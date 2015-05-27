@@ -3,6 +3,7 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'groovy'
+apply plugin: 'com.github.tkruse.groovysh'
 
 repositories {
   mavenCentral()
@@ -12,9 +13,11 @@ repositories {
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath group: 'org.javalite', name: 'activejdbc-instrumentation', version: '1.4.1'
+        classpath 'com.tkruse.gradle:gradle-groovysh-plugin:1.0.2'
     }
 }
 
