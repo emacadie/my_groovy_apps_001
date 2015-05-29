@@ -9,8 +9,10 @@ class BetterThreadExample {
     def doStuff() {
         sleep( 5000 )
         printThreadInfo 'Main'
+        println "Main is ${Thread.currentThread().name}"
         Thread.start {
-            printThreadInfo "AA Started"
+            def name = Thread.currentThread().name
+            printThreadInfo "AA Started: ${name}"
             sleep( 3000 ) 
             println "AA Interrupted 1" 
             sleep( 1000 )
@@ -20,8 +22,9 @@ class BetterThreadExample {
             println "AA Finished Started"
         }
         
-        Thread.start {
-            printThreadInfo "BB Started Daemon"
+        Thread.start( 'Second' ) {
+            def name = Thread.currentThread().name
+            printThreadInfo "BB Started Daemon: ${name}"
             sleep( 5000 ) 
             println "BB Interrupted 2" 
             sleep( 1000 )
@@ -29,6 +32,7 @@ class BetterThreadExample {
             sleep( 1000 )
             println "BB Finished Started Daemon"
         }
+        println "At the end in main"
     }
       static void main( String[] args ) { 
           def bte = new BetterThreadExample()
