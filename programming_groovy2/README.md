@@ -1,4 +1,5 @@
 Some classes are from Venkat Subraminian's book "Programming Groovy 2"   
+As well as other classes I make that have no other place for the time being   
 
 With a few extras using the Gradle groovysh plugin:
 https://github.com/tkruse/gradle-groovysh-plugin
@@ -23,5 +24,6 @@ gradle runGroovy -PmainClass=info.shelfunit.venkat.ch013.MethodOnHierarchy
 gradle runGroovy -PmainClass=info.shelfunit.venkat.ch013.IntegerEMCDSL     
 gradle runGroovy -PmainClass=info.shelfunit.venkat.ch013.InstanceInjector     
 
+gradle runGroovy -PmainClass=info.shelfunit.functional.listMetaProgramming
 
 
