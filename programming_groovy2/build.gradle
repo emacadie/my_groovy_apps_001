@@ -17,7 +17,7 @@ buildscript {
     }
     dependencies {
         classpath group: 'org.javalite', name: 'activejdbc-instrumentation', version: '1.4.1'
-        classpath 'com.tkruse.gradle:gradle-groovysh-plugin:1.0.2'
+        classpath 'com.tkruse.gradle:gradle-groovysh-plugin:1.0.5'
     }
 }
 
@@ -31,6 +31,7 @@ allprojects {
     testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
     testCompile 'xmlunit:xmlunit:1.5'
 
+    // compile 'com.github.mperry:functionalgroovy-core:0.5.1-SNAPSHOT'
     compile 'commons-codec:commons-codec:1.6'
     compile 'io.netty:netty:3.5.7.Final'
 
@@ -46,8 +47,10 @@ allprojects {
     
     testRuntime 'ch.qos.logback:logback-core:1.0.+'
     testRuntime 'ch.qos.logback:logback-classic:1.0.+'
-    // Groovy version 2.1
-    compile 'org.codehaus.groovy:groovy-all:2.1.0'
+    // Groovy 
+    // compile 'org.codehaus.groovy:groovy-all:2.4.3'
+    compile 'org.codehaus.groovy:groovy-all:2.4.1' // highest for gradle shell
+    // compile 'org.codehaus.groovy:groovy-all:2.4.0'
      
     // from Spock
     testCompile "org.spockframework:spock-core:0.5-groovy-1.7"

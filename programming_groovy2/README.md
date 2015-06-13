@@ -25,5 +25,7 @@ gradle runGroovy -PmainClass=info.shelfunit.venkat.ch013.IntegerEMCDSL
 gradle runGroovy -PmainClass=info.shelfunit.venkat.ch013.InstanceInjector     
 
 gradle runGroovy -PmainClass=info.shelfunit.functional.listMetaProgramming
-
+gradle runGroovy -PmainClass=info.shelfunit.functional.setMetaProgramming
+gradle runGroovy -PmainClass=info.shelfunit.functional.moreListMetaProgramming
+gradle runGroovy -PmainClass=info.shelfunit.functional.thirdListMetaProgramming
 
