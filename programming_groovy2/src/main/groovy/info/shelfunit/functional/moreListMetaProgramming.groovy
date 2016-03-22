@@ -28,7 +28,7 @@ java.util.ArrayList.metaClass.constructor = {  ->
     constructor.newInstance(  ).asImmutable()
 }
 
-
+*/
 
 ArrayList.metaClass.constructor = { Collection arg ->
     println "Intercepting call from mailing list"
@@ -39,10 +39,47 @@ ArrayList.metaClass.constructor = { Collection arg ->
       ctor.newInstance(arg).asImmutable()
 }
 
+
 java.util.Collections$UnmodifiableRandomAccessList.metaClass.invokeMethod = { String name, args ->
-    println "invoking ${name} on UnmodifiableRandomAccessList"
+    // println "invoking ${name} on UnmodifiableRandomAccessList"
+    def validMethod = java.util.Collections$UnmodifiableRandomAccessList.metaClass.getMetaMethod(name, args)
+    if ( name == 'leftShift' ) {
+        validMethod = java.util.Collections$UnmodifiableRandomAccessList.metaClass.getMetaMethod( 'plus', args)
+        def result = validMethod.invoke( delegate, args )
+        return result.clone().asImmutable()
+    } else if ( validMethod != null ) {
+        validMethod.invoke( delegate, args )
+    } else {
+        java.util.Collections$UnmodifiableRandomAccessList.metaClass.invokeMissingMethod(delegate, name, args)
+    }
 }
 
+/*
+java.util.Collections$UnmodifiableRandomAccessList.metaClass.invokeMethod = { String name, args ->
+    // Do something before method call
+    // println "before calling method ${name}"
+    // Lookup existing method...
+    def m = delegate.metaClass.getMetaMethod(name, *args)
+    // ...and call it. If we cannot find it, delegate call to methodMissing
+    def result = (m ? m.invoke(delegate, *args) : delegate.metaClass.invokeMissingMethod(delegate, name, args))
+    // Do something after method call
+    // println "after calling method ${name}"
+    // Return result
+    if ( name == 'leftShift' ) {
+        def resultI = result.clone().asImmutable()
+        return resultI
+    } else {
+        return result
+    }
+}
+*/
+/*
+def testImForMeta = [ 1, 2, 3 ].asImmutable()
+println "testImForMeta.class.name: ${testImForMeta.class.name}"
+testImForMeta.metaClass.invokeMethod = { String name, args ->
+    println "invoking ${name} on UnmodifiableRandomAccessList"
+}
+*/
 println "Using null arg"
 def qq = new ArrayList()
 println "qq.class.name: ${qq.class.name}"
@@ -61,7 +98,7 @@ println "emptyList.class.name: ${emptyList.class.name}"
 
 def xs = new ArrayList( [ 1, 2, 3, "hello" ] )
 println "xs.class.name: ${xs.class.name}"
-*/
+
 // closet I have gotten:
 println "\nTrying with a closure"
 def collConst = ArrayList.class.getConstructor( java.util.Collection )
@@ -170,6 +207,7 @@ groovy:000>
 // look at https://github.com/mperry/functionalgroovy/blob/master/core/src/main/groovy/com/github/mperry/fg/ListOps.groovy
 // uuid1 = new UUID((2 * new Random().nextInt()), (3 * new Random().nextInt()))
 // to get a range: 
+println "Working with range"
 def startTime = System.nanoTime()
 def rng = 0..20000
 def listA = []
@@ -186,13 +224,82 @@ println "listA: ${listA.class.name} listAIm: ${listAIm.class.name}"
 // listAIm[99]
 println "System.identityHashCode(listA[99]): ${System.identityHashCode(listA[99])}"
 println "System.identityHashCode(listAIm[99]): ${System.identityHashCode(listAIm[99])}"
-listA[99] =  new UUID((2 * new Random().nextInt()), (3 * new Random().nextInt()))
-
+listA[99] =  new UUID( ( 2 * new Random().nextInt() ), ( 3 * new Random().nextInt() ) )
+println "changed listA[ 99 ]"
 println "System.identityHashCode(listA[99]): ${System.identityHashCode(listA[99])}"
 println "System.identityHashCode(listAIm[99]): ${System.identityHashCode(listAIm[99])}"
 // listAIm[99] =  new UUID((2 * new Random().nextInt()), (3 * new Random().nextInt()))
 // System.identityHashCode(listAIm[99])
 // listAIm[99]
+/*
 
+*/
+java.util.ArrayList.metaClass.invokeMethod = { String name, args ->
+    // println "invoking ${name} on ArrayList"
+    def validMethod = java.util.ArrayList.metaClass.getMetaMethod( name, args )
+    if ( name == 'leftShift' ) {
+        // println "running leftShift"
+        def result = validMethod.invoke( delegate, args )
+        return result.clone().asImmutable()
+    } else if ( validMethod != null ) {
+        validMethod.invoke( delegate, args )
+    } else {
+        java.util.ArrayList.metaClass.invokeMissingMethod(delegate, name, args)
+    }
+}
+println "About to change listA[ 99 ] again"
+listA[99] =  new UUID( ( 2 * new Random().nextInt() ), ( 3 * new Random().nextInt() ) )
+println "changed listA[ 99 ]"
+/*
+java.util.ArrayList.metaClass.invokeMethod = { String name, args ->
+    // Do something before method call
+    // println "before calling method ${name}"
+    // Lookup existing method...
+    def m = delegate.metaClass.getMetaMethod(name, *args)
+    // ...and call it. If we cannot find it, delegate call to methodMissing
+    def result = (m ? m.invoke(delegate, *args) : delegate.metaClass.invokeMissingMethod(delegate, name, args))
+    // Do something after method call
+    // println "after calling method ${name}"
+    // Return result
+    if ( name == 'leftShift' ) {
+        
+        def resultI = result.clone().asImmutable()
+        // println "called leftShift on java.util.ArrayList, result is ${result.class.name}, resultI is ${resultI.class.name}"
+        result = resultI
+        return resultI
+    } else {
+        return result
+    }
+    result
+}
+*/
+println "Working with ranges again"
+startTime = System.nanoTime()
+rng = 0..20000
+def listB = []
+rng.each { 
+    listB = listB <<  new UUID( ( it * new Random().nextInt() ), ( 3 * new Random().nextInt() ) )
+}
+def listBIm = listB.asImmutable()
+// def listAIm = listA.asImmutable()
+endTime = System.nanoTime()
+println "Time (seconds) taken " + ( ( endTime - startTime ) / 1.0e9 )
+println "listB size: ${listB.size()}, listBIm size: ${listBIm.size()}"
+println "listB: ${listB.class.name} listBIm: ${listBIm.class.name}"
+// listA[99]
+// listAIm[99]
+println "System.identityHashCode(listB[99]): ${System.identityHashCode(listB[99])}"
+println "System.identityHashCode(listBIm[99]): ${System.identityHashCode(listBIm[99])}"
+listB[99] =  new UUID( ( 2 * new Random().nextInt() ), ( 3 * new Random().nextInt() ) )
+println "changed listB[ 99 ]"
+println "System.identityHashCode(listB[99]): ${System.identityHashCode(listB[99])}"
+println "System.identityHashCode(listBIm[99]): ${System.identityHashCode(listBIm[99])}"
+// listAIm[99] =  new UUID((2 * new Random().nextInt()), (3 * new Random().nextInt()))
+// System.identityHashCode(listAIm[99])
+// listAIm[99]
 
+def list293 = [1,2,3]
+println "list293.class.name: ${list293.class.name}"
+list293 = list293 << "hello"
+println "list293.class.name: ${list293.class.name}"
 //

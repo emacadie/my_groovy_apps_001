@@ -3,7 +3,8 @@ package info.shelfunit.logandcli
 import groovy.util.CliBuilder
 import groovy.util.ConfigSlurper
 
-import org.apache.log4j.DailyRollingFileAppender
+// import org.apache.log4j.DailyRollingFileAppender
+import org.apache.logging.log4j.core.appender.RollingFileAppender
 // import org.apache.log4j.EnhancedPatternLayout
 import org.apache.logging.log4j.core.layout.PatternLayout
 import org.apache.log4j.Level
@@ -25,7 +26,7 @@ class CLIRunner {
         } else {
             // provide a default logger
             log.level = Level.INFO
-            log.addAppender( new DailyRollingFileAppender( new PatternLayout( PatternLayout.TTCC_CONVERSION_PATTERN ), "xml.transform.log", "'.'yyyy-MM-dd" ) )
+            log.addAppender( new RollingFileAppender( new PatternLayout( PatternLayout.TTCC_CONVERSION_PATTERN ), "xml.transform.log", "'.'yyyy-MM-dd" ) )
         }
         return log
     } // end method getLogger

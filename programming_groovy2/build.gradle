@@ -50,18 +50,17 @@ allprojects {
     // Groovy 
     // compile 'org.codehaus.groovy:groovy-all:2.4.3'
     compile 'org.codehaus.groovy:groovy-all:2.4.1' // highest for gradle shell
-    // compile 'org.codehaus.groovy:groovy-all:2.4.0'
      
-    // from Spock
     testCompile "org.spockframework:spock-core:0.5-groovy-1.7"
 
     // active jdbc
     compile 'org.javalite:activejdbc:1.4.1'
     compile 'org.javalite:activejdbc-instrumentation:1.4.1'
-
-    // MySQL
+    
     compile 'mysql:mysql-connector-java:5.0.4'
 
+    compile 'uk.com.robust-it:cloning:1.9.2'
+    
     // optional dependencies for using Spock
     testCompile "org.hamcrest:hamcrest-core:1.2" // only necessary if Hamcrest matchers are used
     testRuntime "cglib:cglib-nodep:2.2"     // enables mocking of classes (in addition to interfaces)
