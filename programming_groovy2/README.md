@@ -29,3 +29,4 @@ gradle runGroovy -PmainClass=info.shelfunit.functional.setMetaProgramming
 gradle runGroovy -PmainClass=info.shelfunit.functional.moreListMetaProgramming
 gradle runGroovy -PmainClass=info.shelfunit.functional.thirdListMetaProgramming
 
+This is now also the catch-all app for this repo as of 2016-08-28.
