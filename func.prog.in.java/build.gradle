@@ -1,8 +1,21 @@
+buildscript {
+  repositories {
+        maven {
+                    url "https://plugins.gradle.org/m2/"
+        }
+  }
+      dependencies {
+                      classpath "com.netflix.nebula:nebula-clojure-plugin:4.0.2"
+      }
+}
+
+
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'groovy'
 // do not run this every single time
 apply plugin: 'checkstyle'
+apply plugin: 'nebula.clojure'
 
 repositories {
   mavenCentral()
@@ -14,7 +27,6 @@ allprojects {
     testCompile 'org.mockito:mockito-all:[1.8.5,)'
     // From Maven, it's GroupId:ArtifactId:Version 
     testCompile 'org.spockframework:spock-core:0.7-groovy-2.0'
-    testCompile 'com.typesafe.akka:akka-testkit_2.10:2.2.0-RC2'
 
     // testCompile ''
     compile 'commons-codec:commons-codec:1.6'
@@ -31,19 +43,12 @@ allprojects {
     testRuntime 'ch.qos.logback:logback-classic:1.0.+'
 
     compile 'org.codehaus.groovy:groovy-all:2.4.8'
-    // compile 'org.clojure:clojure:1.5.1'
 
-    // compile 'com.typesafe.akka:akka-actor_2.10:2.2.0-RC2'
-    // compile 'com.typesafe.akka:akka-transactor_2.10:2.2.0'
-
-    // ScalaSTM, since that is what Akka uses for STM
-    // compile 'org.scala-stm:scala-stm_2.10:0.7'
-
-    // compile 'org.multiverse:multiverse-core:0.7.0'
-    
-    // compile 'com.google.guava:guava:14.0.1'
-
-    // compile 'org.codehaus.gpars:gpars:1.2.0'
+    // for clojure
+    compile 'org.clojure:clojure:1.8.0'
+    compile "camel-snake-kebab:camel-snake-kebab:0.4.0"
+    compile 'org.clojure:tools.nrepl:0.2.12'
+    compile "clojuresque:clojuresque-nrepl-runtime:1.2.0"
   }
 
 
