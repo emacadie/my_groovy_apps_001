@@ -13,9 +13,9 @@ public class ChapterOneRunner {
         System.out.println( "-----\nstarting method " + methodName );
         final List< BigDecimal > prices =
             Arrays.asList(
-                        new BigDecimal( "10" ), new BigDecimal( "30" ), new BigDecimal( "17" ),
-                        new BigDecimal( "20" ), new BigDecimal( "15" ), new BigDecimal( "18" ),
-                        new BigDecimal( "45" ), new BigDecimal( "12" )
+                new BigDecimal( "10" ), new BigDecimal( "30" ), new BigDecimal( "17" ),
+                new BigDecimal( "20" ), new BigDecimal( "15" ), new BigDecimal( "18" ),
+                new BigDecimal( "45" ), new BigDecimal( "12" )
         );
         // total prices greater than 20, discounted by 10%
         BigDecimal totalOfDiscountedPrices = BigDecimal.ZERO;
