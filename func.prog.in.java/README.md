@@ -2,8 +2,11 @@ This repo is for exercises in "Functional Programming in Java" by Venkat Subrama
 
 I don't really know a whole lot about the new stuff in JDK 8. I think some of it is similar to things we have had in Groovy for a while.
 
+up to page 23  
+
 Some sample commands from another project:
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch01.ChapterOneRunner   
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch02.ChapterTwoRunner   
 
 gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch01.GChapterOneRunner
 
