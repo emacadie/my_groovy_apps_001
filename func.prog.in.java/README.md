@@ -9,6 +9,7 @@ gradle runJava -PmainClass=info.shelfunit.funcjava.ch01.ChapterOneRunner
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch02.ChapterTwoRunner   
 
 gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch01.GChapterOneRunner
+gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch02.GChapterTwoRunner
 
 gradle runJava -PmainClass=info.shelfunit.concurrency.venkatsbook.ch002.ConcurrentCallableNAV   
 gradle runJava -PmainClass=info.shelfunit.concurrency.venkatsbook.ch002.SequentialPrimeFinder -PmainArgs=10000000   
