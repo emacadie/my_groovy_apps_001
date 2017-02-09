@@ -7,6 +7,8 @@ up to page 23
 Some sample commands from another project:
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch01.ChapterOneRunner   
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch02.ChapterTwoRunner   
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch02.ChapterTwoRunner -PmainArgs=iterateThroughAList   
+
 
 gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch01.GChapterOneRunner
 gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch02.GChapterTwoRunner

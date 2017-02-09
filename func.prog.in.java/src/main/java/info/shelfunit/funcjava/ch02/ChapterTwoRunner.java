@@ -38,12 +38,26 @@ public class ChapterTwoRunner {
         System.out.println( "Now with method reference" );
         friends.forEach( System.out::println );
         
-    } // iterateThroughAList() 
+    } // iterateThroughAList()
+
+    public void transformAList() {
+    }
     
     public static void main( String [] args ) {
         ChapterTwoRunner cTwoR = new ChapterTwoRunner();
-        cTwoR.iterateThroughAList();
-    }       
+        String methodToRun = args[ 0 ];
+        switch( methodToRun ) {
+            case "iterateThroughAList" :
+                cTwoR.iterateThroughAList();
+                break;
+            case "transformAList":
+                cTwoR.transformAList();
+                break;
+            default:
+                System.out.println( "No method named " + methodToRun );
+        }
+        
+    } // main       
 }
 
 
