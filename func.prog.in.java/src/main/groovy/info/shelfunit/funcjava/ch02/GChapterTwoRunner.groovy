@@ -32,7 +32,7 @@ class GChapterTwoRunner {
             println "Here is the next step: ${names[ nextStep ]}"
         }
         println "Using a range, which is exclusive (so using names.size() - 1)"
-        ( 0..names.size() - 1 ).each{ nextRange ->
+        ( 0..names.size() - 1 ).each { nextRange ->
             println "Here is the next in the range: ${names[ nextRange ]}"
         }
         println "Doing the groovy for-each loop (per Mr Haki)"
@@ -40,12 +40,21 @@ class GChapterTwoRunner {
             println "Here is i: ${i}"
         }
         
-    }
-    
-    
+    } // end iterateManyWays
     
     static void main( String... args ) {
         GChapterTwoRunner gcTwoR = new GChapterTwoRunner()
-        gcTwoR.iterateManyWays()
-    }
+        println "Here is args: ${args}"
+        println "Args is a ${args.getClass().name}"
+        def methodToRun = args[ 0 ]
+        switch ( methodToRun ) {
+            case 'iterateManyWays':
+                gcTwoR.iterateManyWays()
+                break
+            default:
+                println "Unknown method"
+
+        }
+        
+    } // end main
 }
