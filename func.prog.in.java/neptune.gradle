@@ -1,17 +1,25 @@
+buildscript {
+  repositories {
+        maven {
+                    url "https://plugins.gradle.org/m2/"
+        }
+  }
+      dependencies {
+                      classpath "com.netflix.nebula:nebula-clojure-plugin:4.0.2"
+      }
+}
+
+
 apply plugin: 'java'
 apply plugin: 'maven'
 apply plugin: 'groovy'
 // do not run this every single time
 apply plugin: 'checkstyle'
+apply plugin: 'nebula.clojure'
 
 repositories {
   mavenCentral()
 }
-
-// these need a value (even a single-letter string)
-// even if somevalues are passed in for mainClass and mainArgs
-project.ext.mainClassExt="info.shelfunit.funcjava.ch02.GChapterTwoRunner"
-project.ext.mainArgsExt="transformAList"
 
 allprojects {
   dependencies {
@@ -35,7 +43,14 @@ allprojects {
     testRuntime 'ch.qos.logback:logback-classic:1.0.+'
 
     compile 'org.codehaus.groovy:groovy-all:2.4.8'
+
+    // for clojure
+    compile 'org.clojure:clojure:1.8.0'
+    compile "camel-snake-kebab:camel-snake-kebab:0.4.0"
+    compile 'org.clojure:tools.nrepl:0.2.12'
+    compile "clojuresque:clojuresque-nrepl-runtime:1.2.0"
   }
+
 
   tasks.withType( JavaCompile ) { JavaCompile compile ->
     compile.options.debug = true
@@ -54,15 +69,15 @@ test {
   outputs.upToDateWhen { false }
 }
 
-task runJava( type: JavaExec ) {
+task runJava(type: JavaExec) {
      println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
      dependsOn classes
      description = 'Run gradle.sample.SampleApp'
      // Java main class to execute.
-     if ( rootProject.hasProperty( "mainClass" ) ) {     
+     if ( rootProject.hasProperty("mainClass") ) {     
      	main = mainClass
      } else {
-       main = mainClassExt
+       main = 'org.lookup'
      }
      // We need to set the classpath.
      classpath sourceSets.main.runtimeClasspath
@@ -76,12 +91,10 @@ task runJava( type: JavaExec ) {
      // We can pass arguments to the main() method
      if ( rootProject.hasProperty( "mainArgs" ) ) {     
      	args = mainArgs.tokenize() // args wants a List, so split by spaces if need be
-     } else {
-         args = mainArgsExt.tokenize()
-     }
+     } 
 }
 
-task runGroovy( type: JavaExec ) {
+task runGroovy(type: JavaExec) {
      println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
      dependsOn classes
      description = 'Run gradle.sample.SampleApp'
@@ -89,7 +102,7 @@ task runGroovy( type: JavaExec ) {
      if ( rootProject.hasProperty("mainClass") ) {     
      	main = mainClass
      } else {
-       main = mainClassExt
+       main = 'org.lookup'
      }
      // We need to set the classpath.
      classpath sourceSets.main.runtimeClasspath
@@ -97,11 +110,9 @@ task runGroovy( type: JavaExec ) {
      systemProperty 'sysProp', 'notUsed'
      jvmArgs '-client'
      // We can pass arguments to the main() method
-     if ( rootProject.hasProperty( "mainArgs" ) ) {
-         args = mainArgs.tokenize() // args wants a List, so split by spaces if need be
-     } else {
-         args = mainArgsExt.tokenize()
-     }
+     if ( rootProject.hasProperty( "mainArgs" ) ) {     
+     	args = mainArgs.tokenize() // args wants a List, so split by spaces if need be
+     } 
 }
 
 task showProperties {
@@ -112,7 +123,7 @@ task showProperties {
 }
 
 // you can type "gradle console" and get a console with all your classes
-task( console, dependsOn: 'classes', type: JavaExec ) {
+task(console, dependsOn: 'classes', type: JavaExec) {
   main = 'groovy.ui.Console'
   classpath = sourceSets.main.runtimeClasspath
 }
