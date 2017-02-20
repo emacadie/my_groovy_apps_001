@@ -65,6 +65,15 @@ class GChapterTwoRunner {
         }
         println "result of two calls to collect: ${upperNamesReverseTwoCalls}"
     } // transformAList()
+
+    def findElements() {
+        println "In method ${className}findElements"
+        println "Original list: ${names}"
+        def startsWithN = names.findAll { name ->
+            name.startsWith( 'N' )
+        }
+        println "List of names starting with N: ${startsWithN}"
+    } // findElements
     
     static void main( String... args ) {
         GChapterTwoRunner gcTwoR = new GChapterTwoRunner()
@@ -78,6 +87,9 @@ class GChapterTwoRunner {
             case 'transformAList':
                 gcTwoR.transformAList()
                 break
+            case 'findElements':
+                gcTwoR.findElements()
+                break                
             default:
                 println "Unknown method"
 
