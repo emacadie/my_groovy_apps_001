@@ -10,8 +10,8 @@ repositories {
 
 // these need a value (even a single-letter string)
 // even if somevalues are passed in for mainClass and mainArgs
-project.ext.mainClassExt="info.shelfunit.funcjava.ch02.GChapterTwoRunner"
-project.ext.mainArgsExt="transformAList"
+project.ext.mainClassExt="info.shelfunit.funcjava.ch03.ChapterThreeRunner"
+project.ext.mainArgsExt="implementComparator"
 
 allprojects {
   dependencies {
