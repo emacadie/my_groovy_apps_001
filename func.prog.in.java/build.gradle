@@ -55,53 +55,53 @@ test {
 }
 
 task runJava( type: JavaExec ) {
-     println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
-     dependsOn classes
-     description = 'Run gradle.sample.SampleApp'
-     // Java main class to execute.
-     if ( rootProject.hasProperty( "mainClass" ) ) {     
-     	main = mainClass
-     } else {
-       main = mainClassExt
-     }
-     // We need to set the classpath.
-     classpath sourceSets.main.runtimeClasspath
-     // Extra options can be set.
-     systemProperty 'sysProp', 'notUsed'
-     println System.properties['iterations'] 
-     systemProperty 'iterations', System.properties['iterations'] 
-     // you can use this if nothing is set via command line
-     // systemProperties = System.getProperties()
-     jvmArgs '-server'
-     // We can pass arguments to the main() method
-     if ( rootProject.hasProperty( "mainArgs" ) ) {     
-     	args = mainArgs.tokenize() // args wants a List, so split by spaces if need be
-     } else {
-         args = mainArgsExt.tokenize()
-     }
+    println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
+    dependsOn classes
+    description = 'Run gradle.sample.SampleApp'
+    // Java main class to execute.
+    if ( rootProject.hasProperty( "mainClass" ) ) {
+        main = mainClass
+    } else {
+        main = mainClassExt
+    }
+    // We need to set the classpath.
+    classpath sourceSets.main.runtimeClasspath
+    // Extra options can be set.
+    systemProperty 'sysProp', 'notUsed'
+    println System.properties['iterations'] 
+    systemProperty 'iterations', System.properties['iterations'] 
+    // you can use this if nothing is set via command line
+    // systemProperties = System.getProperties()
+    jvmArgs '-server'
+    // We can pass arguments to the main() method
+    if ( rootProject.hasProperty( "mainArgs" ) ) {
+        args = mainArgs.tokenize() // args wants a List, so split by spaces if need be
+    } else {
+        args = mainArgsExt.tokenize()
+    }
 }
 
 task runGroovy( type: JavaExec ) {
-     println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
-     dependsOn classes
-     description = 'Run gradle.sample.SampleApp'
-     // main class to execute
-     if ( rootProject.hasProperty("mainClass") ) {     
+    println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
+    dependsOn classes
+    description = 'Run gradle.sample.SampleApp'
+    // main class to execute
+    if ( rootProject.hasProperty("mainClass") ) {     
      	main = mainClass
-     } else {
-       main = mainClassExt
-     }
-     // We need to set the classpath.
-     classpath sourceSets.main.runtimeClasspath
-     // Extra options can be set.
-     systemProperty 'sysProp', 'notUsed'
-     jvmArgs '-client'
-     // We can pass arguments to the main() method
-     if ( rootProject.hasProperty( "mainArgs" ) ) {
-         args = mainArgs.tokenize() // args wants a List, so split by spaces if need be
-     } else {
-         args = mainArgsExt.tokenize()
-     }
+    } else {
+        main = mainClassExt
+    }
+    // We need to set the classpath.
+    classpath sourceSets.main.runtimeClasspath
+    // Extra options can be set.
+    systemProperty 'sysProp', 'notUsed'
+    jvmArgs '-client'
+    // We can pass arguments to the main() method
+    if ( rootProject.hasProperty( "mainArgs" ) ) {
+        args = mainArgs.tokenize() // args wants a List, so split by spaces if need be
+    } else {
+        args = mainArgsExt.tokenize()
+    }
 }
 
 task showProperties {

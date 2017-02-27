@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.StringJoiner;
+import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
@@ -35,6 +37,8 @@ public class ChapterThreeRunner {
 
     Comparator< Person > compareAgeAscending  = ( person1, person2 ) -> person1.ageDifference( person2 );
     Comparator< Person > compareAgeDescending = compareAgeAscending.reversed();
+    final Function< Person, String > byTheirName = person -> person.getName();
+    final Function< Person, Integer > byAge = person -> person.getAge(); 
     
     public void iterateAString() {
         methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
@@ -95,10 +99,59 @@ public class ChapterThreeRunner {
         people.stream()
             .max( Person::ageDifference )
             .ifPresent( oldest -> System.out.println( "Oldest: " + oldest ) );
+        System.out.println( "Comparing with Function byTheirName: " );
+        System.out.println(
+            people.stream()
+            .sorted( Comparator.comparing( byTheirName ) )
+            .collect( Collectors.toList() ) );
+        printPeople( "Sorted in ascending order by age and name with our functions together: ",
+            people.stream()
+                     .sorted( Comparator.comparing( byAge ).thenComparing( byTheirName ) )
+                     .collect( Collectors.toList() ) );
     } // implementComparator
 
-
     
+
+    public void useCollectMethod() {
+        methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
+        System.out.println( "-----\nstarting method " + methodName );
+        System.out.println( "Remember, in Java, java.util.stream.Stream.collect is a method analogous to 'reduce' in functional languages" );
+        System.out.println( "In Groovy, 'reduce' is more like functional 'map'" );
+        List< Person > olderThan20 = new ArrayList< Person >();
+        people.stream()
+            .filter( person -> person.getAge() > 20 )
+            .forEach( person -> olderThan20.add( person ) );
+        System.out.println( "People older than 20 using stream, filter and forEach: " + olderThan20 );
+        List< Person > olderThan20B =
+            people.stream()
+            .filter( person -> person.getAge() > 20 )
+            .collect( ArrayList::new, ArrayList::add, ArrayList::addAll );
+        System.out.println( "People older than 20 using stream, filter and collect: " + olderThan20B );
+        System.out.println( "You must use ArrayList for those method references. So much for interfaces, I suppose" );
+        List< Person > olderThan20C =
+            people.stream()
+            .filter( person -> person.getAge() > 20 )
+            .collect( Collectors.toList() );
+        System.out.println( "People older than 20 using less verbose stream, filter and collect w/Collectors.toList(): " + olderThan20C );
+        Map< Integer, List< Person > > peopleByAge =
+            people.stream()
+            .collect( Collectors.groupingBy( Person::getAge ) );
+        System.out.println( "Grouped by age w/Collectors.groupingBy: " + peopleByAge );
+        Map< Integer, List< String > > nameOfPeopleByAge =
+            people.stream()
+            .collect( Collectors.groupingBy( Person::getAge, Collectors.mapping( Person::getName, Collectors.toList() ) ) );
+        System.out.println( "People grouped by age: " + nameOfPeopleByAge );
+        System.out.println( "Yo dawg, I heard you like functional programming, so I added lambdas to your lambda so you can collect while you collect" );
+        Comparator< Person > byAge = Comparator.comparing( Person::getAge );
+        Map< Character, Optional< Person > > olderPersonOfEachLetter =
+            people.stream()
+            .collect( Collectors.groupingBy( person -> person.getName().charAt( 0 ),
+                                             Collectors.reducing( BinaryOperator.maxBy( byAge ) ) ) );
+        System.out.println( "Oldest person of each letter: " + olderPersonOfEachLetter );
+        System.out.println( "I had to define the Comparator in the method" );
+        
+    } // useCollectMethod
+
     public static void main( String [] args ) {
         ChapterThreeRunner cThreeR = new ChapterThreeRunner();
         String methodToRun = args[ 0 ];
@@ -109,8 +162,8 @@ public class ChapterThreeRunner {
             case "implementComparator":
                 cThreeR.implementComparator();
                 break;
-            case "findElements":
-                // cThreeR.findElements();
+            case "useCollectMethod":
+                cThreeR.useCollectMethod();
                 break;
             case "reuseLambda":
                 // cThreeR.reuseLambda();
