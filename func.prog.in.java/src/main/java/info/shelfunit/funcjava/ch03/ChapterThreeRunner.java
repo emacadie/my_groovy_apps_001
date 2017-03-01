@@ -1,6 +1,14 @@
 package info.shelfunit.funcjava.ch03;
 
-// import java.math.BigDecimal;
+import java.io.File;
+import java.io.IOException;
+import java.lang.InterruptedException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardWatchEventKinds;
+import java.nio.file.WatchKey;
+import java.nio.file.WatchService;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -8,11 +16,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.StringJoiner;
+import java.util.concurrent.TimeUnit;
 import java.util.function.BinaryOperator;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ChapterThreeRunner {
     private static final String className = "ChapterThreeRunner.";
@@ -110,8 +120,6 @@ public class ChapterThreeRunner {
                      .collect( Collectors.toList() ) );
     } // implementComparator
 
-    
-
     public void useCollectMethod() {
         methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
         System.out.println( "-----\nstarting method " + methodName );
@@ -152,6 +160,81 @@ public class ChapterThreeRunner {
         
     } // useCollectMethod
 
+    public void workWithFiles() {
+        methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
+        System.out.println( "-----\nstarting method " + methodName );
+        System.out.println( "Let's list the files in the current directory as a stream" );
+        try {
+            Files.list( Paths.get( "." ) )
+            .forEach( f -> System.out.print( f + " " ) );
+            System.out.println();
+            System.out.println( "Let's list immediate subdirectories with streams" );
+            Files.list( Paths.get( "." ) )
+                .filter( Files::isDirectory )
+                .forEach( dir -> System.out.print( dir + " " ) );
+            System.out.println();
+            System.out.println( "Listing files with FilenameFilter" );
+            final String[] files = new File( "." ).list( new java.io.FilenameFilter() {
+                    public boolean accept( final File dir, final String name ) {
+                        return name.endsWith( ".gradle" );
+                    }
+                });
+            System.out.println( files );
+            System.out.println( "Send that primitive array to Arrays.asList and use forEach" );
+            Arrays.asList( files ).forEach( f -> System.out.print( f + ", " ) );
+            System.out.println();
+            System.out.println( "A better way with streams" );
+            Files.newDirectoryStream( Paths.get( "." ), path -> path.toString().endsWith( ".gradle" ) )
+                .forEach( f -> System.out.print( f + " " ) );
+            System.out.println();
+            System.out.println( "Hidden files: " );
+            final File[] hiddenFiles = new File( "." ).listFiles( file -> file.isHidden() );
+            Arrays.asList( hiddenFiles ).forEach( f -> System.out.print( f + ", " ) );
+            System.out.println();
+            System.out.println( "Listing directories the hard way" );
+            List< File > qFiles = new ArrayList< File >();
+            File[] filesInCurrentDir = new File( "." ).listFiles();
+            for ( File nextFile : filesInCurrentDir ) {
+                File[] filesInSubDir = nextFile.listFiles();
+                if ( filesInSubDir != null ) {
+                    qFiles.addAll( Arrays.asList( filesInSubDir ) );
+                } else {
+                    qFiles.add( nextFile );
+                }
+            }
+            System.out.println( "count: " + qFiles.size() );
+            System.out.println( "Now, using flatMap" );
+            List< File > wFiles =
+                Stream.of( new File( "." ).listFiles() )
+                .flatMap( file -> file.listFiles() == null ? Stream.of( file ) : Stream.of( file.listFiles() ) )
+                .collect( Collectors.toList() );
+            System.out.println( "Count: " + wFiles.size() );
+            System.out.println( "Here they are as a list with forEach: " );
+            Arrays.asList( wFiles ).forEach( f -> System.out.print( f + ", " ) );
+            System.out.println();
+
+            System.out.println( "Let's watch, baby" );
+            final Path thePath = Paths.get( "." );
+            final WatchService watchService =
+                thePath.getFileSystem().newWatchService();
+            thePath.register( watchService, StandardWatchEventKinds.ENTRY_MODIFY );
+            final WatchKey watchKey = watchService.poll( 1, TimeUnit.MINUTES );
+            if ( watchKey != null ) {
+                watchKey.pollEvents()
+                    .stream()
+                    .forEach( event -> System.out.println( event.context() ) );
+            }
+            
+        } catch ( IOException ioEx ) {
+            System.out.println( "IOException: " + ioEx.getMessage() );
+            ioEx.printStackTrace();
+        } catch ( InterruptedException intEx ) {
+            System.out.println( "InterruptedException : " + intEx.getMessage() );
+            intEx.printStackTrace();
+        }
+        
+    } // workWithFiles
+
     public static void main( String [] args ) {
         ChapterThreeRunner cThreeR = new ChapterThreeRunner();
         String methodToRun = args[ 0 ];
@@ -165,8 +248,8 @@ public class ChapterThreeRunner {
             case "useCollectMethod":
                 cThreeR.useCollectMethod();
                 break;
-            case "reuseLambda":
-                // cThreeR.reuseLambda();
+            case "workWithFiles":
+                cThreeR.workWithFiles();
                 break;
             case "pickName":
                 // cThreeR.pickName( args[ 1 ] );
