@@ -16,7 +16,8 @@ gradle runJava -PmainClass=info.shelfunit.funcjava.ch02.ChapterTwoRunner -PmainA
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch03.ChapterThreeRunner -PmainArgs=iterateAString
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch03.ChapterThreeRunner -PmainArgs=implementComparator
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch03.ChapterThreeRunner -PmainArgs=useCollectMethod
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch03.ChapterThreeRunner -PmainArgs=workWithFiles
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch03.ChapterThreeRunner -PmainArgs=workWithFiles     
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=separateConcerns     
 
 
 
