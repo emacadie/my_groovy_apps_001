@@ -1,14 +1,15 @@
 package info.shelfunit.funcjava.ch04;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
+// import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
+// import java.util.Optional;
 import java.util.StringJoiner;
-import java.util.function.Consumer;
+// import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
+// import java.util.stream.Collectors;
 
 public class ChapterFourRunner {
     private static final String className = "ChapterFourRunner.";
@@ -60,6 +61,19 @@ public class ChapterFourRunner {
         
     } // separateConcerns()
 
+    public void delegateUsingLambdas() {
+        methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
+        System.out.println( "-----\nstarting method " + methodName );
+        NAVCalculator nCalc = new NAVCalculator( ticker -> new BigDecimal( "6.01" ) );
+        System.out.println( "Value of 1000 shares: " + nCalc.computeStockWorth( "GOOG", 1000 ) );
+        NAVCalculator yCalc = new NAVCalculator( YahooFinance::getPrice );
+        System.out.println( "100 shares of VZ are worth: " + yCalc.computeStockWorth( "VZ", 100 ) );
+        System.out.println( "Let's do that again without a method reference, slightly more verbose" );
+        Function< String, BigDecimal > yFinance = ticker -> { return YahooFinance.getPrice( ticker ); };
+        NAVCalculator yCalcB = new NAVCalculator( yFinance );
+        System.out.println( "100 shares of VZ are worth: " + yCalcB.computeStockWorth( "VZ", 100 ) );
+    } // separateConcerns()
+
 
     public static void main( String [] args ) {
         ChapterFourRunner cFourR = new ChapterFourRunner();
@@ -68,8 +82,8 @@ public class ChapterFourRunner {
             case "separateConcerns" :
                 cFourR.separateConcerns();
                 break;
-            case "transformAList":
-                // cFourR.transformAList();
+            case "delegateUsingLambdas":
+                cFourR.delegateUsingLambdas();
                 break;
             case "findElements":
                 // cFourR.findElements();
