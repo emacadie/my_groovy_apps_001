@@ -3,12 +3,14 @@ package info.shelfunit.funcjava.ch03;
 import java.io.File;
 import java.io.IOException;
 import java.lang.InterruptedException;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardWatchEventKinds;
 import java.nio.file.WatchKey;
 import java.nio.file.WatchService;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -16,11 +18,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.StringJoiner;
+
 import java.util.concurrent.TimeUnit;
+
 import java.util.function.BinaryOperator;
-import java.util.function.Consumer;
+
 import java.util.function.Function;
 import java.util.function.Predicate;
+
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 

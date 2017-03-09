@@ -1,12 +1,13 @@
 package info.shelfunit.funcjava.ch04;
 
+import java.awt.Color;
 import java.math.BigDecimal;
 // import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 // import java.util.Optional;
 import java.util.StringJoiner;
-// import java.util.function.Consumer;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 // import java.util.stream.Collectors;
@@ -72,7 +73,31 @@ public class ChapterFourRunner {
         Function< String, BigDecimal > yFinance = ticker -> { return YahooFinance.getPrice( ticker ); };
         NAVCalculator yCalcB = new NAVCalculator( yFinance );
         System.out.println( "100 shares of VZ are worth: " + yCalcB.computeStockWorth( "VZ", 100 ) );
-    } // separateConcerns()
+        System.out.println( "What about an invalid stock? Like VNKT" );
+        System.out.println( "100 shares of VNKT are worth: " + yCalcB.computeStockWorth( "VNKT", 100 ) );
+    } // delegateUsingLambdas()
+
+    @SuppressWarnings( "unchecked" )
+    public void decorateUsingLambdas() {
+        methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
+        System.out.println( "-----\nstarting method " + methodName );
+
+        final Camera camera = new Camera();
+        final Consumer< String > printCaptured = ( filterInfo ) ->
+        System.out.println( String.format( "with %s: %s", filterInfo,
+                            camera.capture( new Color( 200, 100, 200 ) ) ) );
+        printCaptured.accept( "no filter" );
+        camera.setFilters( Color::brighter );
+        printCaptured.accept( "brighter filter" );
+        camera.setFilters( Color::darker );
+        printCaptured.accept( "darker filter" );
+
+        camera.setFilters( Color::brighter, Color::darker );
+        printCaptured.accept( "combining filters" );
+
+        camera.setFilters( Color::darker, Color::darker );
+        printCaptured.accept( "two darks" );
+    } // decorateUsingLambdas()
 
 
     public static void main( String [] args ) {
@@ -85,8 +110,8 @@ public class ChapterFourRunner {
             case "delegateUsingLambdas":
                 cFourR.delegateUsingLambdas();
                 break;
-            case "findElements":
-                // cFourR.findElements();
+            case "decorateUsingLambdas":
+                cFourR.decorateUsingLambdas();
                 break;
             case "reuseLambda":
                 // cFourR.reuseLambda();
