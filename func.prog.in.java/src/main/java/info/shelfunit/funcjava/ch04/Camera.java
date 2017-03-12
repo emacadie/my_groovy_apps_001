@@ -1,8 +1,9 @@
 package info.shelfunit.funcjava.ch04;
 
 import java.awt.Color;
-import java.util.function.Consumer;
+
 import java.util.function.Function;
+
 import java.util.stream.Stream;
 
 @SuppressWarnings( "unchecked" )

@@ -19,7 +19,11 @@ gradle runJava -PmainClass=info.shelfunit.funcjava.ch03.ChapterThreeRunner -Pmai
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch03.ChapterThreeRunner -PmainArgs=workWithFiles     
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=separateConcerns
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=delegateUsingLambdas
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=decorateUsingLambdas     
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=decorateUsingLambdas
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=useDefaultMethods      
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=createFluentInterfaces
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=dealWithExceptions      
+
 
 
 

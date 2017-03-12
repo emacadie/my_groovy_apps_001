@@ -1,16 +1,19 @@
 package info.shelfunit.funcjava.ch04;
 
 import java.awt.Color;
+
+import java.io.File;
+
 import java.math.BigDecimal;
-// import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.List;
-// import java.util.Optional;
-import java.util.StringJoiner;
+
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
-// import java.util.stream.Collectors;
+
+import java.util.stream.Stream;
 
 public class ChapterFourRunner {
     private static final String className = "ChapterFourRunner.";
@@ -99,6 +102,45 @@ public class ChapterFourRunner {
         printCaptured.accept( "two darks" );
     } // decorateUsingLambdas()
 
+    public void useDefaultMethods() {
+        methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
+        System.out.println( "-----\nstarting method " + methodName );
+        SeaPlane seaPlane = new SeaPlane();
+        seaPlane.takeOff();
+        seaPlane.turn();
+        seaPlane.cruise();
+        seaPlane.land();
+    } // useDefaultMethods
+
+    public void createFluentInterfaces() {
+        methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
+        System.out.println( "-----\nstarting method " + methodName );
+        SeaPlane seaPlane = new SeaPlane();
+        seaPlane.takeOff();
+        seaPlane.turn();
+        seaPlane.cruise();
+        seaPlane.land();
+        System.out.println( "Now, for a FluentMailer with a block" );
+        FluentMailer.send( mailer ->
+            mailer.from( "build@funcjava.com" )
+                  .to( "author@funcjava.com" )
+                  .subject( "Important message" )
+                  .body( "Venkat rocks" )
+        );
+        System.out.println( "So Consumer in Java is like Closure in Groovy, I think" );
+        
+    } // createFluentInterfaces
+
+    public void dealWithExceptions() {
+        methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
+        System.out.println( "-----\nstarting method " + methodName );
+        System.out.println( "We will take a closer look at this in chapter 5" );
+        /*
+        Stream.of( "/usr", "/tmp" )
+            .map( path -> new File( path ).getCanonicalPath() )
+            .forEach( f -> System.out.print( f + ", " ) );
+        */
+    } // dealWithExceptions
 
     public static void main( String [] args ) {
         ChapterFourRunner cFourR = new ChapterFourRunner();
@@ -113,14 +155,14 @@ public class ChapterFourRunner {
             case "decorateUsingLambdas":
                 cFourR.decorateUsingLambdas();
                 break;
-            case "reuseLambda":
-                // cFourR.reuseLambda();
+            case "useDefaultMethods":
+                cFourR.useDefaultMethods();
                 break;
-            case "pickName":
-                // cFourR.pickName( args[ 1 ] );
+            case "createFluentInterfaces":
+                cFourR.createFluentInterfaces();
                 break;
-            case "reduceAndJoin":
-                // cFourR.reduceAndJoin();
+            case "dealWithExceptions":
+                cFourR.dealWithExceptions();
                 break;  
             default:
                 System.out.println( "No method named " + methodToRun );
