@@ -2,6 +2,8 @@ This repo is for exercises in "Functional Programming in Java" by Venkat Subrama
 
 I don't really know a whole lot about the new stuff in JDK 8. I think some of it is similar to things we have had in Groovy for a while.
 
+In chapter five, he points out that for the most part we don't need to worry about garbage collection. We do need to think about when we interface with resources outside our application: databases, files, sockets, native resources.    
+
 up to page 23  
 
 Some sample commands from another project:
@@ -22,7 +24,9 @@ gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -Pmain
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=decorateUsingLambdas
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=useDefaultMethods      
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=createFluentInterfaces
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=dealWithExceptions      
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=dealWithExceptions
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch05.ChapterFiveRunner -PmainArgs=cleanUpResources
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch05.ChapterFiveRunner -PmainArgs=cleanUpWithLamdba      
 
 
 
