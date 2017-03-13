@@ -90,10 +90,15 @@ public class ChapterFiveRunner {
         System.out.println( "In summary, this also feels like Groovy" );
         System.out.println( "a lot of SQL stuff in Groovy is done by methods that take closures" );
         System.out.println( "The closures handle the boiler plate stuff for you"  );
-                            
         
     } // cleanUpWithLamdba
 
+    public void manageLocks() {
+        methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
+        System.out.println( "-----\nstarting method " + methodName );
+        System.out.println( "I bet he will do the same thing I did with ClosureLock.groovy in my java-concurrency repo" );
+    }
+    
     public static void main( String [] args ) {
         ChapterFiveRunner cFiveR = new ChapterFiveRunner();
         String methodToRun = args[ 0 ];
@@ -104,8 +109,8 @@ public class ChapterFiveRunner {
             case "cleanUpWithLamdba":
                 cFiveR.cleanUpWithLamdba();
                 break;
-            case "decorateUsingLambdas":
-                // cFiveR.decorateUsingLambdas();
+            case "manageLocks":
+                cFiveR.manageLocks();
                 break;
             case "useDefaultMethods":
                 // cFiveR.useDefaultMethods();

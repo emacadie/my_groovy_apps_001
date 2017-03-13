@@ -26,7 +26,8 @@ gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -Pmain
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=createFluentInterfaces
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=dealWithExceptions
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch05.ChapterFiveRunner -PmainArgs=cleanUpResources
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch05.ChapterFiveRunner -PmainArgs=cleanUpWithLamdba      
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch05.ChapterFiveRunner -PmainArgs=cleanUpWithLamdba
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch05.ChapterFiveRunner -PmainArgs=manageLocks      
 
 
 
