@@ -13,7 +13,8 @@ import java.util.Date;
 // import java.util.function.Consumer;
 // import java.util.function.Function;
 // import java.util.function.Predicate;
-
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 // import java.util.stream.Stream;
 
 public class ChapterFiveRunner {
@@ -97,7 +98,30 @@ public class ChapterFiveRunner {
         methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
         System.out.println( "-----\nstarting method " + methodName );
         System.out.println( "I bet he will do the same thing I did with ClosureLock.groovy in my java-concurrency repo" );
-    }
+        final Lock lock = new ReentrantLock();
+        System.out.println( "About to try to write to a file with FileWriterEAM with the locking code" );
+
+        Locker.runLocked( lock, () -> {
+            try {
+                FileWriterEAM.use(
+                "eam.locked.txt",
+                writerEAM -> writerEAM.writeStuff( "This is some locked code." )
+                );
+            } catch ( IOException ioEx ) {
+                ioEx.printStackTrace();
+            }
+        }
+        );
+        System.out.println( "Okay, so that was not too elegant. Perhaps the locking class should throw the exception. But the point is we got it to work" );
+        Locker.runLocked( lock, () -> { System.out.println( "This is locked" ); }
+        );
+
+    } // manageLocks
+
+    public void createConciseTests() {
+        methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
+        System.out.println( "-----\nstarting method " + methodName );
+    } // createConciseTests
     
     public static void main( String [] args ) {
         ChapterFiveRunner cFiveR = new ChapterFiveRunner();
@@ -112,8 +136,8 @@ public class ChapterFiveRunner {
             case "manageLocks":
                 cFiveR.manageLocks();
                 break;
-            case "useDefaultMethods":
-                // cFiveR.useDefaultMethods();
+            case "createConciseTests":
+                cFiveR.createConciseTests();
                 break;
             case "createFluentInterfaces":
                 // cFiveR.createFluentInterfaces();
