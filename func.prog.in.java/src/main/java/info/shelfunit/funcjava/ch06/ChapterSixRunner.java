@@ -39,6 +39,17 @@ public class ChapterSixRunner {
         }
 
     } // dealWithExceptions
+    
+    public void evaluateLazily() {
+        methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
+        System.out.println( "-----\nstarting method " + methodName );
+        System.out.println( "Calling Evaluation.evaluate with arg 20: " + Evaluation.evaluate( 20 ) );
+        System.out.println( "Calling Evaluation.evaluate with arg 120: " + Evaluation.evaluate( 120 ) );
+        System.out.println( "Trying eagerEvaluator with args 1 and 2" );
+        Evaluation.eagerEvaluator( Evaluation.evaluate( 1 ), Evaluation.evaluate( 2 ) );
+        System.out.println( "Trying lazy evaluator with args 1 and 2" );
+        Evaluation.lazyEvaluator( () -> Evaluation.evaluate( 1 ), () -> Evaluation.evaluate( 2 ) );
+    } // evaluateLazily
 
     public static void main( String [] args ) {
         ChapterSixRunner cSixR = new ChapterSixRunner();
@@ -47,8 +58,8 @@ public class ChapterSixRunner {
             case "delayInitialization" :
                 cSixR.delayInitialization();
                 break;
-            case "delegateUsingLambdas":
-                // cSixR.delegateUsingLambdas();
+            case "evaluateLazily":
+                cSixR.evaluateLazily();
                 break;
             case "decorateUsingLambdas":
                 // cSixR.decorateUsingLambdas();
