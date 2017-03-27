@@ -51,6 +51,42 @@ public class ChapterSixRunner {
         Evaluation.lazyEvaluator( () -> Evaluation.evaluate( 1 ), () -> Evaluation.evaluate( 2 ) );
     } // evaluateLazily
 
+    public static int length( final String name ) {
+        System.out.println( "getting length for " + name );
+        return name.length();
+    }
+
+    public static String toUpper( final String name ) {
+        System.out.println( "Converting following name to uppercase: " + name );
+        return name.toUpperCase();
+    }
+    
+    public void leverageTheLaziness() {
+        methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
+        System.out.println( "-----\nstarting method " + methodName );
+        List< String > names = Arrays.asList(
+            "Brad", "Kate", "Kim", "Jack", "Joe", "Mike", "Susan", "George", "Robert", "Julia", "Parker", "Benson"
+        );
+        final String firstNameWith3Letters =
+            names.stream()
+            .filter( name -> ChapterSixRunner.length( name ) == 3 )
+            .map( name -> ChapterSixRunner.toUpper( name ) )
+            .findFirst()
+            .get();
+        System.out.println( "Printing out firstNameWith3Letters:\n" + firstNameWith3Letters );
+        System.out.println( "Let's break it down again" );
+        Stream< String > namesWith3Letters =
+            names.stream()
+            .filter( name -> ChapterSixRunner.length( name ) == 3 )
+            .map( name -> ChapterSixRunner.toUpper( name ) );
+        System.out.println( "Stream created, filtered, mapped" );
+        System.out.println( "Ready to call findFirst" );
+        final String firstWith3Letters = namesWith3Letters.findFirst().get();
+        System.out.println( "Here we are: " + firstWith3Letters );
+    } // leverageTheLaziness
+
+    
+
     public static void main( String [] args ) {
         ChapterSixRunner cSixR = new ChapterSixRunner();
         String methodToRun = args[ 0 ];
@@ -61,8 +97,8 @@ public class ChapterSixRunner {
             case "evaluateLazily":
                 cSixR.evaluateLazily();
                 break;
-            case "decorateUsingLambdas":
-                // cSixR.decorateUsingLambdas();
+            case "leverageTheLaziness":
+                cSixR.leverageTheLaziness();
                 break;
             case "useDefaultMethods":
                 // cSixR.useDefaultMethods();

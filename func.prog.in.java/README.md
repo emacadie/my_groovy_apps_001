@@ -31,6 +31,7 @@ gradle runJava -PmainClass=info.shelfunit.funcjava.ch05.ChapterFiveRunner -Pmain
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch05.ChapterFiveRunner -PmainArgs=createConciseTests
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch06.ChapterSixRunner -PmainArgs=delayInitialization
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch06.ChapterSixRunner -PmainArgs=evaluateLazily      
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch06.ChapterSixRunner -PmainArgs=leverageTheLaziness    
 
 
 
