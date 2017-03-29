@@ -13,6 +13,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class ChapterSixRunner {
@@ -85,7 +87,33 @@ public class ChapterSixRunner {
         System.out.println( "Here we are: " + firstWith3Letters );
     } // leverageTheLaziness
 
-    
+    public static boolean isPrime( final int number ) {
+        return number > 1 &&
+            IntStream.rangeClosed( 2, ( int ) Math.sqrt( number ) )
+            .noneMatch( divisor -> number % divisor == 0 );
+    }
+
+    // he has this in a separate class
+    private static int primeAfter( final int number ) {
+        if ( isPrime( number + 1 ) ) {
+            return number + 1;
+        } else {
+            return primeAfter( number + 1 );
+        }
+    }
+
+    public static List< Integer > primes( final int fromNumber, final int count ) {
+        return Stream.iterate( primeAfter( fromNumber - 1 ), ChapterSixRunner::primeAfter )
+            .limit( count )
+            .collect( Collectors.< Integer >toList() );
+    }
+
+    public void createInfiniteStreams() {
+        methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
+        System.out.println( "-----\nstarting method " + methodName );
+        System.out.println( "10 primes from 1: " + ChapterSixRunner.primes( 1, 10 ) );
+        System.out.println( "5 primes from 100: " + ChapterSixRunner.primes( 100, 5 ) );
+    } // createInfiniteStreams
 
     public static void main( String [] args ) {
         ChapterSixRunner cSixR = new ChapterSixRunner();
@@ -100,8 +128,8 @@ public class ChapterSixRunner {
             case "leverageTheLaziness":
                 cSixR.leverageTheLaziness();
                 break;
-            case "useDefaultMethods":
-                // cSixR.useDefaultMethods();
+            case "createInfiniteStreams":
+                cSixR.createInfiniteStreams();
                 break;
             case "createFluentInterfaces":
                 // cSixR.createFluentInterfaces();
