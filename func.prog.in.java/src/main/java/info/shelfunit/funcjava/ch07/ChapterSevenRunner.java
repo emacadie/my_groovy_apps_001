@@ -14,35 +14,58 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class ChapterSevenRunner {
     private static final String className = "ChapterSevenRunner.";
     private String methodName;
 
-    public void delayInitialization() {
+    public int factorialRec( final int number ) {
+        if ( number == 1 ) {
+            return number;
+        } else {
+            return ( number * ( factorialRec( number - 1 ) ) );
+        }
+    } // factorialRec
+
+    // first arg is the initial value, sort of like for reduce in clojure
+    public TailCall< Integer > factorialTailRec( final int factorial, final int number ) {
+        if ( number == 1 ) {
+            return TailCalls.done( factorial );
+        } else {
+            return TailCalls.call( () -> factorialTailRec( ( factorial * number ) , ( number - 1 ) ) );
+        }
+    } // factorialTailRec
+
+    public int factorial( final int number ) {
+        return this.factorialTailRec( 1, number ).invoke();
+    }
+
+    public void useTailCallRecursion() {
         methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
         System.out.println( "-----\nstarting method " + methodName );
+        boolean gotStackOverflow = false;
+        int stackOverflowCounter = 0;
         try {
-            final HolderNaive holderN = new HolderNaive();
-            System.out.println( "deferring heavy creation in instance of HolderNaive, waiting for a few seconds" );
-            Thread.sleep( 2 * 1000 );
-            System.out.println( "calling holderN.getHeavy: " + holderN.getHeavy() );
-            System.out.println( "calling holderN.getHeavy: " + holderN.getHeavy() );
-            System.out.println( "Now, for the real stuff, the heavy hitters and the heavy holders. Hang on to your hats, it might get heady in here" );
-            final Holder holder = new Holder();
-            System.out.println( "About to wait again" );
-            Thread.sleep( 2 * 1000 );
-            System.out.println( "calling holder.getHeavy: " + holder.getHeavy() );
-            System.out.println( "calling holder.getHeavy: " + holder.getHeavy() );
-        } catch ( InterruptedException iEx ) {
-            iEx.printStackTrace();
+            System.out.println( "About to call factorialRec( 5 ): " + this.factorialRec( 5 ) );
+            System.out.println( "Have we gotten a StackOverFlowError: " + gotStackOverflow + ", this many times: " + stackOverflowCounter );
+            System.out.println( "Let's try again with 20,000" );
+            this.factorialRec( 20000 );
+        } catch ( StackOverflowError iEx ) {
+            gotStackOverflow = true;
+            stackOverflowCounter++;
         }
+        System.out.println( "Have we gotten a StackOverFlowError: " + gotStackOverflow + ", this many times: " + stackOverflowCounter );
+        System.out.println( "Now to use our TailCall classes: " +  this.factorialTailRec( 1, 2 ).invoke() );
+        System.out.println( "Now to use our TailCall classes with 19: " +  this.factorialTailRec( 1, 19 ).invoke() );
+        System.out.println( "Now to use our TailCall classes with 5: " +  this.factorialTailRec( 1, 5 ).invoke() );
+        System.out.println( "Now a cleaner call to just factorial with arg of 5: " + this.factorial( 5 ) );
 
-    } // dealWithExceptions
-    
+    } // useTailCallRecursion
+        
     public void evaluateLazily() {
+        /*
         methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
         System.out.println( "-----\nstarting method " + methodName );
         System.out.println( "Calling Evaluation.evaluate with arg 20: " + Evaluation.evaluate( 20 ) );
@@ -51,6 +74,7 @@ public class ChapterSevenRunner {
         Evaluation.eagerEvaluator( Evaluation.evaluate( 1 ), Evaluation.evaluate( 2 ) );
         System.out.println( "Trying lazy evaluator with args 1 and 2" );
         Evaluation.lazyEvaluator( () -> Evaluation.evaluate( 1 ), () -> Evaluation.evaluate( 2 ) );
+        */
     } // evaluateLazily
 
     public static int length( final String name ) {
@@ -119,8 +143,8 @@ public class ChapterSevenRunner {
         ChapterSevenRunner cSevenR = new ChapterSevenRunner();
         String methodToRun = args[ 0 ];
         switch( methodToRun ) {
-            case "delayInitialization" :
-                cSevenR.delayInitialization();
+            case "useTailCallRecursion" :
+                cSevenR.useTailCallRecursion();
                 break;
             case "evaluateLazily":
                 cSevenR.evaluateLazily();
