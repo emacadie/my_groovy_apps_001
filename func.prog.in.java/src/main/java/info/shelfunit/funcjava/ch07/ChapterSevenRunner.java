@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import java.io.File;
 
-import java.math.BigDecimal;
+import java.math.BigInteger;
 
 import java.util.Arrays;
 import java.util.List;
@@ -61,6 +61,8 @@ public class ChapterSevenRunner {
         System.out.println( "Now to use our TailCall classes with 19: " +  this.factorialTailRec( 1, 19 ).invoke() );
         System.out.println( "Now to use our TailCall classes with 5: " +  this.factorialTailRec( 1, 5 ).invoke() );
         System.out.println( "Now a cleaner call to just factorial with arg of 5: " + this.factorial( 5 ) );
+        System.out.println( "Now getting factorial of 5 with BigFactorial: " + BigFactorial.factorial( new BigInteger( "5" ) ) );
+        System.out.println( "Now getting factorial of 20000 with BigFactorial: " + String.format( "%.10s...", BigFactorial.factorial( new BigInteger( "20000" ) ) ) );
 
     } // useTailCallRecursion
         
