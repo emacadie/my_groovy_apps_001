@@ -66,18 +66,13 @@ public class ChapterSevenRunner {
 
     } // useTailCallRecursion
         
-    public void evaluateLazily() {
-        /*
+    public void speedUpWithMemos() {
         methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
         System.out.println( "-----\nstarting method " + methodName );
-        System.out.println( "Calling Evaluation.evaluate with arg 20: " + Evaluation.evaluate( 20 ) );
-        System.out.println( "Calling Evaluation.evaluate with arg 120: " + Evaluation.evaluate( 120 ) );
-        System.out.println( "Trying eagerEvaluator with args 1 and 2" );
-        Evaluation.eagerEvaluator( Evaluation.evaluate( 1 ), Evaluation.evaluate( 2 ) );
-        System.out.println( "Trying lazy evaluator with args 1 and 2" );
-        Evaluation.lazyEvaluator( () -> Evaluation.evaluate( 1 ), () -> Evaluation.evaluate( 2 ) );
-        */
-    } // evaluateLazily
+        final List< Integer > priceValues = Arrays.asList( 2, 1, 1, 2, 2, 2, 1, 8, 9, 15 );
+        final RodCutterBasic rodCutter = new RodCutterBasic( priceValues );
+        
+    } // speedUpWithMemos
 
     public static int length( final String name ) {
         System.out.println( "getting length for " + name );
@@ -148,8 +143,8 @@ public class ChapterSevenRunner {
             case "useTailCallRecursion" :
                 cSevenR.useTailCallRecursion();
                 break;
-            case "evaluateLazily":
-                cSevenR.evaluateLazily();
+            case "speedUpWithMemos":
+                cSevenR.speedUpWithMemos();
                 break;
             case "leverageTheLaziness":
                 cSevenR.leverageTheLaziness();

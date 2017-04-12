@@ -33,7 +33,8 @@ gradle runJava -PmainClass=info.shelfunit.funcjava.ch06.ChapterSixRunner -PmainA
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch06.ChapterSixRunner -PmainArgs=evaluateLazily      
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch06.ChapterSixRunner -PmainArgs=leverageTheLaziness      
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch06.ChapterSixRunner -PmainArgs=createInfiniteStreams
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch07.ChapterSevenRunner -PmainArgs=useTailCallRecursion          
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch07.ChapterSevenRunner -PmainArgs=useTailCallRecursion     
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch07.ChapterSevenRunner -PmainArgs=speedUpWithMemos     
 
 
 
