@@ -7,6 +7,7 @@ import java.io.File;
 import java.math.BigInteger;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import java.util.function.Consumer;
@@ -71,6 +72,16 @@ public class ChapterSevenRunner {
         System.out.println( "-----\nstarting method " + methodName );
         final List< Integer > priceValues = Arrays.asList( 2, 1, 1, 2, 2, 2, 1, 8, 9, 15 );
         final RodCutterBasic rodCutter = new RodCutterBasic( priceValues );
+        System.out.println( "Max profit of 5: " + rodCutter.maxProfit( 5 ) );
+        System.out.println( "Date before 22: " + new Date().toString() );
+        System.out.println( "Max profit of 22: " + rodCutter.maxProfit( 22 ) );
+        System.out.println( "Date after 22: " + new Date().toString() );
+        final Memoizer memoizer = new Memoizer( priceValues );
+        System.out.println( "Using memoizer" );
+        System.out.println( "Max profit of 5: " + memoizer.maxProfit( 5 ) );
+        System.out.println( "Date before 22: " + new Date().toString() );
+        System.out.println( "Max profit of 22: " + memoizer.maxProfit( 22 ) );
+        System.out.println( "Date after 22: " + new Date().toString() );
         
     } // speedUpWithMemos
 
