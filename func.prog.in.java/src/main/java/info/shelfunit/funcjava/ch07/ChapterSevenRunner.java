@@ -85,68 +85,6 @@ public class ChapterSevenRunner {
         
     } // speedUpWithMemos
 
-    public static int length( final String name ) {
-        System.out.println( "getting length for " + name );
-        return name.length();
-    }
-
-    public static String toUpper( final String name ) {
-        System.out.println( "Converting following name to uppercase: " + name );
-        return name.toUpperCase();
-    }
-    
-    public void leverageTheLaziness() {
-        methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
-        System.out.println( "-----\nstarting method " + methodName );
-        List< String > names = Arrays.asList(
-            "Brad", "Kate", "Kim", "Jack", "Joe", "Mike", "Susan", "George", "Robert", "Julia", "Parker", "Benson"
-        );
-        final String firstNameWith3Letters =
-            names.stream()
-            .filter( name -> ChapterSevenRunner.length( name ) == 3 )
-            .map( name -> ChapterSevenRunner.toUpper( name ) )
-            .findFirst()
-            .get();
-        System.out.println( "Printing out firstNameWith3Letters:\n" + firstNameWith3Letters );
-        System.out.println( "Let's break it down again" );
-        Stream< String > namesWith3Letters =
-            names.stream()
-            .filter( name -> ChapterSevenRunner.length( name ) == 3 )
-            .map( name -> ChapterSevenRunner.toUpper( name ) );
-        System.out.println( "Stream created, filtered, mapped" );
-        System.out.println( "Ready to call findFirst" );
-        final String firstWith3Letters = namesWith3Letters.findFirst().get();
-        System.out.println( "Here we are: " + firstWith3Letters );
-    } // leverageTheLaziness
-
-    public static boolean isPrime( final int number ) {
-        return number > 1 &&
-            IntStream.rangeClosed( 2, ( int ) Math.sqrt( number ) )
-            .noneMatch( divisor -> number % divisor == 0 );
-    }
-
-    // he has this in a separate class
-    private static int primeAfter( final int number ) {
-        if ( isPrime( number + 1 ) ) {
-            return number + 1;
-        } else {
-            return primeAfter( number + 1 );
-        }
-    }
-
-    public static List< Integer > primes( final int fromNumber, final int count ) {
-        return Stream.iterate( primeAfter( fromNumber - 1 ), ChapterSevenRunner::primeAfter )
-            .limit( count )
-            .collect( Collectors.< Integer >toList() );
-    }
-
-    public void createInfiniteStreams() {
-        methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
-        System.out.println( "-----\nstarting method " + methodName );
-        System.out.println( "10 primes from 1: " + ChapterSevenRunner.primes( 1, 10 ) );
-        System.out.println( "5 primes from 100: " + ChapterSevenRunner.primes( 100, 5 ) );
-    } // createInfiniteStreams
-
     public static void main( String [] args ) {
         ChapterSevenRunner cSevenR = new ChapterSevenRunner();
         String methodToRun = args[ 0 ];
@@ -157,18 +95,6 @@ public class ChapterSevenRunner {
             case "speedUpWithMemos":
                 cSevenR.speedUpWithMemos();
                 break;
-            case "leverageTheLaziness":
-                cSevenR.leverageTheLaziness();
-                break;
-            case "createInfiniteStreams":
-                cSevenR.createInfiniteStreams();
-                break;
-            case "createFluentInterfaces":
-                // cSevenR.createFluentInterfaces();
-                break;
-            case "dealWithExceptions":
-                // cSevenR.dealWithExceptions();
-                break;  
             default:
                 System.out.println( "No method named " + methodToRun );
         }
