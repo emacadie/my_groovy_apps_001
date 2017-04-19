@@ -25,21 +25,27 @@ public class ChapterEightRunner {
     public void useFunctionComposition() {
         methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
         System.out.println( "-----\nstarting method " + methodName );
+        
         List< String > symbols = Arrays.asList(
             "AMD", "HPQ", "IBM", "TXN", "VMW", "XRX", "AAPL", "ADBE",
             "AMZN", "CRAY", "CSCO", "SNE", "GOOG", "INTC", "INTU", "MSFT",
-            "ORCL", "TIBX", "VRSN", "YHOO"
+            "ORCL", "TSLA", "VRSN", "YHOO"
         );
 
-        final BigDecimal HUNDRED = new BigDecimal( "100" );
+        final BigDecimal HUNDRED = new BigDecimal( 100 );
         System.out.println( "Here are stocks with prices over $100: " );
-        symbols.stream()
+        String bigStocks = symbols.stream()
             .filter( symbol -> YahooFinance.getPrice( symbol ).compareTo( HUNDRED ) > 0 ) 
             .sorted()
             .collect( Collectors.joining( ", " ) );
-        System.out.println( " " );
-        System.out.println( "For some reason the Yahoo part is not working" );
-
+        System.out.println( "here are some big Scottish stocks: " + bigStocks );
+        
+        final List< String > theList = symbols.stream()
+            .filter( symbol -> YahooFinance.getPrice( symbol ).compareTo( HUNDRED ) > 0 ) 
+            .sorted()
+            .collect( Collectors.toList() );
+        System.out.println( "Here it is again: " + theList );
+        
     } // useFunctionComposition
     
     public void evaluateLazily() {
