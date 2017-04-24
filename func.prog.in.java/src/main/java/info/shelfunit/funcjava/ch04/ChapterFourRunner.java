@@ -2,8 +2,6 @@ package info.shelfunit.funcjava.ch04;
 
 import java.awt.Color;
 
-import java.io.File;
-
 import java.math.BigDecimal;
 
 import java.util.Arrays;
@@ -12,8 +10,6 @@ import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
-
-import java.util.stream.Stream;
 
 public class ChapterFourRunner {
     private static final String className = "ChapterFourRunner.";

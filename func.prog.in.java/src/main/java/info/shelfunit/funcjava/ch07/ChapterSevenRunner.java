@@ -1,22 +1,10 @@
 package info.shelfunit.funcjava.ch07;
 
-import java.awt.Color;
-
-import java.io.File;
-
 import java.math.BigInteger;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.Predicate;
-
-import java.util.stream.Collectors;
- import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class ChapterSevenRunner {
     private static final String className = "ChapterSevenRunner.";

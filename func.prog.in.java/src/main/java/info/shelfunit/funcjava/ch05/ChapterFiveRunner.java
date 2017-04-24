@@ -1,21 +1,11 @@
 package info.shelfunit.funcjava.ch05;
 
-// import java.awt.Color;
-
-// import java.io.File;
 import java.io.IOException;
-// import java.math.BigDecimal;
 
 import java.util.Date;
-// import java.util.Arrays;
-// import java.util.List;
 
-// import java.util.function.Consumer;
-// import java.util.function.Function;
-// import java.util.function.Predicate;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-// import java.util.stream.Stream;
 
 public class ChapterFiveRunner {
     private static final String className = "ChapterFiveRunner.";
