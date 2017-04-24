@@ -129,12 +129,6 @@ public class ChapterFiveRunner {
             case "createConciseTests":
                 cFiveR.createConciseTests();
                 break;
-            case "createFluentInterfaces":
-                // cFiveR.createFluentInterfaces();
-                break;
-            case "dealWithExceptions":
-                // cFiveR.dealWithExceptions();
-                break;  
             default:
                 System.out.println( "No method named " + methodToRun );
         }

@@ -121,12 +121,6 @@ public class ChapterSixRunner {
             case "createInfiniteStreams":
                 cSixR.createInfiniteStreams();
                 break;
-            case "createFluentInterfaces":
-                // cSixR.createFluentInterfaces();
-                break;
-            case "dealWithExceptions":
-                // cSixR.dealWithExceptions();
-                break;  
             default:
                 System.out.println( "No method named " + methodToRun );
         }

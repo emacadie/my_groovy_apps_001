@@ -253,12 +253,6 @@ public class ChapterThreeRunner {
             case "workWithFiles":
                 cThreeR.workWithFiles();
                 break;
-            case "pickName":
-                // cThreeR.pickName( args[ 1 ] );
-                break;
-            case "reduceAndJoin":
-                // cThreeR.reduceAndJoin();
-                break;  
             default:
                 System.out.println( "No method named " + methodToRun );
         }
