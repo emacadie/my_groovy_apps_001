@@ -7,6 +7,7 @@ import java.io.File;
 
 import java.math.BigDecimal;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,15 +23,17 @@ public class ChapterEightRunner {
     private static final String className = "ChapterEightRunner.";
     private String methodName;
 
+    List< String > symbols = Arrays.asList(
+        "AMD", "HPQ", "IBM", "TXN", "VMW", "XRX", "AAPL", "ADBE",
+        "AMZN", "CRAY", "CSCO", "SNE", "GOOG", "INTC", "INTU", "MSFT",
+        "ORCL", "TSLA", "VRSN", "YHOO"
+    );
+
     public void useFunctionComposition() {
         methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
         System.out.println( "-----\nstarting method " + methodName );
         
-        List< String > symbols = Arrays.asList(
-            "AMD", "HPQ", "IBM", "TXN", "VMW", "XRX", "AAPL", "ADBE",
-            "AMZN", "CRAY", "CSCO", "SNE", "GOOG", "INTC", "INTU", "MSFT",
-            "ORCL", "TSLA", "VRSN", "YHOO"
-        );
+
 
         final BigDecimal HUNDRED = new BigDecimal( 100 );
         System.out.println( "Here are stocks with prices over $100: " );
@@ -47,12 +50,59 @@ public class ChapterEightRunner {
         System.out.println( "Here it is again: " + theList );
         
     } // useFunctionComposition
+
+    public StockInfo getPrice( final String ticker ) {
+        return new StockInfo( ticker, YahooFinance.getPrice( ticker ) );
+    }
+
+    public Predicate< StockInfo > isPricedLessThan( final int price ) {
+        return stockInfo -> stockInfo.price.compareTo( BigDecimal.valueOf( price ) ) < 0;
+    }
+
+    public StockInfo pickHigh( final StockInfo stock1, final StockInfo stock2 ) {
+        return stock1.price.compareTo( stock2.price ) > 0 ? stock1 : stock2;
+    }
     
-    public void evaluateLazily() {
+    public void useMapReduce() {
         methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
         System.out.println( "-----\nstarting method " + methodName );
-                
-    } // evaluateLazily
+        System.out.println( "Here is the imperative version with three loops" );
+        final List< StockInfo > stocks = new ArrayList< StockInfo >();
+        for ( String symbol : symbols ) {
+            stocks.add( this.getPrice( symbol ) );
+        }
+        final List< StockInfo > stocksUnder500 = new ArrayList< StockInfo > ();
+        final Predicate< StockInfo > isPriceLessThan500 = this.isPricedLessThan( 500 );
+        for( StockInfo stock : stocks ) {
+            if ( isPriceLessThan500.test( stock ) ) {
+                stocksUnder500.add( stock );
+            }
+        }
+
+        StockInfo highPriced = new StockInfo( "", BigDecimal.ZERO );
+        for ( StockInfo stock : stocksUnder500 ) {
+            highPriced = this.pickHigh( highPriced, stock );
+        }
+        System.out.println( "Highest priced stock under $500 from imperative: " + highPriced );
+        System.out.println( "Trying again with a more concise imperative" );
+        StockInfo highPricedB = new StockInfo( "", BigDecimal.ZERO );
+        // we will re-use final Predicate< StockInfo > isPriceLessThan500 = this.isPricedLessThan( 500 );
+        for( String symbol : symbols ) {
+            StockInfo stockInfo = this.getPrice( symbol );
+            if ( isPriceLessThan500.test( stockInfo ) ) {
+                highPricedB = this.pickHigh( highPricedB, stockInfo );
+            }
+        }
+        System.out.println( "Highest priced stock under $500 from concise imperative: " + highPricedB );
+        System.out.println( "Let's do it again with functional programming" );
+        final StockInfo highPricedC =
+            symbols.stream()
+            .map( nextSymbol -> this.getPrice( nextSymbol ) )
+            .filter( this.isPricedLessThan( 500 ) )
+            .reduce( this::pickHigh )
+            .get();
+        System.out.println( "Highest priced stock under $500 from functional: " + highPricedC );
+    } // useMapReduce
 
     public static int length( final String name ) {
         System.out.println( "getting length for " + name );
@@ -123,8 +173,8 @@ public class ChapterEightRunner {
             case "useFunctionComposition" :
                 cEightR.useFunctionComposition();
                 break;
-            case "evaluateLazily":
-                cEightR.evaluateLazily();
+            case "useMapReduce" :
+                cEightR.useMapReduce();
                 break;
             case "leverageTheLaziness":
                 cEightR.leverageTheLaziness();

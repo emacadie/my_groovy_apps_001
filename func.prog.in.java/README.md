@@ -35,7 +35,8 @@ gradle runJava -PmainClass=info.shelfunit.funcjava.ch06.ChapterSixRunner -PmainA
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch06.ChapterSixRunner -PmainArgs=createInfiniteStreams
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch07.ChapterSevenRunner -PmainArgs=useTailCallRecursion     
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch07.ChapterSevenRunner -PmainArgs=speedUpWithMemos
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch08.ChapterEightRunner -PmainArgs=useFunctionComposition     
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch08.ChapterEightRunner -PmainArgs=useFunctionComposition
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch08.ChapterEightRunner -PmainArgs=useMapReduce     
 
 
 
