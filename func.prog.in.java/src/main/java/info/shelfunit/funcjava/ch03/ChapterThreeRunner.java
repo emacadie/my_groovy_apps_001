@@ -126,7 +126,7 @@ public class ChapterThreeRunner {
         methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
         System.out.println( "-----\nstarting method " + methodName );
         System.out.println( "Remember, in Java, java.util.stream.Stream.collect is a method analogous to 'reduce' in functional languages" );
-        System.out.println( "In Groovy, 'reduce' is more like functional 'map'" );
+        System.out.println( "In Groovy, 'collect' is more like functional 'map'" );
         List< Person > olderThan20 = new ArrayList< Person >();
         people.stream()
             .filter( person -> person.getAge() > 20 )
