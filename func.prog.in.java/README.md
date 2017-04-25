@@ -50,7 +50,8 @@ gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch02.GChapterTwoRunner -Pma
 gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch02.GChapterTwoRunner -PmainArgs=findElements
 gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch02.GChapterTwoRunner -PmainArgs=reuseLambda
 gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch02.GChapterTwoRunner -PmainArgs="pickName N"
-gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch02.GChapterTwoRunner -PmainArgs=reduceAndJoin      
+gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch02.GChapterTwoRunner -PmainArgs=reduceAndJoin
+gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch03.GChapterThreeRunner -PmainArgs=iterateAString      
 
 gradle runJava -PmainClass=info.shelfunit.concurrency.venkatsbook.ch002.ConcurrentCallableNAV   
 gradle runJava -PmainClass=info.shelfunit.concurrency.venkatsbook.ch002.SequentialPrimeFinder -PmainArgs=10000000   
