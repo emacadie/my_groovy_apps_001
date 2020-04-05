@@ -26,18 +26,13 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class GChapterThreeRunner {
+class GChapterThreeRunner {
     final className = "GChapterThreeRunner."
     def methodName
     final String str = "w00t";
 
     final people = [ new Person( "John", 20 ), new Person( "Sara", 21 ),
                      new Person( "Jane", 21 ), new Person( "Greg", 35 ) ]
-
-    // Comparator< Person > compareAgeAscending  = ( person1, person2 ) -> person1.ageDifference( person2 );
-                     // Comparator< Person > compareAgeDescending = compareAgeAscending.reversed();
-    // final Function< Person, String > byTheirName = person -> person.getName();
-    // final Function< Person, Integer > byAge = person -> person.getAge(); 
     
     public void iterateAString() {
         methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
@@ -109,7 +104,7 @@ public class GChapterThreeRunner {
                  ( oldestByLetter[ pers.name[ 0 ] ].age < pers.age ) ) {
                 oldestByLetter[ pers.name[ 0 ] ] = pers
             } // is this really idiomatic groovy?
-            /*
+            /* slightly longer way:
             if ( !oldestByLetter.containsKey( pers.name[ 0 ] ) ) {
                 oldestByLetter[ pers.name[ 0 ] ] = pers
             } else {
@@ -127,7 +122,7 @@ public class GChapterThreeRunner {
         methodName = className + Thread.currentThread().getStackTrace()[ 1 ].getMethodName();
         println( "-----\nstarting method " + methodName );
         println( "Let's list the files in the current directory as a stream" );
-        /*
+        /* I will get to this later
         try {
             Files.list( Paths.get( "." ) )
             .forEach( f -> System.out.print( f + " " ) );
