@@ -6,7 +6,7 @@ In chapter five, he points out that for the most part we don't need to worry abo
 
 up to page 23  
 
-Some sample commands from another project:
+Some sample commands from another project:    
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch01.ChapterOneRunner   
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch02.ChapterTwoRunner   
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch02.ChapterTwoRunner -PmainArgs=iterateThroughAList    
@@ -46,18 +46,18 @@ gradle runJava -PmainClass=info.shelfunit.funcjava.ch08.ChapterEightRunner -Pmai
 gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch01.GChapterOneRunner    
 gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch02.GChapterTwoRunner    
 gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch02.GChapterTwoRunner -PmainArgs=iterateManyWays    
-gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch02.GChapterTwoRunner -PmainArgs=transformAList
-gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch02.GChapterTwoRunner -PmainArgs=findElements
-gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch02.GChapterTwoRunner -PmainArgs=reuseLambda
-gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch02.GChapterTwoRunner -PmainArgs="pickName N"
-gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch02.GChapterTwoRunner -PmainArgs=reduceAndJoin
-gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch03.GChapterThreeRunner -PmainArgs=iterateAString
-gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch03.GChapterThreeRunner -PmainArgs=implementComparator
+gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch02.GChapterTwoRunner -PmainArgs=transformAList   
+gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch02.GChapterTwoRunner -PmainArgs=findElements   
+gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch02.GChapterTwoRunner -PmainArgs=reuseLambda   
+gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch02.GChapterTwoRunner -PmainArgs="pickName N"   
+gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch02.GChapterTwoRunner -PmainArgs=reduceAndJoin   
+gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch03.GChapterThreeRunner -PmainArgs=iterateAString   
+gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch03.GChapterThreeRunner -PmainArgs=implementComparator   
 gradle runGroovy -PmainClass=info.shelfunit.funcjava.ch03.GChapterThreeRunner -PmainArgs=useInjectMethod      
                 
 gradle runJava -PmainClass=info.shelfunit.concurrency.venkatsbook.ch002.ConcurrentCallableNAV   
 gradle runJava -PmainClass=info.shelfunit.concurrency.venkatsbook.ch002.SequentialPrimeFinder -PmainArgs=10000000   
-gradle runJava -PmainClass=info.shelfunit.concurrency.venkatsbook.ch002.ConcurrentPrimeFinder -PmainArgs="10000000 2 2"
+gradle runJava -PmainClass=info.shelfunit.concurrency.venkatsbook.ch002.ConcurrentPrimeFinder -PmainArgs="10000000 2 2"   
 
 
 
