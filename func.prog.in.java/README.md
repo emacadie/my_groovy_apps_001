@@ -10,33 +10,33 @@ Some sample commands from another project:
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch01.ChapterOneRunner   
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch02.ChapterTwoRunner   
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch02.ChapterTwoRunner -PmainArgs=iterateThroughAList    
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch02.ChapterTwoRunner -PmainArgs=transformAList
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch02.ChapterTwoRunner -PmainArgs=transformAList  
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch02.ChapterTwoRunner -PmainArgs=findElements     
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch02.ChapterTwoRunner -PmainArgs=reuseLambda
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch02.ChapterTwoRunner -PmainArgs="pickName N"
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch02.ChapterTwoRunner -PmainArgs=reduceAndJoin
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch03.ChapterThreeRunner -PmainArgs=iterateAString
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch03.ChapterThreeRunner -PmainArgs=implementComparator
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch03.ChapterThreeRunner -PmainArgs=useCollectMethod
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch02.ChapterTwoRunner -PmainArgs=reuseLambda   
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch02.ChapterTwoRunner -PmainArgs="pickName N"  
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch02.ChapterTwoRunner -PmainArgs=reduceAndJoin   
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch03.ChapterThreeRunner -PmainArgs=iterateAString  
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch03.ChapterThreeRunner -PmainArgs=implementComparator  
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch03.ChapterThreeRunner -PmainArgs=useCollectMethod   
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch03.ChapterThreeRunner -PmainArgs=workWithFiles     
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=separateConcerns
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=delegateUsingLambdas
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=decorateUsingLambdas
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=separateConcerns  
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=delegateUsingLambdas   
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=decorateUsingLambdas   
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=useDefaultMethods      
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=createFluentInterfaces
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=dealWithExceptions
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch05.ChapterFiveRunner -PmainArgs=cleanUpResources
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch05.ChapterFiveRunner -PmainArgs=cleanUpWithLamdba
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch05.ChapterFiveRunner -PmainArgs=manageLocks
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch05.ChapterFiveRunner -PmainArgs=createConciseTests
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch06.ChapterSixRunner -PmainArgs=delayInitialization
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=createFluentInterfaces   
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch04.ChapterFourRunner -PmainArgs=dealWithExceptions   
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch05.ChapterFiveRunner -PmainArgs=cleanUpResources   
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch05.ChapterFiveRunner -PmainArgs=cleanUpWithLamdba   
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch05.ChapterFiveRunner -PmainArgs=manageLocks   
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch05.ChapterFiveRunner -PmainArgs=createConciseTests   
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch06.ChapterSixRunner -PmainArgs=delayInitialization   
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch06.ChapterSixRunner -PmainArgs=evaluateLazily      
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch06.ChapterSixRunner -PmainArgs=leverageTheLaziness      
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch06.ChapterSixRunner -PmainArgs=createInfiniteStreams
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch06.ChapterSixRunner -PmainArgs=createInfiniteStreams   
 gradle runJava -PmainClass=info.shelfunit.funcjava.ch07.ChapterSevenRunner -PmainArgs=useTailCallRecursion     
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch07.ChapterSevenRunner -PmainArgs=speedUpWithMemos
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch08.ChapterEightRunner -PmainArgs=useFunctionComposition
-gradle runJava -PmainClass=info.shelfunit.funcjava.ch08.ChapterEightRunner -PmainArgs=useMapReduce
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch07.ChapterSevenRunner -PmainArgs=speedUpWithMemos   
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch08.ChapterEightRunner -PmainArgs=useFunctionComposition   
+gradle runJava -PmainClass=info.shelfunit.funcjava.ch08.ChapterEightRunner -PmainArgs=useMapReduce    
 
 
 

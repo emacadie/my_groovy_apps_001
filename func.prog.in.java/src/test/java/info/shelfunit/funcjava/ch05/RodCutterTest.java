@@ -2,7 +2,7 @@ package info.shelfunit.funcjava.ch05;
 
 import org.junit.Before;
 import org.junit.Test;
-import junit.framework.JUnit4TestAdapter;
+// import junit.framework.JUnit4TestAdapter;
 import static org.junit.Assert.fail;
 import static org.junit.Assert.assertTrue;
 import java.util.Arrays;
