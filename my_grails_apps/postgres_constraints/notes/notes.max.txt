@@ -1,0 +1,97 @@
+<div class="fieldcontain  required">
+	<label for="firstIntField">
+		First Int Field
+		<span class="required-indicator">*</span>
+	</label>
+	<input type="number" name="firstIntField" max="1000" value="0" required="" id="firstIntField" />
+</div>
+
+<div class="fieldcontain  required">
+	<label for="firstFloatField">
+		First Float Field
+		<span class="required-indicator">*</span>
+	</label>
+	<input type="null" name="firstFloatField" value="0" required="" id="firstFloatField" />
+</div>
+
+Both fields have max value of 1000, but only one has HTML saying so.
+
+Postgres:
+create or replace function check_second_float_001() returns trigger as $body$
+        begin
+                IF new.second_float_field > 1000 THEN
+                    return NULL;
+                END IF;
+                return new;
+        end;
+$body$ language plpgsql;
+
+create trigger check_second_float_trig_001
+        BEFORE INSERT OR UPDATE on max_class
+        for each row execute procedure check_second_float_001();
+
+Issue with constraints: You may add a constraint for a column, and you may have existing data that violates the constraint but you want to keep. In order to add constraint, you would need to change that data.
+
+create or replace function check_second_int_001() returns trigger as $body$
+        begin
+                IF new.second_int_field > 1000 THEN
+                    return NULL;
+                END IF;
+                return new;
+        end;
+$body$ language plpgsql;
+
+create  trigger check_second_int_trig_001
+        BEFORE INSERT OR UPDATE on max_class
+        for each row execute procedure check_second_int_001();
+
+drop trigger check_second_int_trig_001 on max_class;
+
+MySQL:
+DELIMITER $$
+ 
+CREATE TRIGGER before_insert_first_int_field_max_class
+     BEFORE INSERT ON max_class FOR EACH ROW
+     BEGIN
+          IF NEW.first_int_field > 1000
+          THEN
+               SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'first_int_field must be less than 1000';
+          END IF;
+     END;
+$$
+ 
+CREATE TRIGGER before_update_first_int_field_max_class
+     BEFORE UPDATE ON max_class  FOR EACH ROW
+     BEGIN
+          IF NEW.first_int_field > 1000
+          THEN
+               SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'first_int_field must be less than 1000';
+          END IF;
+     END;
+$$
+insert into max_class (first_int_field, first_float_field,id, version, 
+first_date_field, second_date_field, second_int_field, second_float_field ) 
+values (43, -- first_int_field 
+1234.55, -- first_float_field
+nextval('seq_max_class'), -- id 
+0, -- version
+'2014-08-11 00:00:00', -- first_date_field 
+'2014-08-11 00:00:00', -- second_date_field
+1259, -- second_int_field
+9999 -- second_float_field 
+);
+
+insert into max_class (first_int_field, first_float_field,id, version, 
+first_date_field, second_date_field, second_int_field, second_float_field ) 
+values (43, -- first_int_field 
+1234.55, -- first_float_field
+nextval('seq_max_class'), -- id 
+0, -- version
+CURRENT_TIMESTAMP(0), -- first_date_field 
+'2014-08-11 00:00:00', -- second_date_field
+1259, -- second_int_field
+9999 -- second_float_field 
+);
+

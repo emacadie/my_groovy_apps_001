@@ -1,0 +1,132 @@
+http://grails.org/plugin/shiro
+http://shiro.apache.org/jsp-tag-library.html
+How to use the tags:
+http://shiro.apache.org/web.html#Web-JSP%2FGSPTagLibrary
+Do NOT include the taglib directive. That messes things up.
+https://github.com/pledbrook/grails-shiro
+
+http://shiro.apache.org/
+http://shiro.apache.org/static/1.2.2/apidocs/
+http://localhost:8080/shiro004
+
+Another one:
+http://grails.org/plugin/shiro-ui
+https://github.com/Arkilog/grails-shiro-ui
+http://arkilog.github.io/grails-shiro-ui/
+
+http://coderberry.me/blog/2012/04/26/grails-authentication-with-shiro/ - has a nice taglib reference
+https://github.com/cavneb/grails-shiro-example/blob/master/grails-app/conf/BootStrap.groovy
+According to https://github.com/cavneb/grails-shiro-example/blob/master/grails-app/conf/com/example/SecurityFilters.groovy
+It looks like you list the actions/filters in there. So unlike SpringSecurity, no way to do it dynamically
+http://suryazi.blogspot.com/2012/07/securing-grails-application-using.html
+
+http://amilaparanawithana.blogspot.com/2013/08/apache-shiro-annotation-based-security.html
+
+file:///home/ericm/tmp/groovy/grails-shiro/target/docs/ref/Filters/accessControl.html
+(if it does not work, go to /home/ericm/tmp/groovy/grails-shiro and run "grails doc")
+Docs on accessControl
+file:///home/ericm/grails-shiro/target/pluginDescForDocs/ShiroGrailsPlugin.groovy
+file:///home/ericm/tmp/groovy/grails-shiro/target/pluginDescForDocs/ShiroGrailsPlugin.groovy
+     * Implementation of the "accessControl()" dynamic method available
+     * to filters. It requires a reference to the filter so that it can
+     * access the dynamic properties and methods, such as "request" and
+     * "redirect()".
+     * @param filter The filter instance that the "accessControl()"
+     * method is called from.
+     * @param authcRequired Specifies whether the default behaviour is
+     * to only allow access if the user is authenticated. If
+     * <code>false</code>, remembered users are also allowed unless this
+     * setting is overridden in the arguments of the method.
+     * @param args An argument map as passed to the "accessControl()"
+     * method. Only the "auth" argument is supported at the moment.
+     * @param c The closure to execute if the user has not been blocked
+     * by the authentication requirement. The closure should return
+     * <code>true</code> to allow access, or <code>false</code> otherwise.
+boolean accessControlMethod(application, filter, boolean authcRequired, Map args = [:], Closure c = null)
+
+
+This looks like a complete app:
+https://github.com/msrust0/bangbangbang
+
+
+List of constraints: http://grails.org/doc/latest/ref/Constraints/Usage.html
+
+grails create-app shiro004
+grails compile
+I got some errors but I could still run the  plugin script
+grails shiro-quick-start --prefix=info.shelfunit.shiro.Shiro
+| Created file grails-app/domain/info/shelfunit/shiro/ShiroUser.groovy
+| Created file grails-app/domain/info/shelfunit/shiro/ShiroRole.groovy
+| Created file grails-app/realms/info/shelfunit/shiro/ShiroDbRealm.groovy
+| Created file grails-app/controllers/info/shelfunit/shiro/AuthController.groovy
+| Created file grails-app/views/auth/login.gsp
+| Created file grails-app/conf/info/shelfunit/shiro/ShiroSecurityFilters.groovy
+
+Edit BootStrap.groovy
+Add this to not get errors:
+compile (":shiro:1.2.0")
+         { excludes "servlet-api" } 
+
+grails create-domain-class info.shelfunit.misc.Movie
+| Created file grails-app/domain/info/shelfunit/misc/Movie.groovy
+| Created file test/unit/info/shelfunit/misc/MovieSpec.groovy
+grails generate-all info.shelfunit.misc.Movie
+
+<shiro:authenticated> Hello, <shiro:principal/>, how are you today? </shiro:authenticated>
+To Logout: http://localhost:8080/shiro004/auth/signOut
+https://github.com/grails-samples/grails-website/blob/master/grails-app/conf/org/grails/auth/JSecurityAuthFilters.groovy
+If you return true from filter, you will not have any blocking
+
+grails create-domain-class info.shelfunit.misc.Book
+grails generate-all info.shelfunit.misc.Book
+
+Here are the session vars: java.util.Collections$2@2786549c
+next name is: org.apache.shiro.subject.support.DefaultSubjectContext_AUTHENTICATED_SESSION_KEY; 
+next name is: org.apache.shiro.web.session.HttpServletSession.HOST_SESSION_KEY; 
+next name is: org.codehaus.groovy.grails.FLASH_SCOPE; 
+next name is: org.apache.shiro.subject.support.DefaultSubjectContext_PRINCIPALS_SESSION_KEY; 
+
+-----
+Here are the session vars: java.util.Collections$2@2b1eef58
+next name is: org.apache.shiro.subject.support.DefaultSubjectContext_AUTHENTICATED_SESSION_KEY; value: true and it is a java.lang.Boolean
+next name is: org.apache.shiro.web.session.HttpServletSession.HOST_SESSION_KEY; value: 0:0:0:0:0:0:0:1 and it is a java.lang.String
+next name is: org.codehaus.groovy.grails.FLASH_SCOPE; value: [:] and it is a null
+next name is: org.apache.shiro.subject.support.DefaultSubjectContext_PRINCIPALS_SESSION_KEY; value: user123 and it is a org.apache.shiro.subject.SimplePrincipalCollection
+
+From shiro tests:
+java/org/apache/shiro/realm/text/TextConfigurationRealmTest.java:23:import org.apache.shiro.subject.SimplePrincipalCollection;
+java/org/apache/shiro/realm/text/TextConfigurationRealmTest.java:114:                PrincipalCollection principalCollection = new SimplePrincipalCollection("user1", "realm1");
+java/org/apache/shiro/realm/text/TextConfigurationRealmTest.java:131:                PrincipalCollection principalCollection = new SimplePrincipalCollection("user1", "realm1");
+java/org/apache/shiro/realm/text/TextConfigurationRealmTest.java:149:                PrincipalCollection principalCollection = new SimplePrincipalCollection("user1", "realm1");
+java/org/apache/shiro/realm/text/TextConfigurationRealmTest.java:168:                PrincipalCollection principalCollection = new SimplePrincipalCollection("user1", "realm1");
+
+-----
+
+In ShiroUser form, 
+<g:select name="roles" from="${info.shelfunit.shiro.ShiroRole.list()}" multiple="multiple" optionKey="id" size="5" value="${shiroUserInstance?.roles*.id}" optionValue="name" class="many-to-many"/>
+Adding optionValue allowed the role name to display instead of "info.shelfunit.shiro.ShiroRole: 1", etc
+
+grails generate-all info.shelfunit.shiro.ShiroUser
+grails generate-all info.shelfunit.shiro.ShiroRole
+
+grails create-domain-class info.shelfunit.misc.Box
+grails generate-all info.shelfunit.misc.Box
+
+Here are the session vars: java.util.Collections$2@18e42e61
+next name is: org.apache.shiro.subject.support.DefaultSubjectContext_AUTHENTICATED_SESSION_KEY; value: true and it is a java.lang.Boolean
+next name is: org.apache.shiro.web.session.HttpServletSession.HOST_SESSION_KEY; value: 0:0:0:0:0:0:0:1 and it is a java.lang.String
+next name is: org.codehaus.groovy.grails.FLASH_SCOPE; value: [:] and it is a null
+next name is: org.apache.shiro.subject.support.DefaultSubjectContext_PRINCIPALS_SESSION_KEY; value: user456 and it is a org.apache.shiro.subject.SimplePrincipalCollection
+
+Calling create with no user logged in:
+In BookController.create
+Here are params: 
+action: create,  
+format: null,  
+controller: book,  
+Here are the session vars: java.util.Collections$2@3ea113d6
+Done creating
+
+Look at example 4 in http://spring.io/blog/2012/03/28/secure-data-binding-with-grails/
+
+

@@ -1,0 +1,109 @@
+Trying again, since what I had did not work at all.
+
+http://localhost:8080/spring-security-002/
+
+First created the app:
+grails create-app spring-security-002
+
+gvm use groovy 2.1.9
+gvm use grails 2.3.0
+
+Next I will create the dbs in postgres
+
+sudo -u postgres psql postgres
+
+create user collab_dev with password 'dev-word-to-pass001';
+create database spring_security_002_dev_db with owner collab_dev;
+grant all privileges on database spring_security_002_dev_db to collab_dev;
+
+To log in: psql -h localhost -U collab_dev -d collab_todo_dev_db
+
+create user collab_test with password 'test-word-to-pass001';
+create database spring_security_002_test_db with owner collab_test;
+grant all privileges on database spring_security_002_test_db to collab_test;
+
+grails create-domain-class info.shelfunit.Newspaper
+grails generate-all info.shelfunit.Newspaper
+
+
+Next, update 
+plugins {
+   …
+   compile ':spring-security-core:2.0-RC2'
+}
+
+Note that until the 2.0 version of the plugin is officially released, you'll also need to add a custom repository:
+
+repositories {
+   …
+   mavenRepo 'http://repo.spring.io/milestone'
+}
+
+Run the compile script to resolve the dependencies and ensure everything is correct:
+
+$ grails compile
+
+To get it to actually work, add this to grails-app/conf/Config.groovy
+grails.plugin.springsecurity.rejectIfNoRule = false
+grails.plugin.springsecurity.fii.rejectPublicInvocations = false
+
+there is no logging in the generated classes /home/ericm/github/my_grails_apps/collab-todo-spring-security/target/work/plugins/spring-security-core-2.0-RC2/grails-app/controllers/grails/plugin/springsecurity/LogoutController
+I think you would have to move those somewhere else
+As well as the view classes
+
+In controllers params is a org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap
+<!-- <g:if test="${bookInstance?.owner?.id == currentLoggedInUser?.id}"> -->
+
+
+<org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap@808f7291 request=SecurityContextHolderAwareRequestWrapper[ org.springframework.security.web.context.HttpSessionSecurityContextRepository$Servlet3SaveToSessionRequestWrapper@afb82a8] nestedDateMap=[:] wrappedMap=[topic:what it is, title: hello, create:Create, owner.id:3, owner:[id:3], action:save, format:null, controller:magazine]>
+
+Here are the params for MagazineController.save()
+<org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap@96e1e7c3 request=SecurityContextHolderAwareRequestWrapper[ org.springframework.security.web.context.HttpSessionSecurityContextRepository$Servlet3SaveToSessionRequestWrapper@617d24ab] nestedDateMap=[:] wrappedMap=[topic:wwww, title:dfdf, create:Create, owner.id:3, owner:[id:3], action:save, format:null, controller:magazine]>
+
+In BookController.save
+author = aaaa ---
+title = ddddd ---
+create = Create ---
+owner.id = 3 ---
+owner = [id:3] ---
+action = save ---
+format = null ---
+controller = book ---
+currentUser id: 4
+In BookController.show
+currentUser id: 4, currentUser username: auser
+
+Here are the params for MagazineController.save()
+topic = aaaaa ---
+title = aaaaa ---
+owner.id2 = 4 ---
+owner = [id2:4, id:3] ---
+create = Create ---
+owner.id = 3 ---
+action = save ---
+format = null ---
+controller = magazine ---
+
+
+         def testUser = new SecUser(username: 'me', password: 'password') 
+         testUser.save(flush: true)
+         
+         SecUserSecRole.create testUser, adminRole, true
+         
+         def anotherUser = new SecUser(username: 'auser', password: 'password')
+         anotherUser.save(flush: true)
+         SecUserSecRole.create anotherUser, userRole, true
+         
+         def bUser = new SecUser(username: 'buser', password: 'password')
+         bUser.save(flush: true)
+         SecUserSecRole.create bUser, userRole, true
+
+Something for geb:
+https://code.google.com/p/selenium/wiki/TipsAndTricks
+
+grails create-domain-class info.shelfunit.Album
+grails generate-all info.shelfunit.Album
+
+grails create-domain-class info.shelfunit.Video
+grails generate-all info.shelfunit.Video
+

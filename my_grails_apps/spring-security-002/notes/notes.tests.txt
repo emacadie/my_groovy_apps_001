@@ -1,0 +1,30 @@
+Some notes and console output from the BookController.save() action:
+params is a org.codehaus.groovy.grails.web.servlet.mvc.GrailsParameterMap
+is springSecurityService null: false
+springSecurityService.encodePassword("String password"): $2a$10$2CnXjd5U3auld9Ttcq3RzuzqZCEEVUyO0AjYV65.ybwt2GCbmli96
+is user null?: false +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+About to print user id 0000000000000000000000000000000000000000000000000000000000000000000000000000
+currentUser id: 4
+currentUser id: 4, currentUser username: auser
+user is a info.shelfunit.SecUser 2222222222222222222222222222222222222222222222222
+bookInstance.owner: info.shelfunit.SecUser : 3
+owner.username: me
+bookInstance.title: some book
+bookInstance.author: this is the book
+After the change: bookInstance.owner: info.shelfunit.SecUser : 4,  owner.id: 4, owner.username: auser
+In BookController.show
+currentUser id: 4, currentUser username: auser
+
+http://stackoverflow.com/questions/17829220/grails-testing-with-spock-which-mocking-framework-select
+http://docs.spockframework.org/en/latest/interaction_based_testing.html
+Try stubbing it. Stub it good.
+
+http://grails.1312388.n4.nabble.com/Grails-mockFor-values-not-returned-in-controller-td2292369.html
+
+Just test the Books Controller: grails test-app BookController 
+grails test-app MagazineController   
+
+http://mechanitis.blogspot.co.uk/2013/07/spock-passes-next-test-painless-stubbing.html
+
+as of 2014-02-02, BookControllerSpec uses Groovy mocking and stubbing, and so far no luck. I will try creating a SecUser.
+

@@ -1,0 +1,2 @@
+Grails 2.3.3: Tests run, app does not
+Groovy Version: 2.3.3

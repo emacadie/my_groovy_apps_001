@@ -1,0 +1,65 @@
+dev:
+create database grls_cnstrnts_001;
+GRANT ALL PRIVILEGES ON grls_cnstrnts_001.* TO 'grls_cnstu001'@'localhost' IDENTIFIED BY 'constrain-grails-12' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON grls_cnstrnts_001.* TO 'grls_cnstu001'@'%' IDENTIFIED BY 'constrain-grails-12' WITH GRANT OPTION;
+flush privileges;
+commit;
+mysql --user=grls_cnstu001 --password=constrain-grails-12 --database=grls_cnstrnts_001
+mysql --user=grls_cnstu001 --password=constrain-grails-12 --database=grls_cnstrnts_001
+mysql -u grls_cnstu001 -pconstrain-grails-12 --database=grls_cnstrnts_001
+mysql -u grls_cnstu001 -pconstrain-grails-12 < ./dump.new.txt 
+
+test:
+create database grls_cnstrnts_002;
+GRANT ALL PRIVILEGES ON grls_cnstrnts_002.* TO 'grls_cnstu002'@'localhost' IDENTIFIED BY 'constrain-grails-02' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON grls_cnstrnts_002.* TO 'grls_cnstu002'@'%' IDENTIFIED BY 'constrain-grails-02' WITH GRANT OPTION;
+flush privileges;
+commit;
+
+
+mysql --user=grls_cnstu002 --password=constrain-grails-02 --database=grls_cnstrnts_002
+mysql --user=grls_cnstu002 --password=constrain-grails-02 --database=grls_cnstrnts_002
+mysql -u grls_cnstu002 -pconstrain-grails-02 --database=grls_cnstrnts_002
+mysql -u grls_cnstu002 -pconstrain-grails-02 < ./dump.new.txt 
+
+update max_class set second_date_field = '2014-08-10 00:00:00' where id = 2;
+
+DELIMITER $$
+ 
+CREATE TRIGGER before_insert_first_int_field_max_class
+     BEFORE INSERT ON max_class FOR EACH ROW
+     BEGIN
+          IF NEW.first_int_field > 1000
+          THEN
+               SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'first_int_field must be less than 1000';
+          END IF;
+     END;
+$$
+ 
+CREATE TRIGGER before_update_first_int_field_max_class
+     BEFORE UPDATE ON max_class  FOR EACH ROW
+     BEGIN
+          IF NEW.first_int_field > 1000
+          THEN
+               SIGNAL SQLSTATE '45000'
+                    SET MESSAGE_TEXT = 'first_int_field must be less than 1000';
+          END IF;
+     END;
+$$
+
+show triggers\G;
+You need that \G at the end.
+
+ERROR 1235 (42000): This version of MySQL doesn't yet support 'multiple triggers with the same action time and event for one table'
+So it has to be one big trigger for a table
+
+insert into max_class (first_int_field, second_int_field, first_date_field, second_date_field) 
+values (123, 1234, '2014-10-10 00:00:00', '2014-08-10 00:00:00');
+
+insert into min_class (first_int_field, first_float_field, first_date_field, second_date_field) 
+values (6, 5.5, '2012-08-10 00:00:00', '2015-08-10 00:00:00');
+
+insert into max_class (first_int_field, second_float_field, first_date_field, second_date_field) 
+values (124, 1234.0, '2014-08-10 00:00:00', '2014-08-10 00:00:00');
+

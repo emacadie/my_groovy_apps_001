@@ -1,0 +1,21 @@
+attributes
+bindable
+blank
+creditCard
+email
+inList - influences schema generation 
+matches
+x- max - influences schema generation (not really)
+maxSize - influences schema generation 
+x- min - influences schema generation (not really)
+minSize - influences schema generation 
+notEqual
+nullable - influences schema generation 
+range - influences schema generation 
+scale - influences schema generation 
+size - influences schema generation 
+unique - influences schema generation - this one really does show up in the schema in MySQL, also in postgres
+url
+validator
+widget - no impact on persistence
+

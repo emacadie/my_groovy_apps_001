@@ -1,0 +1,98 @@
+# I know it's bad to put passwords in source control.
+# This is not really a production app, so I don't think it's a big deal.
+
+create user apug_devu001 with password 'apug-dev-001';
+create database apug_devdb_001 with owner apug_devu001;
+grant all privileges on database apug_devdb_001 to apug_devu001;
+
+To log in: psql -h localhost -U apug_devu001 -d apug_devdb_001
+
+create user apug_testu001 with password 'apug-test-001';
+create database apug_testdb_001 with owner apug_testu001;
+grant all privileges on database apug_testdb_001 to apug_testu001;
+
+From definitive guide to grails 2: 
+- create-drop: Drops and re-creates the database schema on each application load.  
+- create: Creates the database on application load.  
+- update: Creates and/or attempts an update to existing tables on application load.   
+- [blank]: Does nothing.  
+
+From Grails website:
+create - Drops the existing schema and creates the schema on startup, dropping existing tables, indexes, etc. first.   
+create-drop - Same as create, but also drops the tables when the application shuts down cleanly.   
+update - Creates missing tables and indexes, and updates the current schema without dropping any tables or data. Note that this can't properly handle many schema changes like column renames (you're left with the old column containing the existing data).   
+validate - Makes no changes to your database. Compares the configuration with the existing database schema and reports warnings.  
+any other value - does nothing  
+
+insert into max_class (first_int_field, first_float_field,id, version, 
+first_date_field, second_date_field, second_int_field, second_float_field ) 
+values (4321, 1234, nextval('hibernate_sequence'), 0, '2014-08-11 00:00:00', '2014-08-11 00:00:00', 1, 1 );
+
+, ,id, version, 
+, , , 
+insert into max_class (first_int_field, first_float_field,id, version, 
+first_date_field, second_date_field, second_int_field, second_float_field ) 
+values (43, -- first_int_field 
+1234.55, -- first_float_field
+nextval('seq_max_class'), -- id 
+0, -- version
+'2014-08-11 00:00:00', -- first_date_field 
+'2014-08-11 00:00:00', -- second_date_field
+1259, -- second_int_field
+9999 -- second_float_field 
+);
+
+ALTER TABLE max_class ADD CONSTRAINT first_int_max CHECK (first_int_field <= 1000);
+ALTER TABLE tablename ADD CONSTRAINT constraintname UNIQUE (columns);
+
+SQL function based on example at http://sqlfiddle.com/#!11/98403/1 and 
+http://stackoverflow.com/questions/15500270/string-matching-in-insert-trigger-how-to-use-in-conditionals-to-return-null
+
+
+create or replace function check_second_float_001() returns trigger as $body$
+        begin
+                IF new.second_float_field > 1000 THEN
+                    return NULL;
+                END IF;
+                return new;
+        end;
+$body$ language plpgsql;
+
+create trigger check_second_float_trig_001
+        BEFORE INSERT OR UPDATE  on max_class
+        for each row execute procedure check_second_float_001();
+
+Issue with constraints: You may add a constraint for a column, and you may have existing data that violates the constraint but you want to keep. In order to add constraint, you would need to change that data.
+
+create or replace function check_second_int_001() returns trigger as $body$
+        begin
+                IF new.second_int_field > 1000 THEN
+                    return NULL;
+                END IF;
+                return new;
+        end;
+$body$ language plpgsql;
+
+create  trigger check_second_int_trig_001
+        BEFORE INSERT OR UPDATE on max_class
+        for each row execute procedure check_second_int_001();
+
+drop trigger check_second_int_trig_001 on max_class;
+
+I think a failed insert still increments the sequence;
+
+SELECT last_value FROM seq_unique_class;
+select nextval('seq_max_class');
+
+select currval('seq_max_class');
+
+| Error 2014-09-24 23:14:04,082 [localhost-startStop-1] ERROR hbm2ddl.SchemaExport  - ERROR: relation "size_class_unique_class" does not exist
+| Error 2014-09-24 23:14:04,087 [localhost-startStop-1] ERROR hbm2ddl.SchemaExport  - HHH000389: Unsuccessful: drop sequence seq_max_class
+| Error 2014-09-24 23:14:04,087 [localhost-startStop-1] ERROR hbm2ddl.SchemaExport  - ERROR: sequence "seq_max_class" does not exist
+| Error 2014-09-24 23:14:04,088 [localhost-startStop-1] ERROR hbm2ddl.SchemaExport  - HHH000389: Unsuccessful: drop sequence seq_min_class
+| Error 2014-09-24 23:14:04,088 [localhost-startStop-1] ERROR hbm2ddl.SchemaExport  - ERROR: sequence "seq_min_class" does not exist
+| Error 2014-09-24 23:14:04,089 [localhost-startStop-1] ERROR hbm2ddl.SchemaExport  - HHH000389: Unsuccessful: drop sequence seq_size_class
+| Error 2014-09-24 23:14:04,089 [localhost-startStop-1] ERROR hbm2ddl.SchemaExport  - ERROR: sequence "seq_size_class" does not exist
+| Error 2014-09-24 23:14:04,090 [localhost-startStop-1] ERROR hbm2ddl.SchemaExport  - HHH000389: Unsuccessful: drop sequence seq_unique_class
+| Error 2014-09-24 23:14:04,090 [localhost-startStop-1] ERROR hbm2ddl.SchemaExport  - ERROR: sequence "seq_unique_class" does not exist
+I read you can ignore these

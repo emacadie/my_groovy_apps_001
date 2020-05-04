@@ -1,0 +1,17 @@
+grails create-domain-class info.shelfunit.constraints.MaxClass
+create fields
+grails generate-all info.shelfunit.constraints.MaxClass
+
+grails create-domain-class info.shelfunit.constraints.MinClass
+create fields
+grails generate-all info.shelfunit.constraints.MinClass
+
+grails create-domain-class info.shelfunit.constraints.SizeClass
+create fields
+grails generate-all info.shelfunit.constraints.SizeClass
+
+grails create-domain-class info.shelfunit.constraints.UniqueClass
+create fields
+grails generate-all info.shelfunit.constraints.UniqueClass
+
+

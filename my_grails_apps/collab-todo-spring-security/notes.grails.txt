@@ -1,0 +1,41 @@
+Edit grails-app/conf/BuildConfig.groovy, add the plugin names
+compile ":spring-security-core:2.0-RC2"
+compile ":spring-security-ui:1.0-RC1"
+
+
+To use proper versions:
+gvm use groovy 2.1.9
+gvm use grails 2.3.0
+
+To install plugin, run: grails compile
+
+I added both spring-security and spring-security-ui
+
+Any new content is closed off by default. However, it does put in rules for javascript, css, etc
+Other defaults: bcrypt for passwords, and session fixation is prevented
+
+Many files that were generated in the grails-app/ dir are now in the target/ dir. They can be deleted and overrode.
+./target/work/plugins/spring-security-core-2.0-RC2/grails-app/controllers/grails/plugin/springsecurity/LoginController.groovy
+./target/work/plugins/spring-security-core-2.0-RC2/grails-app/controllers/grails/plugin/springsecurity/LogoutController.groovy
+./target/work/plugins/spring-security-core-2.0-RC2/grails-app/views/login/auth.gsp
+./target/work/plugins/spring-security-core-2.0-RC2/grails-app/views/login/denied.gsp
+
+To add some classes:
+grails s2-quickstart info.shelfunit SecUser SecRole RequestMap
+
+You need a class for the users and one for roles. It also makes a class that combines the Users and the Role. It handles the many-to-many mapping. I wonder if you could make classes in Grails apps for any many-to-many relationship. (I will have to ask on the list)
+
+The s2-quickstart script also takes an optional argument to make a RequestMap to administer user and role permissions to controllers. You can put this information in the database, or you can put it in the controllers with annotations, or you can put it in grails-app/conf/Config.groovy. You can only use one.
+
+If you look at the docs and third-party pages online, they seem to be a bit inconsistent with their terms. They use "Person" and "User" interchangably, and they use "Role" and "Authority" interchangably.
+
+I went with SecUser because Postgres does not like creating a table named "users"
+
+The roles must start with "ROLE_" you could add a name for a pretty field
+
+When I first tried this, it did not work. I had to add this to grails-app/conf/Config.groovy:
+grails.plugin.springsecurity.rejectIfNoRule = false
+grails.plugin.springsecurity.fii.rejectPublicInvocations = false
+
+
+

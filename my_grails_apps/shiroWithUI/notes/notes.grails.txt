@@ -1,0 +1,25 @@
+grails shiro-quick-start --prefix=info.shelfunit.shiro.Shiro
+output:
+| Created file grails-app/domain/info/shelfunit/shiro/ShiroUser.groovy
+| Created file grails-app/domain/info/shelfunit/shiro/ShiroRole.groovy
+| Created file grails-app/realms/info/shelfunit/shiro/ShiroDbRealm.groovy
+| Created file grails-app/controllers/info/shelfunit/shiro/AuthController.groovy
+| Created file grails-app/views/auth/login.gsp
+| Created file grails-app/conf/info/shelfunit/shiro/ShiroSecurityFilters.groovy
+
+grails shiro-ui-quick-start
+no output
+
+I had to rearrange some files, since both plugins made a role and user domain. But the UI plugin made nice controllers for role and user. It lists the permissions for all the actions in the controller pages. I guess it just makes a list of the actions.
+
+grails create-domain-class info.shelfunit.misc.Book
+grails generate-all info.shelfunit.misc.Book
+
+I don't get the style when I log in. I have to look into that.
+It looks okay in shiro004
+There is a shiro-ui taglib: that is how it gets the permissions
+
+In the controller:
+In ShiroRoleController.save, with params: [description:, name:ROLE_BOOKER, permissions:[book:create, book:delete, book:edit, book:index, book:save, book:show, book:update], create:Create, action:save, format:null, controller:shiroRole]
+
+

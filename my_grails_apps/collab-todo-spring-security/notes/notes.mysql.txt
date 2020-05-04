@@ -1,0 +1,27 @@
+create database collab_todo_dev;
+
+grant all privileges on collab_todo_dev.* to 'collab-dev-admin'@'%' identified by 'dev-word-to-pass' with grant option;
+
+grant all privileges on collab_todo_dev.* to 'collab-dev-admin'@'localhost' identified by 'dev-word-to-pass' with grant option;
+
+flush privileges;
+commit;
+
+mysql --user=collab-dev-admin --password=dev-word-to-pass < /home/ericm/github/James-Admin-Web-App/db.schema.test.txt
+mysql --user collab-dev-admin --password=dev-word-to-pass --database=collab_todo_dev
+mysql --user=collab-dev-admin --password=dev-word-to-pass --database=collab_todo_dev  
+#
+create database collab_todo_test;
+
+grant all privileges on collab_todo_test.* to 'collab-tst-admin'@'%' identified by 'test-word-to-pass' with grant option;
+
+grant all privileges on collab_todo_test.* to 'collab-tst-admin'@'localhost' identified by 'test-word-to-pass' with grant option;
+
+flush privileges;
+commit;
+
+mysql --user=collab-tst-admin --password=test-word-to-pass < /home/ericm/github/James-Admin-Web-App/db.schema.test.txt
+mysql --user collab-tst-admin --password=test-word-to-pass --database=collab_todo_test
+mysql --user=collab-tst-admin --password=test-word-to-pass --database=collab_todo_test  
+
+

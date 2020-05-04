@@ -1,0 +1,33 @@
+http://grails.org/doc/latest/ref/Constraints/size.html
+It says "Uses a Groovy range to restrict the size of a collection, a number, or the length of a String."
+But this does not seem to work with numbers.
+For collections that are one-to-many, it allows a record to be saved with nothing in the collection. But if you specify at least one, the size of the collection must be within the range specified. I guess you would need nullable or minSize for that.
+
+But when you try to edit a record, then it complains
+
+<div class="fieldcontain  ">
+	<label for="firstString">
+		First String
+		
+	</label>
+	<input type="text" name="firstString" maxlength="15" value="" id="firstString" />
+</div>
+
+<div class="fieldcontain  required">
+	<label for="firstInt">
+		First Int
+		<span class="required-indicator">*</span>
+	</label>
+	<input type="number" name="firstInt" value="0" required="" id="firstInt" />
+</div>
+
+<div class="fieldcontain  ">
+	<label for="maxClasses">
+		Max Classes
+		
+	</label>
+	<select name="maxClasses" multiple="multiple" size="5" class="many-to-many" id="maxClasses" >
+</select>
+</div>
+
+

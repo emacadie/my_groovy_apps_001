@@ -1,0 +1,15 @@
+grails create-app secureapp  
+emacsnw grails-app/conf/BuildConfig.groovy   
+grails compile   
+grails s2-quickstart   
+grails s2-quickstart info.shelfunit.secureapp SecAppUser SecAppRole   
+emacsnw grails-app/conf/Config.groovy   
+emacsnw grails-app/conf/BootStrap.groovy    
+grails create-controller info.shelfunit.secureapp.SensitiveContentController   
+grails create-controller info.shelfunit.secureapp.UserContentController
+grails create-controller info.shelfunit.secureapp.PublicContentController
+
+http://localhost:8080/secureapp/sensitiveContent/index
+
+http://grails-plugins.github.io/grails-spring-security-core/docs/manual/guide/single.html
+

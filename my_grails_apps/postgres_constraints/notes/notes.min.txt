@@ -1,0 +1,23 @@
+I can add a record in console that violates constraints. Unless the date is null, I can view them without any issue in the app. But when I go to the "Edit" screen, then I see the errors.
+
+
+
+<div class="fieldcontain  required">
+	<label for="firstIntField">
+		First Int Field
+		<span class="required-indicator">*</span>
+	</label>
+	<input type="number" name="firstIntField" min="10" value="0" required="" id="firstIntField" />
+</div>
+
+<div class="fieldcontain  required">
+	<label for="firstFloatField">
+		First Float Field
+		<span class="required-indicator">*</span>
+	</label>
+	<input type="null" name="firstFloatField" value="0" required="" id="firstFloatField" />
+</div>
+Like "max", with min only one field with validation has that in the HTML.
+
+
+

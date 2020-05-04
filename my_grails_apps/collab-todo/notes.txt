@@ -1,0 +1,10 @@
+grails run-app
+
+http://localhost:8080/collab-todo
+
+grails create-controller todo
+
+grails test-app
+
+grails create-domain-class todo
+

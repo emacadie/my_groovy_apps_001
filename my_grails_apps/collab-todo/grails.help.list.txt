@@ -1,0 +1,120 @@
+
+| Loading Grails 2.2.0
+| Configuring classpath
+| Configuring classpath.
+| Environment set to development
+| Environment set to development.
+| Environment set to development..
+| Environment set to development...
+| Environment set to development....
+| Environment set to development.....
+
+Usage (optionals marked with *):
+grails [environment]* [options]* [target] [arguments]*
+
+Examples:
+grails dev run-app
+grails create-app books
+
+
+Available options:
+ -verbose                     Enable verbose output
+ -plain-output                Disables ANSI output
+ -refresh-dependencies        Whether to force a resolve of dependencies (skipping any caching)
+ -reloading                   Enable the reloading agent
+ -stacktrace                  Enable stack traces in output
+ -offline                     Indicates that Grails should not connect to any remote servers during processing of the build
+ -version                     Current Grails version
+ -non-interactive             Whether to allow the command line to request input
+
+Available Targets (type grails help 'target-name' for more info):
+grails add-proxy
+grails alias
+grails bootstrap
+grails bug-report
+grails clean
+grails clear-proxy
+grails compile
+grails console
+grails create-app
+grails create-controller
+grails create-domain-class
+grails create-filters
+grails create-hibernate-cfg-xml
+grails create-integration-test
+grails create-multi-project-build
+grails create-plugin
+grails create-pom
+grails create-scaffold-controller
+grails create-script
+grails create-service
+grails create-tag-lib
+grails create-unit-test
+grails create-web-xml-config
+grails dbm-changelog-sync
+grails dbm-changelog-sync-sql
+grails dbm-changelog-to-groovy
+grails dbm-clear-checksums
+grails dbm-create-changelog
+grails dbm-db-doc
+grails dbm-diff
+grails dbm-drop-all
+grails dbm-future-rollback-sql
+grails dbm-generate-changelog
+grails dbm-generate-gorm-changelog
+grails dbm-gorm-diff
+grails dbm-list-locks
+grails dbm-list-tags
+grails dbm-mark-next-changeset-ran
+grails dbm-previous-changeset-sql
+grails dbm-register-changelog
+grails dbm-release-locks
+grails dbm-rollback
+grails dbm-rollback-count
+grails dbm-rollback-count-sql
+grails dbm-rollback-sql
+grails dbm-rollback-to-date
+grails dbm-rollback-to-date-sql
+grails dbm-status
+grails dbm-tag
+grails dbm-update
+grails dbm-update-count
+grails dbm-update-count-sql
+grails dbm-update-sql
+grails dbm-validate
+grails dependency-report
+grails doc
+grails generate-all
+grails generate-controller
+grails generate-views
+grails help
+grails init
+grails install-dependency
+grails install-jq-uery
+grails install-plugin
+grails install-templates
+grails integrate-with
+grails interactive
+grails list-plugin-updates
+grails list-plugins
+grails migrate-docs
+grails package
+grails package-plugin
+grails plugin-info
+grails refresh-dependencies
+grails remove-proxy
+grails run-app
+grails run-script
+grails run-war
+grails schema-export
+grails set-proxy
+grails set-version
+grails shell
+grails stats
+grails stop-app
+grails test-app
+grails tomcat
+grails uninstall-plugin
+grails upgrade
+grails war
+grails wrapper

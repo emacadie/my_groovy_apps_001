@@ -1,0 +1,13 @@
+
+Done: create user shro_dev with password 'active-stand-12';
+create database shro_wui_dev_001 with owner shro_dev;
+grant all privileges on database shro_wui_dev_001 to shro_dev;
+
+To log in: psql -h localhost -U shro_dev -d shro_wui_dev_001
+
+Done: create user shro_test with password 'active-stand-13';
+create database shro_wui_tst_001 with owner shro_test;
+grant all privileges on database shro_wui_tst_001 to shro_test;
+
+To log in: psql -h localhost -U shro_test -d shro_wui_tst_001 
+

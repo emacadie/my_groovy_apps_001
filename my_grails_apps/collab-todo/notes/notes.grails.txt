@@ -1,0 +1,62 @@
+I did "grails run-app" on a different machine, and I got an error because it could not find web-app/WEB-INF/applicationContext.xml.   
+
+cp -v notes/DataSource.mysql.groovy grails-app/conf/DataSource.groovy 
+cp -v notes/DataSource.h2.groovy grails-app/conf/DataSource.groovy 
+cp -v notes/DataSource.postgres.groovy grails-app/conf/DataSource.groovy 
+cp -v notes/BuildConfig.h2.groovy grails-app/conf/BuildConfig.groovy
+cp -v notes/BuildConfig.mysql.groovy grails-app/conf/BuildConfig.groovy
+cp -v notes/BuildConfig.postgres.groovy grails-app/conf/BuildConfig.groovy
+
+Up to page 185
+
+To get the app to run, I typed:
+grails upgrade   
+
+grails run-app
+
+http://localhost:8080/collab-todo
+
+grails create-controller todo
+
+grails test-app
+
+grails create-domain-class todo
+
+Static scaffolding:
+grails generate-controller collab.todo.Todo
+grails generate-views collab.todo.Todo
+To do both:
+grails generate-all collab.todo.Todo
+
+Now my turn:
+grails create-domain-class category
+grails generate-controller collab.todo.Category
+grails create-domain-class user
+grails generate-controller collab.todo.User
+grails generate-views collab.todo.User
+
+grails create-domain-class buddyList
+grails create-domain-class buddyListMember
+grails create-domain-class keyword
+
+to test the app:
+grails test-app 
+to test the User domain object:
+grails test-app collab.todo.User
+to test with println statements (only some work):
+grails test-app collab.todo.User -echoOut
+see http://stackoverflow.com/questions/2217873/grails-test-app-to-output-to-console
+It is also in the test reports
+
+Don't use "def" at the shell
+grails shell 
+Import the packages first:
+import collab.todo.*
+To see if objects are good:
+todo.validate()
+If false:
+todo.errors.each {
+    println it
+}
+
+

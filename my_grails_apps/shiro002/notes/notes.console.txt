@@ -1,0 +1,92 @@
+http://stackoverflow.com/questions/2040055/grails-shell-not-seeing-domain-objects
+
+How to get the ctx variable in the shell?
+
+
+
+for (cls in grailsApplication.controllerClasses) {
+println "cls is a ${cls.name} with logical property name: ${cls.logicalPropertyName} in package ${cls.packageName}"
+}
+println "\n"
+stuff = grailsApplication.controllerClasses.findAll{  ![ 'assets', 'dbdoc', 'auth' ].contains( it.logicalPropertyName )  }
+
+stuff.each { controller -> 
+    println "stuff is ${controller.logicalPropertyName} and it is a ${controller.class}" 
+    println "-- default action: ${controller.getDefaultAction()}"
+    uris = controller.getURIs()
+    // uris.each { println "-- uri is ${it}" }
+    uris.findAll{ !it.contains('/**') && !it.endsWith( "/" ) }.each(){next -> println "-- next: ${next}"}
+}
+
+            5 | *:*
+             5 | assets:*
+             5 | assets:index
+             5 | book:*
+             5 | book:create
+             5 | book:delete
+             5 | book:edit
+             5 | book:index
+             5 | book:save
+             5 | book:show
+             5 | book:update
+             5 | dbdoc:*
+             5 | dbdoc:index
+             5 | shiroRole:*
+             5 | shiroRole:create
+             5 | shiroRole:delete
+             5 | shiroRole:edit
+             5 | shiroRole:index
+             5 | shiroRole:list
+             5 | shiroRole:save
+             5 | shiroRole:show
+             5 | shiroRole:update
+             5 | shiroUser:*
+             5 | shiroUser:create
+             5 | shiroUser:delete
+             5 | shiroUser:edit
+             5 | shiroUser:index
+             5 | shiroUser:list
+;
+for (cls in grailsApplication.controllerClasses) {
+println "cls is a ${cls.name} with logical property name: ${cls.logicalPropertyName} in package ${cls.packageName}"
+}
+println "\n"
+stuff = grailsApplication.controllerClasses.findAll{  
+    ![ 'assets', 'dbdoc', 'auth' ].contains( it.logicalPropertyName )  
+}.sort{it.logicalPropertyName}
+
+stuff.each { controller -> 
+    println "stuff is ${controller.logicalPropertyName} and it is a ${controller.class}" 
+    println "-- default action: ${controller.getDefaultAction()}"
+    uris = controller.getURIs()
+    // uris.each { println "-- uri is ${it}" }
+    uris.findAll{ !it.contains('/**') && !it.endsWith( "/" ) }.sort().each(){
+        next -> println "-- next: ${next.substring(1, next.length()).replace("/", ":")}"
+    }
+}
+
+actionList = [ ]
+stuff.each { controller -> 
+    println "stuff is ${controller.logicalPropertyName} and it is a ${controller.class}" 
+    println "-- default action: ${controller.getDefaultAction()}"
+    uris = controller.getURIs()
+    // uris.each { println "-- uri is ${it}" }
+    uris.findAll{ !it.contains('/**') && !it.endsWith( "/" ) }
+    .collect{ it.substring(1, it.length()) }
+    .sort(  ).each(){ next ->
+        // next = next.substring(1, next.length())
+        if ( next == controller.logicalPropertyName ) {
+            println "-- next: raw: ${next},  ${next}:*"  
+            actionList.add( next + ":*" )
+        } else { 
+            println "-- next: raw: ${next},  ${next.replace("/", ":")}"
+            actionList.add( next.replace("/", ":") )
+        }
+    }
+}
+println "\n"
+actionList.each { it ->
+    println "actionList: ${it}"
+}
+
+

@@ -1,0 +1,2 @@
+insert into unique_class(id, version, first_int, first_string) values (nextVal('seq_unique_class'), 0, 1, 'hello');
+

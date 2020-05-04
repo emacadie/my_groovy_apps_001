@@ -1,0 +1,39 @@
+sudo -u postgres psql postgres
+
+create user collab_dev with password 'dev-word-to-pass001';
+create database collab_todo_dev_db with owner collab_dev;
+grant all privileges on database collab_todo_dev_db to collab_dev;
+
+To log in: psql -h localhost -U collab_dev -d collab_todo_dev_db
+
+create user collab_test with password 'test-word-to-pass001';
+create database collab_todo_test_db with owner collab_test;
+grant all privileges on database collab_todo_test_db to collab_test;
+
+create database collab_todo_dev;
+
+grant all privileges on collab_todo_dev.* to 'collab-dev-admin'@'%' identified by 'dev-word-to-pass' with grant option;
+
+grant all privileges on collab_todo_dev.* to 'collab-dev-admin'@'localhost' identified by 'dev-word-to-pass' with grant option;
+
+flush privileges;
+commit;
+
+mysql --user=collab-dev-admin --password=dev-word-to-pass < /home/ericm/github/James-Admin-Web-App/db.schema.test.txt
+mysql --user collab-dev-admin --password=dev-word-to-pass --database=collab_todo_dev
+mysql --user=collab-dev-admin --password=dev-word-to-pass --database=collab_todo_dev  
+#
+create database collab_todo_test;
+
+grant all privileges on collab_todo_test.* to 'collab-tst-admin'@'%' identified by 'test-word-to-pass' with grant option;
+
+grant all privileges on collab_todo_test.* to 'collab-tst-admin'@'localhost' identified by 'test-word-to-pass' with grant option;
+
+flush privileges;
+commit;
+
+mysql --user=collab-tst-admin --password=test-word-to-pass < /home/ericm/github/James-Admin-Web-App/db.schema.test.txt
+mysql --user collab-tst-admin --password=test-word-to-pass --database=collab_todo_test
+mysql --user=collab-tst-admin --password=test-word-to-pass --database=collab_todo_test  
+
+

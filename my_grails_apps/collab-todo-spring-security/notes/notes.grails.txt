@@ -1,0 +1,47 @@
+Trying again, since what I had did not work at all.
+
+First created the app:
+grails create-app spring-security-002
+
+gvm use groovy 2.1.9
+gvm use grails 2.3.0
+
+Next I will create the dbs in postgres
+
+sudo -u postgres psql postgres
+
+create user collab_dev with password 'dev-word-to-pass001';
+create database spring_security_002_dev_db with owner collab_dev;
+grant all privileges on database spring_security_002_dev_db to collab_dev;
+
+To log in: psql -h localhost -U collab_dev -d collab_todo_dev_db
+
+create user collab_test with password 'test-word-to-pass001';
+create database spring_security_002_test_db with owner collab_test;
+grant all privileges on database spring_security_002_test_db to collab_test;
+
+
+Next, update 
+plugins {
+   …
+   compile ':spring-security-core:2.0-RC2'
+}
+
+Note that until the 2.0 version of the plugin is officially released, you'll also need to add a custom repository:
+
+repositories {
+   …
+   mavenRepo 'http://repo.spring.io/milestone'
+}
+
+Run the compile script to resolve the dependencies and ensure everything is correct:
+
+$ grails compile
+
+To get it to actually work, add this to grails-app/conf/Config.groovy
+grails.plugin.springsecurity.rejectIfNoRule = false
+grails.plugin.springsecurity.fii.rejectPublicInvocations = false
+
+
+
+
