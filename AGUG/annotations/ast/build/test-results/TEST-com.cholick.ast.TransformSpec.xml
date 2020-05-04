@@ -1,0 +1,7 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<testsuite name="com.cholick.ast.TransformSpec" tests="1" failures="0" errors="0" timestamp="2014-05-18T19:30:29" hostname="finance" time="0.691">
+  <properties/>
+  <testcase name="transform adds method" classname="com.cholick.ast.TransformSpec" time="0.691"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

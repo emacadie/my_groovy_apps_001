@@ -1,0 +1,21 @@
+grails create-app active_grails_web  
+grails compile
+http://localhost:8080/active_grails_web
+
+grails create-domain-class info.shelfunit.activejdbc.SingleState
+add fields
+grails generate-all info.shelfunit.activejdbc.SingleState
+grails run-app
+
+grails create-domain-class info.shelfunit.activejdbc.BookAuthor
+add fields
+grails generate-all info.shelfunit.activejdbc.BookAuthor
+
+Constraints: http://grails.org/doc/latest/ref/Constraints/Usage.html    
+
+grails create-domain-class info.shelfunit.activejdbc.Book
+add fields, add bit to BookAuthor
+grails generate-all info.shelfunit.activejdbc.Book
+Change form
+
+

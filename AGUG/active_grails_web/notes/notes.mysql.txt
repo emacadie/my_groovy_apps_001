@@ -1,0 +1,15 @@
+active_grails_web
+
+create database active_gw_001;   
+GRANT ALL PRIVILEGES ON active_gw_001.* TO 'active_gwu001'@'localhost' IDENTIFIED BY 'active-grails-12' WITH GRANT OPTION;   
+GRANT ALL PRIVILEGES ON active_gw_001.* TO 'active_gwu001'@'%' IDENTIFIED BY 'active-grails-12' WITH GRANT OPTION;   
+flush privileges;  
+commit;   
+
+mysql --user=active_gwu001 --password=active-grails-12 --database=active_gw_001
+mysql --user=active_gwu001 --password=active-grails-12 --database=active_gw_001    
+mysql -u active_gwu001 -pactive-grails-12 --database=active_gw_001    
+mysql -u active_gwu001 -pactive-grails-12 < ./dump.new.txt    
+
+
+

@@ -1,0 +1,24 @@
+groovy:000> import info.shelfunit.activejdbc.*
+===> [import info.shelfunit.activejdbc.*]
+groovy:000> ssWa = new SingleState( stateName: 'Washington2', population: 100000, largestCity: 'Seattle', capitalCity: 'Portland' )
+===> info.shelfunit.activejdbc.SingleState : (unsaved)
+groovy:000> ssWa.save()
+===> info.shelfunit.activejdbc.SingleState : 5
+groovy:000> ssWa.capitalCity = 'RRR'
+===> RRR
+groovy:000> ssWa.save(flush:true)
+===> info.shelfunit.activejdbc.SingleState : 5
+groovy:000> ssVt2 = new SingleState( stateName: 'Vermont3', population: 20, largestCity: 'Burrrlington!!!', capitalCity: 'Mont-pil-hmp-hmp' )
+===> info.shelfunit.activejdbc.SingleState : (unsaved)
+groovy:000> ssVt2.save(flush:true)
+===> null
+groovy:000> ssVt4 = new SingleState( stateName: 'Vermont4', population: 20, largestCity: 'Burrrlington!!!', capitalCity: 'Mont-pil-hmp-hmp' )
+===> info.shelfunit.activejdbc.SingleState : (unsaved)
+groovy:000> ssVt4.save(flush:true)
+===> null
+groovy:000> ssVt4 = new SingleState( stateName: 'Vermont4', population: 20000, largestCity: 'Burrrlington!!!', capitalCity: 'Mont-pil-hmp-hmp' )
+===> info.shelfunit.activejdbc.SingleState : (unsaved)
+groovy:000> ssVt4.save(flush:true)
+===> info.shelfunit.activejdbc.SingleState : 6
+groovy:000> 
+
