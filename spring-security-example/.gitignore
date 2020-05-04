@@ -1,0 +1,143 @@
+# Ignore the backup files
+*~
+
+# .gitignore for Grails 1.2 and 1.3
+
+# web application files
+/web-app/WEB-INF
+web-app/WEB-INF
+
+*jar
+
+# IDE support files
+/.classpath
+/.launch
+/.project
+/.settings
+/*.launch
+/*.tmproj
+/ivy*
+/eclipse
+
+# default HSQL database files for production mode
+/prodDb.*
+
+# general HSQL database files
+*Db.properties
+*Db.script
+
+# logs
+/stacktrace.log
+/test/reports
+/logs
+stacktrace.log
+test/reports
+logs
+
+# project release file
+/*.war
+*.war
+
+# plugin release file
+/*.zip
+*.zip
+
+# older plugin install locations
+/plugins
+/web-app/plugins
+/web-app/WEB-INF/classes
+web-app/WEB-INF/classes
+
+# "temporary" build files
+/target
+target
+
+# other
+*.iws
+
+# per-app. Not the best way to do it.
+# web application files
+collab-todo/web-app/WEB-INF
+
+# IDE support files
+collab-todo/.classpath
+collab-todo/.launch
+collab-todo/.project
+collab-todo/.settings
+collab-todo/*.launch
+collab-todo/*.tmproj
+collab-todo/ivy*
+collab-todo/eclipse
+
+# default HSQL database files for production mode
+collab-todo/prodDb.*
+
+# general HSQL database files
+collab-todo/*Db.properties
+collab-todo/*Db.script
+
+# logs
+collab-todo/stacktrace.log
+collab-todo/test/reports
+collab-todo/logs
+
+# project release file
+collab-todo/*.war
+
+# plugin release file
+collab-todo/*.zip
+
+# older plugin install locations
+collab-todo/plugins
+collab-todo/web-app/plugins
+collab-todo/web-app/WEB-INF/classes
+
+# "temporary" build files
+collab-todo/target
+
+# other
+collab-todo/*.iws
+
+# .gitignore for Grails 1.2 and 1.3
+
+# web application files
+pcgen_grails/web-app/WEB-INF
+
+# IDE support files
+pcgen_grails/.classpath
+pcgen_grails/.launch
+pcgen_grails/.project
+pcgen_grails/.settings
+pcgen_grails/*.launch
+pcgen_grails/*.tmproj
+pcgen_grails/ivy*
+pcgen_grails/eclipse
+
+# default HSQL database files for production mode
+pcgen_grails/prodDb.*
+
+# general HSQL database files
+pcgen_grails/*Db.properties
+pcgen_grails/*Db.script
+
+# logs
+pcgen_grails/stacktrace.log
+pcgen_grails/test/reports
+pcgen_grails/logs
+
+# project release file
+pcgen_grails/*.war
+
+# plugin release file
+pcgen_grails/*.zip
+
+# older plugin install locations
+pcgen_grails/plugins
+pcgen_grails/web-app/plugins
+pcgen_grails/web-app/WEB-INF/classes
+
+# "temporary" build files
+pcgen_grails/target
+
+# other
+pcgen_grails/*.iws
