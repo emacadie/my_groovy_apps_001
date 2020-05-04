@@ -1,0 +1,13 @@
+Commands:
+grails create-app gTunes
+grails create-controller store
+grails test-app
+
+In grails interactive environment:
+create-domain-class com.gtunes.Store
+create-domain-class com.gtunes.Song
+create-scaffold-controller com.gtunes.Song
+create-domain-class com.gtunes.Album
+create-controller com.gtunes.Album
+
+Left off: page 24
