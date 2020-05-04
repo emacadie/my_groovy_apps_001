@@ -1,0 +1,99 @@
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'java-library-distribution'
+apply plugin: 'codenarc'
+// apply plugin: 'application'
+apply plugin: 'com.github.tkruse.groovysh'
+
+repositories {
+  mavenCentral()
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.tkruse.gradle:gradle-groovysh-plugin:1.0.5'
+    }
+}
+
+dependencies {
+
+    testCompile 'junit:junit:4.10'
+    // From Maven, it's GroupId:ArtifactId:Version 
+    testCompile 'org.spockframework:spock-core:1.1-groovy-2.4-rc-4'
+
+    compile 'org.slf4j:slf4j-api:1.7.+'
+    // compile 'log4j:log4j:1.2.17'
+
+    testRuntime 'org.slf4j:slf4j-ext:1.7.+'
+    testRuntime 'org.slf4j:jcl-over-slf4j:1.7.+'
+    testRuntime 'org.slf4j:jul-to-slf4j:1.7.+'
+    testRuntime 'org.slf4j:log4j-over-slf4j:1.7.+'
+    
+    testRuntime 'ch.qos.logback:logback-core:1.0.+'
+    testRuntime 'ch.qos.logback:logback-classic:1.0.+'
+    compile 'org.codehaus.groovy:groovy-all:2.4.1'
+    
+    // testCompile "org.spockframework:spock-core:0.5-groovy-1.7"
+
+    // optional dependencies for using Spock
+    testRuntime "cglib:cglib-nodep:2.2"     // enables mocking of classes (in addition to interfaces)
+    testRuntime "org.objenesis:objenesis:1.2" // enables mocking of classes without default constructor (together with CGLIB)
+    tasks.withType( JavaCompile ) { JavaCompile compile ->
+        compile.options.debug = true
+        compile.options.compilerArgs = [
+            // '-noverify',
+            '-Xlint:deprecation',
+            '-Xlint:unchecked'
+            // '-implicit:class',
+            // '-Awarns', '-Xmaxwarns', '10000',
+            // '-J-Xbootclasspath/p:$CHECKERS/binary/jsr308-all.jar',
+            // '-processor', 'checkers.nullness.NullnessChecker',
+            // '-Xbootclasspath/p:$CHECKERS/jdk/jdk.jar',
+            // '-version'
+        ]
+    }
+
+}
+
+test {
+  maxParallelForks = 5
+  forkEvery = 50
+  // this will make it run tests every time you run 'gradle test'
+  outputs.upToDateWhen { false }
+  // jvmArgs '-client', '-noverify'
+}
+
+task runGroovy( type: JavaExec ) {
+     println( "-- Groovy version: " + groovy.lang.GroovySystem.getVersion() )
+     dependsOn classes
+     description = 'Run gradle.sample.SampleApp'
+     // to set main class from command line
+     if ( rootProject.hasProperty( "mainClass" ) ) {     
+     	main = mainClass
+     } else {
+       main = 'info.shelfunit.app.math.FirstRunner'
+     }
+
+     classpath sourceSets.main.runtimeClasspath
+     // Extra options can be set.
+     systemProperty 'sysProp', 'notUsed'
+     jvmArgs '-client', '-noverify'
+     // We can pass arguments to the main() method of gradle.sample.SampleApp.
+     args 'www.yahoo.com'
+}
+
+// run "gradle console" for this one
+task( console, dependsOn: 'classes', type: JavaExec ) {
+  main = 'groovy.ui.Console'
+  classpath = sourceSets.main.runtimeClasspath
+}
+
+groovydoc {
+    exclude "info/shelfunit/properties/sample/*"
+}
+
+// mainClassName = "info.shelfunit.properties.sample.SampleRunner"
+

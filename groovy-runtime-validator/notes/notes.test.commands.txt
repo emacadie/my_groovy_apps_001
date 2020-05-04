@@ -1,0 +1,122 @@
+gradle clean; gradle groovydoc; gradle test
+gradle test --tests FirstImmutableSampleTest test -info   
+gradle test --tests SecondImmutableSampleTest test -info  
+   
+gradle test --tests ImmutableObject001Test test -info    
+gradle test --tests ImmutableObject002Test test -info    
+gradle test --tests BuilderTest001 test -info    
+gradle test --tests WithTest001 test -info    
+gradle test --tests CarTest test -info    
+gradle test --tests BookTest test -info 
+gradle test --tests BookSequelTest test -info    
+gradle test --tests SecondBookTest test -info 
+gradle test --tests SecondBookSequelTest test -info  
+gradle test --tests TrulyImmutable001Test test -info   
+
+gradle test --tests FloatRunnerTest test -info   
+gradle test --tests DoubleRunnerTest test -info   
+
+gradle test --tests USStateTest test -info
+gradle test --tests SecondUSStateTest test -info
+
+Tests with exceptions:
+Package info.shelfunit.properties.sample.exception
+gradle test --tests DoubleExRunnerTest  test -info  
+gradle test --tests FloatExRunnerTest test -info 
+gradle test --tests LongExRunnerTest test -info 
+gradle test --tests ImmutableExObject002Test test -info   
+gradle test --tests TrulyImmutableEx001Test test -info    
+
+gradle test --tests TrulyImmutableCollector001Test test -info   
+gradle test --tests TrulyImmutableCollectorEx001Test test -info   
+gradle test --tests ImmutableObjectColl001Test test -info  
+gradle test --tests ImmutableObjectColl002Test test -info  
+
+gradle test --tests RegExSubjectSpec test -info 
+gradle test --tests ImmutableRegExSpec test -info  
+
+gradle test --tests ImmutablePartialSpec test -info  
+
+gradle test --tests IntDivisorSpec test -info  
+gradle test --tests LongDivisorSpec test -info   
+gradle test --tests ImmutableIntDivisorSpec test -info  
+gradle test --tests ImmutableLongDivisorSpec test -info  
+
+gradle test --tests BoxSpec test -info  
+
+gradle test --tests SecondUSStateTest test -info
+gradle test --tests USStateTest test -info
+
+gradle clean; gradle groovydoc; gradle test --tests FinalStringHolderSpec test -info
+gradle test --tests info.shelfunit.properties.finality.FinalDoubleHolderSpec -info
+gradle test --tests info.shelfunit.properties.finality.FinalFloatHolderSpec -info
+gradle test --tests info.shelfunit.properties.finality.FinalLongHolderSpec -info
+gradle test --tests info.shelfunit.properties.finality.FinalStringHolderSpec -info
+
+In the console:
+package 
+
+
+
+import info.shelfunit.properties.annotations.IntAnnotation
+import info.shelfunit.properties.annotations.StringAnnotation
+import groovy.transform.ToString
+// import info.shelfunit.properties.sample.BookSequel
+
+@ToString( includeNames = true )
+class BookSequel {
+    
+    @IntAnnotation( minValue = 0 )
+    int pages
+    @StringAnnotation( minLength = 5, maxLength = 20 )
+    String title
+    @IntAnnotation( minValue = 1990 )
+    int year
+}
+
+def bTest1 = new BookSequel( pages: 100, title: "Some Book", year: 1990 )
+println "bTest1: ${bTest1.toString()}"
+bTest1.title = "abcdefg"
+println "bTest1: ${bTest1.toString()}"
+bTest1.title = "qw"
+println "bTest1: ${bTest1.toString()}"
+bTest1.title = "qwertyuiopasdfghjklzxcvbnm"
+println "bTest1: ${bTest1.toString()}"
+
+So it works if I do that.
+It seems to work if I don't have the sample in the test directory.
+What if I move stuff to /src/main?
+Can gradle exclude some files from compiliation?
+
+For proper annotations:
+
+gradle test --tests SecondBookTest test -info 
+gradle test --tests SecondBookSequelTest test -info  
+gradle test --tests BookTest test -info 
+gradle test --tests BookSequelTest test -info
+gradle test --tests ImmutableExObject001Test test -info
+gradle test --tests ImmutableObject001Test test -info 
+
+cd src/test/groovy/info/shelfunit/properties
+grep -rn StringAnnotation * | grep -v import | grep -v '//' | grep StringAnnotation
+sample/SampleRunner.groovy:72:                def stringAnnotation = field?.getAnnotation( StringAnnotation.class )
+sample/SampleRunner.groovy:74:                    print "${it.getName()} has StringAnnotation"
+sample/SampleRunner.groovy:120:            def stringAnnotation = field?.getAnnotation( StringAnnotation.class )
+sample/exception/SampleRunner.groovy:72:                def stringAnnotation = field?.getAnnotation( StringAnnotation.class )
+sample/exception/SampleRunner.groovy:74:                    print "${it.getName()} has StringAnnotation"
+sample/exception/SampleRunner.groovy:120:            def stringAnnotation = field?.getAnnotation( StringAnnotation.class )
+sample/exception/SecondBook.groovy:16:    @StringAnnotation( minLength = 5, maxLength = 20 )
+sample/exception/SecondBookSequel.groovy:11:    @StringAnnotation( minLength = 5, maxLength = 20 )
+sample/immutable/ImmutableObject001Test.groovy:51:    @StringAnnotation( minLength = 5, maxLength = 10 )
+sample/immutable/ImmutableObject001Test.groovy:53:    @StringAnnotation( maxLength = 150 )
+sample/immutable/exception/ImmutableExObject001Test.groovy:89:    @StringAnnotation( minLength = 5, maxLength = 10 )
+sample/immutable/exception/ImmutableExObject001Test.groovy:91:    @StringAnnotation( maxLength = 150 )
+sample/immutable/exception/ImmutableExObjectColl001Test.groovy:50:    @StringAnnotation( minLength = 5, maxLength = 10 )
+sample/immutable/exception/ImmutableExObjectColl001Test.groovy:52:    @StringAnnotation( maxLength = 150 )
+sample/immutable/ImmutableObjectColl001Test.groovy:52:    @StringAnnotation( minLength = 5, maxLength = 10 )
+sample/immutable/ImmutableObjectColl001Test.groovy:54:    @StringAnnotation( maxLength = 150 )
+sample/BookSequel.groovy:12:    @StringAnnotation( minLength = 5, maxLength = 20 )
+sample/Book.groovy:16:    @StringAnnotation( minLength = 5, maxLength = 20 )
+
+
+

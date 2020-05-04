@@ -1,0 +1,11 @@
+http://beta.groovy-lang.org/api.html
+Test reports: file:///home/ericm/github/groovy-validator/build/reports/tests/index.html 
+Groovydoc: file:///home/ericm/github/groovy-validator/build/docs/groovydoc/index.html
+
+gradle clean
+gradle clean; gradle -Dtest.single=BookSequelTest test -info 
+gradle -Dtest.single=ImmutableRegExSpec test -info  
+gradle clean; gradle -Dtest.single=ImmutableRegExSpec test -info 
+
+TODO: Have AnnotationProcessor check for import info.shelfunit.properties.annotations.ImmutableValidator to disable it if that annotation is present
+

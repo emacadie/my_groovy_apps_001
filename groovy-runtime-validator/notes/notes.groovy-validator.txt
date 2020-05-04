@@ -1,0 +1,138 @@
+From Groovy2 Cookbook
+
+Put into groovysh
+class Author {	
+String name  
+String lastName
+}
+
+class Book {
+String title
+Author author
+Long year
+Long pages
+Long getAmazonSalesPosition() {
+new Random().nextInt(1) + 1
+}
+void attachReview(String review) { }
+}
+
+bmc = Book.metaClass
+bmc.properties.each { println "${it.name} ${it.value} " }
+
+http://www.javaworld.com/article/2074616/core-java/javaone-2012--a-walk-through-of-groovy-s-ast-transformations.html
+http://java.dzone.com/articles/groovy-goodness-use-builder
+http://groovy.codehaus.org/Local+AST+Transformations
+http://www.cholick.com/entry/show/276
+https://github.com/mcholick/gradle_ast_example
+http://www.gradle.org/docs/current/userguide/build_lifecycle.html
+http://www.gradle.org/docs/current/userguide/multi_project_builds.html
+http://java.dzone.com/articles/groovy-ast-transformations
+https://github.com/groovy/groovy-core/blob/master/src/main/org/codehaus/groovy/transform/ImmutableASTTransformation.java
+
+I think the fields have annotations, not properties
+http://docs.groovy-lang.org/latest/html/gapi/index.html?groovy/transform/Immutable.html
+http://docs.groovy-lang.org/latest/html/gapi/org/codehaus/groovy/ast/FieldNode.html
+https://github.com/groovy/groovy-core/blob/master/src/test/org/codehaus/groovy/ast/builder/AstBuilderFromStringTest.groovy
+
+
+From console:
+    public info.shelfunit.properties.sample.immutable.ImmutableObject002(java.util.Map args, boolean validation) {
+        this (info.shelfunit.properties.sample.immutable.ImmutableObject002.createValidatingConstructor(args, validation))
+    }
+    
+    public java.lang.Object createValidatingConstructor(java.util.Map args, boolean validation) {
+a
+
+Try testing with this stuff:
+Note that Groovy provides other built-in mechanisms for easy creation of objects, e.g. the named-args constructor:
+
+ new Person(firstName: "Robert", lastName: "Lewandowski", age: 21)
+ 
+
+or the with statement:
+
+ new Person().with {
+     firstName = "Robert"
+     lastName = "Lewandowski"
+     age = 21
+ }
+These are from http://docs.groovy-lang.org/latest/html/gapi/index.html?groovy/transform/builder/package-summary.html
+http://docs.groovy-lang.org/latest/html/gapi/index.html?groovy/transform/builder/Builder.html
+http://docs.groovy-lang.org/latest/html/gapi/index.html?groovy/transform/Immutable.html
+Also look at
+http://mrhaki.blogspot.com/2014/05/groovy-goodness-use-builder-ast.html
+http://blog.jdriven.com/2014/05/groovy-goodness-builder-definition-extra-type-checks/
+https://gist.github.com/dmahapatro/5e35e59cad2736a6723f
+
+At one point, I got this:
+* What went wrong:
+Could not resolve all dependencies for configuration ':compile'.
+> Could not resolve org.slf4j:slf4j-api:1.7.+.
+  Required by:
+      :groovy-validator:unspecified
+   > Could not HEAD 'http://repo1.maven.org/maven2/org/slf4j/slf4j-api/1.7.7/slf4j-api-1.7.7.pom'.
+      > The target server failed to respond
+d
+Java 7 API:  
+http://docs.oracle.com/javase/7/docs/api/  
+http://hibernate.org/validator/documentation/getting-started/  
+
+http://www.journaldev.com/721/java-annotations-tutorial-with-custom-annotation-example-and-parsing-using-reflection   
+http://tutorials.jenkov.com/java-reflection/annotations.html    
+
+It looks like OVal does something similar, but it is a lot bigger and does more stuff:   
+http://oval.sourceforge.net/    
+
+This is intended to be pretty small    
+
+This works with the setters. I cannot get it to work with map-based constructors.  
+
+groovysh does not like the annotations, so I must use the Groovy console (which I don't really like)
+
+RegEx:
+    // example: 2014-02-01-08:00
+    def static yyyyMMddHHmm = ~/\d{4}?-\d{2}?-\d{2}?-\d{2}?:\d{2}?/
+    // example: 2014-02-01
+    def static yyyyMMdd = ~/\d{4}?-\d{2}?-\d{2}/
+Using RegEx:
+        def dateString
+        def dateFormats = [ 'yyyy-MM-dd-HH:mm', 'yyyy-MM-dd-HH' ]
+        if ( yyyyMMddHHmm.matcher( argString ).matches() ) {
+            dateString = Date.parse( 'yyyy-MM-dd-HH:mm', argString )
+        } else if ( yyyyMMdd.matcher( argString ).matches() ) {
+            dateString = Date.parse( 'yyyy-MM-dd', argString )
+        }
+        dateString.format('yyyy-MM-dd')
+a
+yyyyMMdd = Pattern.compile( "~/\\d{4}?-\\d{2}?-\\d{2}/")
+ yyyyMMdd.matcher( '2014-02-01' ).matches()
+yyyyMMdd = Pattern.compile( "\\d{4}?-\\d\\d-\\d\\d" )
+yyyyMMdd.matcher( "2014-02-01" ).matches()
+
+import groovy.transform.ToString
+import validation.StringAnnotation
+import validation.FinalFieldValidator
+
+@ToString( includeNames = true )
+@FinalFieldValidator
+class FinalStringHolder {
+    @StringAnnotation( minLength = 5, maxLength = 20, regEx = /^.*ee.*$/, throwEx = true )
+    def firstDefString
+    @StringAnnotation( minLength = 5, maxLength = 20, regEx = /^.*?oo.*$/ )
+    final def finalDefString
+    @StringAnnotation( minLength = 5, maxLength = 10, throwEx = true )
+    String firstRealString
+    @StringAnnotation( minLength = 5, maxLength = 30, regEx = /^.*?aa.*$/ )
+    final String finalRealString
+    
+    String someOtherString
+    
+}
+def fshA = new FinalStringHolder( [ firstDefString: 'qeeqq', finalDefString: "Groovy ist Wunderbar", firstRealString: "realString", finalRealString: 'Groovy ist Wunderbaar', someOtherString: "Yo adrian" ], true, true )
+
+To replace string in multiple files:
+find . -name "./td/*.c" -exec sed -i "s/:::/::/g" '{}' \;
+
+
+
